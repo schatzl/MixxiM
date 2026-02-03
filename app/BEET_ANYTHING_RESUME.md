@@ -1,217 +1,301 @@
-# BEET ANYTHING - Entwickler-Resume v1.0 PWA
+# BEET ANYTHING - Developer Resume v1.1 i18n
 
-## 🎯 Schnellstart
+## 🎯 Quick Start
 
-**Produktname**: Beet Anything  
-**Version**: 1.0 PWA (Progressive Web App)  
-**Datei**: `gartenplaner-deutsch.html` (~95 KB)  
-**Typ**: Single-Page-Application (Self-contained)  
-**Sprache**: Vollständig Deutsch  
+**Product Name**: Beet Anything  
+**Version**: 1.1 i18n (Internationalized Progressive Web App)  
+**File**: `beet-anything-i18n.html` (~105 KB)  
+**Type**: Single-Page Application (Self-contained)  
+**Languages**: English, German, Italian  
 **Status**: Production Ready  
-**Font**: Inter von https://rsms.me/inter/
+**Font**: Inter from https://rsms.me/inter/
 
 ---
 
-## 📦 Was ist implementiert
+## 📦 What's Implemented
 
-### Kern-Features (alle ✅)
-✅ Mehrjahresplanung mit unbegrenzter Historie  
-✅ Dynamische Beetverwaltung (unbegrenzt)  
-✅ 20 deutsche Gemüsesorten mit Mischkultur-Daten  
-✅ Intelligenter Vorschlagsalgorithmus (Scoring-basiert)  
-✅ Kompatibilitäts-Matrix (20×20 Kombinationen)  
-✅ **Auto-Save nach jeder Änderung** (kein manuelles Speichern nötig!)  
-✅ **Auto-Load beim Start** (alle Daten automatisch wiederhergestellt)  
-✅ Export/Import (JSON für Backups)  
-✅ **PWA-Installation** (iOS, Android, Desktop)  
-✅ **Offline-Funktionalität** (Service Worker)  
-✅ **Mobile-optimiert** (iPhone 16, Android, alle Geräte)  
-✅ Responsive Design (Desktop, Tablet, Mobile)
+### Core Features (all ✅)
+✅ Multi-year planning with unlimited history  
+✅ Dynamic bed management (unlimited)  
+✅ 20 trilingual vegetables with companion planting data  
+✅ Intelligent suggestion algorithm (scoring-based)  
+✅ Compatibility matrix (20×20 combinations)  
+✅ **Auto-save after every change** (no manual saving needed!)  
+✅ **Auto-load on start** (all data automatically restored)  
+✅ Export/import (JSON for backups)  
+✅ **PWA installation** (iOS, Android, Desktop)  
+✅ **Offline functionality** (Service Worker)  
+✅ **Mobile-optimized** (iPhone 16, Android, all devices)  
+✅ Responsive design (Desktop, Tablet, Mobile)  
+✅ **Internationalization** (EN/DE/IT with language persistence)
 
-### Neue Features in v1.0 PWA
-🆕 Automatisches Speichern (kein "Speichern"-Button nötig)  
-🆕 Progressive Web App mit Installation  
-🆕 Offline-Modus (funktioniert ohne Internet)  
-🆕 Mobile-First Design (iPhone 16 optimiert)  
-🆕 Inter Font (moderne UI-Schrift von rsms.me)  
-🆕 Install-Button im Header (immer sichtbar)  
-🆕 Intelligente Installations-Anleitungen  
+### New Features in v1.1 i18n
+🆕 **Trilingual support** (English, German, Italian)  
+🆕 **Language persistence** (remembers language choice)  
+🆕 **All vegetable names translated** (20 vegetables × 3 languages)  
+🆕 **Complete UI translation** (~60 strings per language)  
+🆕 **Language switch in header** (instant switching)  
 
 ---
 
-## 🏗️ Architektur-Überblick
+## 🏗️ Architecture Overview
 
-### Klassen (OOP-Hierarchie)
+### Classes (OOP Hierarchy)
 
 ```
-Gemuese              → Gemüsedaten + Begleiter-Logik
-Gartenbeet           → Beet-Metadaten
-Pflanzung            → Beet-Jahr-Gemüse-Verknüpfung
-GartenManager        → Zentrale Datenverwaltung
-VorschlagsEngine     → Algorithmus für optimale Zuweisung
-app (Global)         → UI-Controller + Event-Handler
+Vegetable              → Vegetable data + companion logic
+GardenBed              → Bed metadata
+Planting               → Bed-year-vegetable linking
+GardenManager          → Central data management
+SuggestionEngine       → Algorithm for optimal assignment
+app (Global)           → UI controller + event handlers
 ```
 
-### Datenfluss
+### Data Flow
 
 ```
 User Interaction
     ↓
-app.* Methoden (Controller)
+app.* Methods (Controller)
     ↓
-GartenManager (Model)
+GardenManager (Model)
     ↓
-app.speichern() → LocalStorage (AUTO!)
+app.save() → LocalStorage (AUTO!)
     ↓
-app.rendern() (View)
+app.render() (View)
     ↓
 DOM Update
 ```
 
 ---
 
-## 🔄 Auto-Save System (WICHTIG!)
+## 🌍 Internationalization System
 
-### Automatisch gespeichert nach:
-
-| Aktion | Speicherung |
-|--------|-------------|
-| Beet hinzufügen | ✅ Sofort |
-| Beet entfernen | ✅ Sofort |
-| Beet umbenennen | ✅ Beim Modal-Speichern |
-| Pflanze hinzufügen | ✅ Sofort |
-| Pflanze entfernen | ✅ Sofort |
-| Jahr ändern | ✅ Sofort |
-| Wunschliste ändern | ✅ Sofort |
-| Vorschlag anwenden | ✅ Sofort |
-
-**KEINE manuelle Speicherung nötig!** Alles automatisch.
-
-### LocalStorage Schlüssel
+### Translation Object
 
 ```javascript
-'gartenplanerDaten'    // Hauptdaten (Beete, Pflanzungen, Gemüse)
-'beetAnythingState'    // App-Status (Jahr, Wunschliste)
+const translations = {
+    en: {
+        "btn.export": "💾 Export Data",
+        "wishlist.title": "Your Wishlist",
+        // ... ~60 keys
+    },
+    de: {
+        "btn.export": "💾 Daten exportieren",
+        "wishlist.title": "Ihre Wunschliste",
+        // ... ~60 keys
+    },
+    it: {
+        "btn.export": "💾 Esporta dati",
+        "wishlist.title": "La tua lista dei desideri",
+        // ... ~60 keys
+    }
+};
 ```
 
-### Wichtigste App-Methoden
+### Vegetable Names (Multilingual)
 
 ```javascript
-app.init()                          // Initialisierung + Auto-Load
-app.speichern()                     // Auto-Save (wird automatisch aufgerufen!)
-app.jahrAendern(±1)                // Jahr navigieren + Auto-Save
-app.vorschlaegeGenerieren()        // Algorithmus starten
-app.beetModalOeffnen(beetId)       // Beet bearbeiten
-app.datenExportieren()             // JSON Download (manuelles Backup)
-app.datenImportieren()             // JSON Upload (Restore)
-app.matrixAnzeigen()               // Mischkultur-Matrix
-app.alsAppInstallieren()           // PWA-Installation triggern
-app.rendern()                      // UI aktualisieren
+class Vegetable {
+    constructor(id, nameEN, nameDE, nameIT, nutrition, family) {
+        this.nameEN = nameEN;  // English
+        this.nameDE = nameDE;  // German
+        this.nameIT = nameIT;  // Italian
+    }
+    
+    getName(lang = 'en') {
+        if (lang === 'de') return this.nameDE;
+        if (lang === 'it') return this.nameIT;
+        return this.nameEN;
+    }
+}
+
+// Example:
+new Vegetable('tomato', 'Tomato', 'Tomate', 'Pomodoro', 'high', 'Solanaceae')
+```
+
+### Language Switch
+
+**HTML:**
+```html
+<div class="language-switch">
+    <button onclick="app.setLanguage('en')" id="langEN">EN</button>
+    <button onclick="app.setLanguage('de')" id="langDE">DE</button>
+    <button onclick="app.setLanguage('it')" id="langIT">IT</button>
+</div>
+```
+
+**Usage in HTML:**
+```html
+<button data-i18n="btn.export">💾 Export Data</button>
+```
+
+**Usage in JavaScript:**
+```javascript
+app.t('btn.export') // Returns translated string
+```
+
+### Language Persistence
+
+```javascript
+// Saved automatically:
+localStorage.setItem('beetAnythingState', JSON.stringify({
+    currentYear: 2024,
+    wishlist: ['tomato', 'carrot'],
+    language: 'it'  // ← Persisted!
+}));
+
+// Loaded on startup:
+this.currentLanguage = parsedState.language || 'en';
 ```
 
 ---
 
-## 📱 PWA-Features
+## 🔄 Auto-Save System (IMPORTANT!)
 
-### Installation erkennen
+### Automatically Saved After:
+
+| Action | Saved |
+|--------|-------|
+| Add bed | ✅ Immediately |
+| Remove bed | ✅ Immediately |
+| Rename bed | ✅ On modal save |
+| Add plant | ✅ Immediately |
+| Remove plant | ✅ Immediately |
+| Change year | ✅ Immediately |
+| Change wishlist | ✅ Immediately |
+| Apply suggestion | ✅ Immediately |
+| Change language | ✅ Immediately |
+
+**NO manual saving needed!** Everything automatic.
+
+### LocalStorage Keys
 
 ```javascript
-// App prüft automatisch:
+'beetAnythingData'     // Main data (beds, plantings, vegetables)
+'beetAnythingState'    // App state (year, wishlist, language)
+```
+
+### Most Important App Methods
+
+```javascript
+app.init()                          // Initialization + auto-load
+app.save()                          // Auto-save (called automatically!)
+app.setLanguage(lang, save)        // Change language + save
+app.changeYear(±1)                 // Navigate year + auto-save
+app.generateSuggestions()          // Start algorithm
+app.openBedModal(bedId)            // Edit bed
+app.exportData()                   // JSON download (manual backup)
+app.importData()                   // JSON upload (restore)
+app.showMatrix()                   // Companion planting matrix
+app.installAsApp()                 // Trigger PWA installation
+app.render()                       // Update UI
+```
+
+---
+
+## 📱 PWA Features
+
+### Detect Installation
+
+```javascript
+// App checks automatically:
 if (window.matchMedia('(display-mode: standalone)').matches) {
-    // App läuft als PWA
-    // Install-Buttons werden ausgeblendet
+    // App is running as PWA
+    // Install buttons are hidden
 }
 ```
 
-### Install-Button-Positionen
+### Install Button Positions
 
-1. **Header-Button** (ID: `headerInstallButton`)
-   - Immer sichtbar (außer wenn bereits installiert)
-   - Bei "📱 Als App installieren"
-   - Funktioniert auf allen Geräten
+1. **Header Button** (ID: `headerInstallButton`)
+   - Always visible (except when installed)
+   - At "📱 Install as App"
+   - Works on all devices
 
-2. **Floating-Button** (ID: `floatingInstallButton`)
-   - Unten rechts (Desktop)
-   - Volle Breite unten (Mobile)
-   - Nur wenn Browser PWA unterstützt
+2. **Floating Button** (ID: `floatingInstallButton`)
+   - Bottom right (desktop)
+   - Full width bottom (mobile)
+   - Only when browser supports PWA
 
-### Installation-Status prüfen
+### Check Installation Status
 
-**Im Browser DevTools Konsole:**
+**In Browser DevTools Console:**
 ```javascript
-// Prüfen ob als PWA installiert:
+// Check if installed as PWA:
 window.matchMedia('(display-mode: standalone)').matches
 
-// Wenn true → App ist installiert
-// Wenn false → App läuft im Browser
+// If true → App is installed
+// If false → App runs in browser
 ```
 
-**Visuelle Indikatoren:**
-- ✅ Install-Button verschwunden = App ist installiert
-- ✅ Keine Browser-Leiste = Läuft als PWA
-- ✅ App-Icon auf Homescreen = Installiert
+**Visual Indicators:**
+- ✅ Install button gone = App is installed
+- ✅ No browser bar = Running as PWA
+- ✅ App icon on homescreen = Installed
 
 ### Service Worker
 
 **Cached:**
-- App-Shell (HTML, CSS, JS)
-- Fonts (Inter von rsms.me)
+- App shell (HTML, CSS, JS)
+- Fonts (Inter from rsms.me)
 
-**Offline verfügbar:**
-- Alle Features (Planung, Bearbeitung, Algorithmus)
-- LocalStorage funktioniert offline
-- Nur erste Installation braucht Internet
+**Available Offline:**
+- All features (planning, editing, algorithm)
+- LocalStorage works offline
+- Only first installation needs internet
 
 ---
 
-## 🧮 Algorithmus-Kernlogik
+## 🧮 Algorithm Core Logic
 
-**Datei-Position**: `VorschlagsEngine.pflanzungsOptionBewerten()` (ca. Zeile 1300)
+**File Location**: `SuggestionEngine.scorePlantingOption()` (approx. line 1500)
 
-### Scoring-Gewichte:
+### Scoring Weights:
 
-| Kriterium | Punkte | Bedingung |
+| Criterion | Points | Condition |
 |-----------|--------|-----------|
-| Familienrotation | +30 | Andere Familie als Vorjahr |
-| Familienrotation | -20 | Gleiche Familie wie Vorjahr |
-| Nährstoffrotation | +25 | Schwachzehrer nach Starkzehrer |
-| Nährstoffrotation | -15 | Starkzehrer nach Starkzehrer |
-| Nährstoffrotation | +10 | Schwachzehrer generell |
-| Guter Begleiter | +15 | Pro kompatible Pflanze |
-| Schlechter Begleiter | -30 | Pro inkompatible Pflanze |
-| Leeres Beet | +5 | Keine aktuellen Pflanzen |
-| 2-Jahres-Rotation | -10 | Gleiche Pflanze vor 2 Jahren |
+| Family rotation | +30 | Different family than previous year |
+| Family rotation | -20 | Same family as previous year |
+| Nutrition rotation | +25 | Light feeder after heavy feeder |
+| Nutrition rotation | -15 | Heavy feeder after heavy feeder |
+| Nutrition rotation | +10 | Light feeder generally |
+| Good companion | +15 | Per compatible plant |
+| Bad companion | -30 | Per incompatible plant |
+| Empty bed | +5 | No current plants |
+| 2-year rotation | -10 | Same plant 2 years ago |
 
-**Output**: Sortierte Liste mit Beet-Gemüse-Zuweisungen + Begründungen
+**Output**: Sorted list with bed-vegetable assignments + reasons
 
 ---
 
-## 📊 Datenstruktur
+## 📊 Data Structure
 
 ### LocalStorage
 
 ```javascript
-// Hauptdaten
-localStorage.getItem('gartenplanerDaten')
+// Main data
+localStorage.getItem('beetAnythingData')
 {
-  "gemueseSorten": [...],  // 20 Gemüsesorten
-  "beete": [...],          // Alle Beete
-  "pflanzungen": [...]     // Alle Pflanzungen (alle Jahre)
+  "vegetables": [...],  // 20 vegetables
+  "beds": [...],        // All beds
+  "plantings": [...]    // All plantings (all years)
 }
 
-// App-State
+// App state
 localStorage.getItem('beetAnythingState')
 {
-  "aktuellesJahr": 2024,
-  "wunschliste": ["tomate", "karotte"]
+  "currentYear": 2024,
+  "wishlist": ["tomato", "carrot"],
+  "language": "en"
 }
 ```
 
 ---
 
-## 🎨 Design-System
+## 🎨 Design System
 
-### Schriftart: Inter (rsms.me)
+### Font: Inter (rsms.me)
 
 ```css
 @import url('https://rsms.me/inter/inter.css');
@@ -220,193 +304,243 @@ font-family: 'Inter', sans-serif;
 font-feature-settings: 'liga' 1, 'calt' 1;
 ```
 
-**Gewichte:**
-- 400 (Normal): Fließtext
+**Weights:**
+- 400 (Normal): Body text
 - 700 (Bold): h2, h3
 - 800 (Extra Bold): h1
 
-### CSS-Variablen (Farbschema)
+### CSS Variables (Color Scheme)
 
 ```css
---boden-dunkel: #3a2f28    /* Primärtext */
---blatt-gruen: #4a7c59     /* Primärfarbe */
---salbei: #8ba888          /* Sekundärfarbe */
---creme: #f4f1ea           /* Hintergrund */
---terrakotta: #c1694f      /* Akzent/Starkzehrer */
---sonnen-gelb: #e8b84d     /* Highlight/Mittelzehrer */
+--soil-dark: #3a2f28      /* Primary text */
+--leaf-green: #4a7c59     /* Primary color */
+--sage: #8ba888           /* Secondary color */
+--cream: #f4f1ea          /* Background */
+--terracotta: #c1694f     /* Accent/heavy feeder */
+--sun-yellow: #e8b84d     /* Highlight/medium feeder */
 ```
 
 ### Responsive Breakpoints
 
 | Breakpoint | Layout |
 |------------|--------|
-| > 968px | 2-Spalten (1:2) |
-| 768-968px | 1-Spalte |
-| 480-768px | 1-Spalte, kompakt |
-| 375-480px | 1-Spalte, mobile |
-| < 375px | 1-Spalte, minimal |
+| > 968px | 2-column (1:2) |
+| 768-968px | 1-column |
+| 480-768px | 1-column, compact |
+| 375-480px | 1-column, mobile |
+| < 375px | 1-column, minimal |
 
-**Landscape < 968px**: 2-Spalten (1:1.5)
+**Landscape < 968px**: 2-column (1:1.5)
 
 ---
 
-## 🔧 Häufige Anpassungen
+## 🔧 Common Customizations
 
-### 1. Neue Gemüsesorte hinzufügen
+### 1. Add New Vegetable
 
-**Position**: `GartenManager.gemueseDatenbankInitialisieren()` (ca. Zeile 900)
+**Location**: `GardenManager.initializeVegetableDatabase()` (approx. line 1320)
 
 ```javascript
-// Schritt 1: Gemüse erstellen
-const gemueseListe = [
-    // ... bestehende ...
-    new Gemuese('rucola', 'Rucola', 'niedrig', 'Kreuzblütler'),
+// Step 1: Create vegetable
+const veggies = [
+    // ... existing ...
+    new Vegetable('arugula', 'Arugula', 'Rucola', 'Rucola', 'low', 'Brassicaceae'),
 ];
 
-// Schritt 2: Begleiter festlegen
-this.begleiterFestlegen('rucola',
-    ['bohnen', 'erbsen'],     // Gute Begleiter
-    []                         // Schlechte Begleiter
+// Step 2: Set companions
+this.setCompanions('arugula',
+    ['beans', 'peas'],     // Good companions
+    []                      // Bad companions
 );
 ```
 
-### 2. Scoring-Gewichte ändern
+### 2. Add New Language
 
-**Position**: `VorschlagsEngine.pflanzungsOptionBewerten()` (ca. Zeile 1300)
+**Location**: `translations` object (approx. line 1013)
 
 ```javascript
-// Familie-Rotation höher bewerten
-bewertung += 50;  // statt 30
+const translations = {
+    en: { ... },
+    de: { ... },
+    it: { ... },
+    fr: {  // New: French
+        title: "Beet Anything",
+        subtitle: "Rotation des cultures facile",
+        "btn.export": "💾 Exporter",
+        // ... all ~60 keys
+    }
+};
 
-// Schlechte Begleiter strenger bewerten
-bewertung -= 50;  // statt 30
+// Update Vegetable class:
+class Vegetable {
+    constructor(id, nameEN, nameDE, nameIT, nameFR, nutrition, family) {
+        this.nameFR = nameFR;  // Add French
+    }
+    
+    getName(lang = 'en') {
+        if (lang === 'fr') return this.nameFR;  // Add French
+        // ...
+    }
+}
+
+// Update HTML:
+<button onclick="app.setLanguage('fr')" id="langFR">FR</button>
 ```
 
-### 3. Neue Bewertungskriterien
+### 3. Change Scoring Weights
+
+**Location**: `SuggestionEngine.scorePlantingOption()` (approx. line 1500)
 
 ```javascript
-// Beispiel: Sonnenbedarf
-if (gem.sonnenbedarf === 'voll' && beet.sonnig) {
-    bewertung += 20;
-    gruende.push('Optimale Sonnenlage');
+// Increase family rotation importance
+score += 50;  // instead of 30
+
+// Stricter bad companion penalty
+score -= 50;  // instead of 30
+```
+
+### 4. Add New Scoring Criteria
+
+```javascript
+// Example: Sun requirement
+if (veg.sunRequirement === 'full' && bed.sunny) {
+    score += 20;
+    reasons.push('reason.optimalSun');
 }
 ```
 
-### 4. Farbschema ändern
+### 5. Change Color Scheme
 
 ```css
 :root {
-    --blatt-gruen: #2d5f3f;  /* Dunkler */
-    --creme: #ffffff;        /* Weißer */
+    --leaf-green: #2d5f3f;  /* Darker */
+    --cream: #ffffff;        /* Whiter */
 }
 ```
 
 ---
 
-## 🐛 Debugging-Tipps
+## 🐛 Debugging Tips
 
-### LocalStorage prüfen
+### Check LocalStorage
 
 ```javascript
-// Browser-Konsole:
-localStorage.getItem('gartenplanerDaten')
+// Browser console:
+localStorage.getItem('beetAnythingData')
 localStorage.getItem('beetAnythingState')
 
-// Größe prüfen
-const size = new Blob([localStorage.getItem('gartenplanerDaten')]).size;
-console.log('Größe:', (size / 1024).toFixed(2), 'KB');
+// Check size
+const size = new Blob([localStorage.getItem('beetAnythingData')]).size;
+console.log('Size:', (size / 1024).toFixed(2), 'KB');
 ```
 
-### Daten zurücksetzen
+### Reset Data
 
 ```javascript
-// VORSICHT: Löscht alle Daten!
-localStorage.removeItem('gartenplanerDaten');
+// CAUTION: Deletes all data!
+localStorage.removeItem('beetAnythingData');
 localStorage.removeItem('beetAnythingState');
 location.reload();
 ```
 
-### PWA-Installation prüfen
+### Check PWA Installation
 
 ```javascript
-// Läuft als PWA?
+// Running as PWA?
 window.matchMedia('(display-mode: standalone)').matches
 
-// Install-Prompt verfügbar?
+// Install prompt available?
 window.deferredPrompt !== null
 ```
 
-### Auto-Save testen
+### Test Auto-Save
 
 ```javascript
-// Manuell triggern
-app.speichern();
+// Manually trigger
+app.save();
 
-// Gespeicherte Daten ansehen
+// View saved data
 console.log(JSON.parse(localStorage.getItem('beetAnythingState')));
 ```
 
----
-
-## 📝 Code-Konventionen
-
-### Namensgebung (Deutsch)
+### Test Language System
 
 ```javascript
-// Variablen: camelCase
-aktuellesJahr, wunschliste, beetId
+// Change language
+app.setLanguage('it');
 
-// Klassen: PascalCase
-Gemuese, Gartenbeet, VorschlagsEngine
+// Get translation
+app.t('btn.export');  // "💾 Esporta dati"
 
-// Methoden: camelCase + Verb
-beetHinzufuegen(), vorschlaegeGenerieren()
-
-// CSS-Klassen: kebab-case
-.beet-kopf, .pflanze-zuweisung, .naehrstoff-badge
+// Get vegetable name
+const tomato = app.garden.vegetables.get('tomato');
+tomato.getName('it');  // "Pomodoro"
 ```
 
 ---
 
-## 🔍 Wichtige Dateipositionen
+## 📝 Code Conventions
 
-### Zeilen-Referenz (ca. Angaben)
+### Naming (English)
 
-| Feature | Zeile | Beschreibung |
-|---------|-------|--------------|
-| Gemüse-Datenbank | ~900 | `gemueseDatenbankInitialisieren()` |
-| Mischkultur-Regeln | ~950 | `begleiterFestlegen()` Aufrufe |
-| Scoring-Algorithmus | ~1300 | `pflanzungsOptionBewerten()` |
-| Auto-Save Logik | ~1680 | `app.speichern()` |
-| Auto-Load Logik | ~1120 | `app.init()` |
-| UI-Rendering | ~1450 | `app.rendern()` |
-| PWA Install-Code | ~1810 | Service Worker + Install-Buttons |
-| Export/Import | ~1640 | `datenExportieren()` / `datenImportieren()` |
+```javascript
+// Variables: camelCase
+currentYear, wishlist, bedId
+
+// Classes: PascalCase
+Vegetable, GardenBed, SuggestionEngine
+
+// Methods: camelCase + Verb
+addBed(), generateSuggestions()
+
+// CSS classes: kebab-case
+.bed-header, .plant-assignment, .nutrition-badge
+```
 
 ---
 
-## 🚀 Nächste Entwicklungsschritte
+## 🔍 Important File Locations
 
-### Priorität 1 (Quick Wins)
-- [ ] Mehr Gemüsesorten (Ziel: 30-40)
-- [ ] Aussaat/Ernte-Kalender
-- [ ] Druckfunktion für Jahresplan
-- [ ] Notizfeld pro Beet
-- [ ] Dark Mode
+### Line Reference (approximate)
 
-### Priorität 2 (Medium)
-- [ ] Beetgrößen-Eingabe
-- [ ] Flächenberechnung
-- [ ] Pflanzabstände
-- [ ] Bilder/Fotos pro Gemüse
-- [ ] Statistiken (Erntemengen)
+| Feature | Line | Description |
+|---------|------|-------------|
+| Translations | ~1013 | `translations` object (EN/DE/IT) |
+| Vegetable database | ~1320 | `initializeVegetableDatabase()` |
+| Companion rules | ~1345 | `setCompanions()` calls |
+| Scoring algorithm | ~1500 | `scorePlantingOption()` |
+| Auto-save logic | ~2040 | `app.save()` |
+| Auto-load logic | ~1598 | `app.init()` |
+| UI rendering | ~1900 | `app.render()` |
+| PWA install code | ~2130 | Service Worker + install buttons |
+| Export/import | ~1990 | `exportData()` / `importData()` |
+| Language switch | ~1637 | `setLanguage()` |
 
-### Priorität 3 (Advanced)
-- [ ] Grafische Beetvisualisierung (SVG/Canvas)
-- [ ] Drag & Drop zwischen Beeten
-- [ ] Benutzer-definierte Mischkultur-Regeln
-- [ ] Cloud-Sync (optional)
-- [ ] Native Mobile App
+---
+
+## 🚀 Next Development Steps
+
+### Priority 1 (Quick Wins)
+- [ ] More vegetables (goal: 30-40)
+- [ ] Sowing/harvest calendar
+- [ ] Print function for yearly plan
+- [ ] Notes field per bed
+- [ ] Dark mode
+- [ ] French translation (FR)
+
+### Priority 2 (Medium)
+- [ ] Bed size input
+- [ ] Area calculation
+- [ ] Plant spacing
+- [ ] Images/photos per vegetable
+- [ ] Statistics (harvest quantities)
+
+### Priority 3 (Advanced)
+- [ ] Graphical bed visualization (SVG/Canvas)
+- [ ] Drag & drop between beds
+- [ ] User-defined companion rules
+- [ ] Cloud sync (optional)
+- [ ] Native mobile app
 
 ---
 
@@ -418,8 +552,8 @@ beetHinzufuegen(), vorschlaegeGenerieren()
 ```
 1. F12 → DevTools
 2. Toggle device toolbar (Ctrl+Shift+M)
-3. Gerät: iPhone 16 Pro (393x852)
-4. Testen!
+3. Device: iPhone 16 Pro (393x852)
+4. Test!
 ```
 
 **Firefox**:
@@ -427,258 +561,274 @@ beetHinzufuegen(), vorschlaegeGenerieren()
 1. F12 → DevTools
 2. Responsive Design Mode (Ctrl+Shift+M)
 3. Viewport: 393x852
-4. Testen!
+4. Test!
 ```
 
-### Echtes Gerät
+### Real Device
 
 **iPhone**:
-1. Datei auf Netlify/GitHub Pages hosten
-2. URL in Safari öffnen
-3. Teilen (□↑) → "Zum Home-Bildschirm"
-4. Testen als PWA
+1. Host file on Netlify/GitHub Pages
+2. Open URL in Safari
+3. Share (□↑) → "Add to Home Screen"
+4. Test as PWA
 
 **Android**:
-1. Datei hosten
-2. URL in Chrome öffnen
-3. "Als App installieren" klicken
-4. Testen als PWA
+1. Host file
+2. Open URL in Chrome
+3. Click "Install as App"
+4. Test as PWA
 
 ---
 
-## 💾 Backup-Strategie
+## 💾 Backup Strategy
 
-### Für Entwickler
-1. Git-Repository verwenden
-2. Regelmäßige Commits
-3. Tags pro Version (v1.0, v1.1, etc.)
+### For Developers
+1. Use Git repository
+2. Regular commits
+3. Tags per version (v1.0, v1.1, etc.)
 
-### Für Nutzer
-1. **Automatisch**: LocalStorage (bleibt erhalten)
-2. **Manuell**: Monatlicher Export empfohlen
-3. **Cloud**: Backup in Dropbox/Google Drive
+### For Users
+1. **Automatic**: LocalStorage (persists)
+2. **Manual**: Monthly export recommended
+3. **Cloud**: Backup to Dropbox/Google Drive
 
-### Export-Dateinamen
+### Export Filenames
 ```
-gartenplan-2025-02-03.json
+garden-plan-2025-02-03.json
+gartenplan-2025-02-03.json   (DE)
+piano-giardino-2025-02-03.json   (IT)
 ```
-(Automatischer Timestamp)
+(Automatic timestamp)
 
 ---
 
-## ⚠️ Bekannte Limitierungen
+## ⚠️ Known Limitations
 
-### Funktional
-1. **Keine Saison**: Nur Jahresplanung, keine Früh-/Nachkultur
-2. **Keine Flächen**: Beetgröße nicht berücksichtigt
-3. **Statische Regeln**: Mischkultur hardcoded
-4. **Single-User**: Keine Collaboration
+### Functional
+1. **No seasons**: Only annual planning, no early/late crops
+2. **No areas**: Bed size not considered
+3. **Static rules**: Companion planting hard-coded
+4. **Single-user**: No collaboration
 
-### Technisch
-1. **LocalStorage Limit**: ~5-10 MB
-2. **Keine Cloud-Sync**: Daten bleiben auf Gerät
-3. **Browser-spezifisch**: PWA-Installation nicht überall
+### Technical
+1. **LocalStorage limit**: ~5-10 MB
+2. **No cloud sync**: Data stays on device
+3. **Browser-specific**: PWA installation not everywhere
 
 ---
 
-## 🆘 Häufige Probleme
+## 🆘 Common Problems
 
-### "Auto-Save funktioniert nicht"
+### "Auto-save doesn't work"
 
-**Prüfen:**
+**Check:**
 ```javascript
-// LocalStorage aktiviert?
+// LocalStorage enabled?
 typeof(Storage) !== "undefined"
 
-// Inkognito-Modus?
-// → Kein LocalStorage verfügbar
+// Incognito mode?
+// → No LocalStorage available
 
-// Speicher voll?
-// → Alte Daten exportieren & löschen
+// Storage full?
+// → Export old data & delete
 ```
 
-### "Daten sind weg"
+### "Data is gone"
 
-**Ursachen:**
-- Cache gelöscht (mit "Cookies und Websitedaten")
-- Anderer Browser/Gerät
-- Inkognito-Modus benutzt
+**Causes:**
+- Cache cleared (with "cookies and website data")
+- Different browser/device
+- Incognito mode used
 
-**Lösung:**
-- Backup-Datei importieren
-- Zukünftig: Regelmäßig exportieren
+**Solution:**
+- Import backup file
+- Future: Export regularly
 
-### "Install-Button erscheint nicht"
+### "Install button doesn't appear"
 
-**Prüfen:**
+**Check:**
 ```javascript
-// Bereits installiert?
+// Already installed?
 window.matchMedia('(display-mode: standalone)').matches
 
-// Browser unterstützt PWA?
-// iOS: Nur Safari
+// Browser supports PWA?
+// iOS: Only Safari
 // Android: Chrome, Edge, Samsung Internet
 // Desktop: Chrome, Edge, Opera
 ```
 
-### "App läuft nicht offline"
+### "App doesn't work offline"
 
-**Lösung:**
-- Mindestens einmal mit Internet öffnen
-- Service Worker muss registriert werden
-- Cache wird beim ersten Besuch gefüllt
+**Solution:**
+- Open with internet at least once
+- Service Worker must be registered
+- Cache is filled on first visit
+
+### "Language doesn't persist"
+
+**Check:**
+```javascript
+// Check saved state:
+JSON.parse(localStorage.getItem('beetAnythingState'))
+
+// Should contain:
+{ language: 'de', currentYear: 2024, wishlist: [...] }
+```
 
 ---
 
-## 📈 Performance-Tipps
+## 📈 Performance Tips
 
-### Optimierung für viele Beete (>50)
+### Optimize for Many Beds (>50)
 
 ```javascript
-// Bei >100 Beeten: Rendering optimieren
-// Nur sichtbare Beete rendern (Virtual Scrolling)
+// For >100 beds: Optimize rendering
+// Only render visible beds (Virtual Scrolling)
 
-// Bei >1000 Pflanzungen: Indexierung
-// Map-basierte Lookups statt Array-Filter
+// For >1000 plantings: Indexing
+// Map-based lookups instead of array filter
 ```
 
-### LocalStorage-Größe reduzieren
+### Reduce LocalStorage Size
 
 ```javascript
-// Alte Jahre archivieren
-// Jahre < 2020 in separate JSON exportieren
-// Aus LocalStorage entfernen
+// Archive old years
+// Export years < 2020 to separate JSON
+// Remove from LocalStorage
 ```
 
 ---
 
 ## ✅ Pre-Release Checklist
 
-Vor jeder neuen Version:
+Before each new version:
 
-- [ ] Alle Features manuell testen
-- [ ] Auto-Save/Load testen (5 Szenarien)
-- [ ] Export/Import mit Beispieldaten
-- [ ] Browser-Kompatibilität (Chrome, Firefox, Safari)
-- [ ] Mobile-Ansicht testen (iPhone, Android)
-- [ ] PWA-Installation testen
-- [ ] Offline-Modus testen
-- [ ] LocalStorage-Limits testen (>100 Beete)
-- [ ] Code-Kommentare aktualisieren
-- [ ] Versionsnummer in Dokumentation ändern
-- [ ] CHANGELOG aktualisieren
-- [ ] README aktualisieren
+- [ ] Manually test all features
+- [ ] Test auto-save/load (5 scenarios)
+- [ ] Export/import with sample data
+- [ ] Browser compatibility (Chrome, Firefox, Safari)
+- [ ] Mobile view test (iPhone, Android)
+- [ ] PWA installation test
+- [ ] Offline mode test
+- [ ] LocalStorage limits test (>100 beds)
+- [ ] All 3 languages working
+- [ ] Language persistence working
+- [ ] Update code comments
+- [ ] Change version number in documentation
+- [ ] Update CHANGELOG
+- [ ] Update README
 
 ---
 
-## 🎓 Für neue Entwickler
+## 🎓 For New Developers
 
-### Einstieg in 5 Minuten
+### Get Started in 5 Minutes
 
-1. **Datei öffnen**: `gartenplaner-deutsch.html` in Editor
-2. **Nach Konzept suchen**: Ctrl+F "Gemuese" → Klasse finden
-3. **Verstehen**: OOP-Hierarchie → GartenManager → VorschlagsEngine
-4. **Anpassen**: Gemüse hinzufügen (siehe oben)
-5. **Testen**: Datei im Browser öffnen
+1. **Open file**: `beet-anything-i18n.html` in editor
+2. **Search concept**: Ctrl+F "Vegetable" → Find class
+3. **Understand**: OOP hierarchy → GardenManager → SuggestionEngine
+4. **Customize**: Add vegetable (see above)
+5. **Test**: Open file in browser
 
-### Wichtigste Konzepte
+### Most Important Concepts
 
-1. **Klassenhierarchie**: Gemuese, Gartenbeet, Pflanzung
-2. **Maps statt Arrays**: Schnellere Lookups
-3. **Auto-Save System**: Nach jeder Änderung
-4. **Scoring-Algorithmus**: Mehrere Kriterien kombiniert
+1. **Class hierarchy**: Vegetable, GardenBed, Planting
+2. **Maps instead of arrays**: Faster lookups
+3. **Auto-save system**: After every change
+4. **Scoring algorithm**: Multiple criteria combined
 5. **PWA**: Service Worker + Manifest
+6. **i18n**: Translation object + multilingual data
 
-### Code-Stil
+### Code Style
 
-- **Deutsch für Business-Logik**: beetHinzufuegen(), gemueseSorten
-- **Englisch für Technical**: Map, Array, JSON
-- **Kommentare**: Wo nötig, nicht überall
-- **Struktur**: Klassen → Manager → App → UI
-
----
-
-## 📞 Support-Ressourcen
-
-### Dokumentation
-
-1. **BEET_ANYTHING_SPEZIFIKATION_V1.0_PWA.md** - Vollständig
-2. **Dieses Resume** - Schnellreferenz
-3. **APP_INSTALLATION_ANLEITUNG.md** - PWA-Installation
-4. **AUTO_SAVE_TEST_ANLEITUNG.md** - Test-Szenarien
-5. **MOBILE_OPTIMIERUNG.md** - Responsive Design
-
-### Im Code
-
-- JSDoc-Kommentare bei Klassen
-- Inline-Kommentare bei komplexer Logik
-- Trennlinien zwischen Code-Bereichen
+- **English for everything**: Variables, classes, methods, comments
+- **Translation system**: For UI strings
+- **Comments**: Where needed, not everywhere
+- **Structure**: Classes → Manager → App → UI
 
 ---
 
-## 🔐 Sicherheit
+## 📞 Support Resources
 
-### Keine Risiken
-- Kein Server-Kontakt
-- Keine API-Calls
-- Keine Cookies/Tracking
-- Keine Passwörter
+### Documentation
+
+1. **BEET_ANYTHING_SPECIFICATION.md** - Complete
+2. **This Resume** - Quick reference
+3. **APP_INSTALLATION_GUIDE.md** - PWA installation
+4. **MOBILE_OPTIMIZATION.md** - Responsive design
+5. **README.md** - Project overview
+
+### In Code
+
+- JSDoc comments for classes
+- Inline comments for complex logic
+- Dividers between code sections
+
+---
+
+## 🔐 Security
+
+### No Risks
+- No server contact
+- No API calls
+- No cookies/tracking
+- No passwords
 
 ### Best Practices
 - JSON.parse in try-catch
-- Input-Validierung bei Import
-- Kein eval() verwendet
-- Keine externe Scripts (außer Inter Font)
+- Input validation on import
+- No eval() used
+- No external scripts (except Inter Font)
 
 ---
 
 ## 🏁 Deployment
 
-### Option 1: Statische Datei
+### Option 1: Static File
 ```bash
-# Einfach auf Webserver hochladen
-# Funktioniert sofort, kein Build nötig
+# Simply upload to web server
+# Works immediately, no build needed
 ```
 
 ### Option 2: GitHub Pages
 ```bash
 git init
-git add gartenplaner-deutsch.html
-# Umbenennen zu index.html!
-mv gartenplaner-deutsch.html index.html
+git add beet-anything-i18n.html
+# Rename to index.html!
+mv beet-anything-i18n.html index.html
 git commit -m "Initial commit"
 git push origin main
-# → GitHub Pages aktivieren
+# → Enable GitHub Pages
 # URL: https://username.github.io/repo-name
 ```
 
 ### Option 3: Netlify
 ```bash
-# Drag & Drop in Netlify
-# Datei als index.html hochladen
-# Automatisches HTTPS
+# Drag & drop to Netlify
+# Upload file as index.html
+# Automatic HTTPS
 # URL: https://beet-anything.netlify.app
 ```
 
 ---
 
-## 📊 Metriken (Typische Nutzung)
+## 📊 Metrics (Typical Usage)
 
-| Metrik | Wert |
-|--------|------|
-| Dateigröße (HTML) | ~95 KB |
-| Dateigröße (Minified) | ~45 KB |
-| Dateigröße (Gzip) | ~20 KB |
-| LocalStorage (10 Beete, 3 Jahre) | ~20 KB |
-| LocalStorage (50 Beete, 10 Jahre) | ~100 KB |
-| Ladezeit (WLAN) | < 1s |
-| Ladezeit (4G) | < 2s |
-| Ladezeit (Cached) | < 0.5s |
+| Metric | Value |
+|--------|-------|
+| File size (HTML) | ~105 KB |
+| File size (Minified) | ~50 KB |
+| File size (Gzip) | ~25 KB |
+| LocalStorage (10 beds, 3 years) | ~20 KB |
+| LocalStorage (50 beds, 10 years) | ~100 KB |
+| Load time (WiFi) | < 1s |
+| Load time (4G) | < 2s |
+| Load time (Cached) | < 0.5s |
 
 ---
 
-**Letzte Aktualisierung**: Februar 2025  
-**Version**: 1.0 PWA  
+**Last Updated**: February 2025  
+**Version**: 1.1 i18n  
 **Status**: Production Ready  
-**Entwickelt für**: Private Gemüsegärtner  
-**Wartung**: Self-contained, keine Dependencies (außer Inter Font)
+**Developed for**: Private vegetable gardeners  
+**Maintenance**: Self-contained, no dependencies (except Inter Font)
