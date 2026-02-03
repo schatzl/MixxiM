@@ -900,6 +900,50 @@
             white-space: normal;
             text-align: center;
         }
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid var(--sage);
+            background: linear-gradient(135deg, rgba(138, 168, 136, 0.05) 0%, rgba(74, 124, 89, 0.05) 100%);
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+            color: var(--soil-medium);
+            font-size: 0.95rem;
+        }
+        
+        footer a {
+            color: var(--leaf-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        footer a:hover {
+            color: var(--soil-dark);
+            transform: translateY(-2px);
+        }
+        
+        .github-icon {
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 480px) {
+            footer {
+                margin-top: 3rem;
+                padding: 1.5rem 1rem;
+            }
+            
+            footer p {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1019,7 +1063,7 @@
                 "btn.import": "📂 Import Data",
                 "btn.matrix": "📊 View Matrix",
                 "btn.install": "📱 Install as App",
-                "controls.title": "Planning Controls",
+                "controls.title": "Planning Board",
                 "wishlist.title": "Your Wishlist",
                 "wishlist.select": "Select vegetable...",
                 "wishlist.add": "Add",
@@ -1071,7 +1115,10 @@
                 "install.desktopSteps": "Desktop (Chrome/Edge):\n1. Click the ⊕ icon in the address bar\n2. Or: Menu (⋮) → 'Install app'\n3. Confirm with 'Install'\n\nMobile:\n- iPhone/Safari: Share (□↑) → 'Add to Home Screen'\n- Android/Chrome: Menu (⋮) → 'Install app'\n\nAdvantages:\n✓ Works offline\n✓ Faster startup\n✓ Own app icon\n✓ Fullscreen mode",
                 "export.filename": "garden-plan",
                 "import.success": "Data imported successfully!",
-                "import.error": "Import failed. Please check the file format."
+                "import.error": "Import failed. Please check the file format.",
+                "footer.viewOnGitHub": "View on GitHub",
+                "footer.madeWith": "Made with",
+                "footer.forGardeners": "for gardeners"
             },
             de: {
                 title: "Beet Anything",
@@ -1080,7 +1127,7 @@
                 "btn.import": "📂 Daten importieren",
                 "btn.matrix": "📊 Matrix anzeigen",
                 "btn.install": "📱 Als App installieren",
-                "controls.title": "Planungssteuerung",
+                "controls.title": "Planungsübersicht",
                 "wishlist.title": "Ihre Wunschliste",
                 "wishlist.select": "Gemüse auswählen...",
                 "wishlist.add": "Hinzufügen",
@@ -1132,7 +1179,10 @@
                 "install.desktopSteps": "Desktop (Chrome/Edge):\n1. Klicken Sie auf das ⊕ Symbol in der Adressleiste\n2. Oder: Menü (⋮) → 'App installieren'\n3. Bestätigen Sie mit 'Installieren'\n\nMobile:\n- iPhone/Safari: Teilen (□↑) → 'Zum Home-Bildschirm'\n- Android/Chrome: Menü (⋮) → 'App installieren'\n\nVorteile:\n✓ Offline nutzbar\n✓ Schnellerer Start\n✓ Eigenes App-Icon\n✓ Vollbild-Modus",
                 "export.filename": "gartenplan",
                 "import.success": "Daten erfolgreich importiert!",
-                "import.error": "Import fehlgeschlagen. Bitte überprüfen Sie das Dateiformat."
+                "import.error": "Import fehlgeschlagen. Bitte überprüfen Sie das Dateiformat.",
+                "footer.viewOnGitHub": "Auf GitHub ansehen",
+                "footer.madeWith": "Gemacht mit",
+                "footer.forGardeners": "für Gärtner"
             },
             it: {
                 title: "Beet Anything",
@@ -1141,7 +1191,7 @@
                 "btn.import": "📂 Importa Dati",
                 "btn.matrix": "📊 Visualizza Matrice",
                 "btn.install": "📱 Installa come App",
-                "controls.title": "Controlli di Pianificazione",
+                "controls.title": "Pannello di Pianificazione",
                 "wishlist.title": "La Tua Lista Desideri",
                 "wishlist.select": "Seleziona ortaggio...",
                 "wishlist.add": "Aggiungi",
@@ -1193,7 +1243,10 @@
                 "install.desktopSteps": "Desktop (Chrome/Edge):\n1. Clicca sull'icona ⊕ nella barra degli indirizzi\n2. Oppure: Menu (⋮) → 'Installa app'\n3. Conferma con 'Installa'\n\nMobile:\n- iPhone/Safari: Condividi (□↑) → 'Aggiungi a Home'\n- Android/Chrome: Menu (⋮) → 'Installa app'\n\nVantaggi:\n✓ Funziona offline\n✓ Avvio più veloce\n✓ Icona app propria\n✓ Modalità schermo intero",
                 "export.filename": "piano-orto",
                 "import.success": "Dati importati con successo!",
-                "import.error": "Importazione fallita. Controlla il formato del file."
+                "import.error": "Importazione fallita. Controlla il formato del file.",
+                "footer.viewOnGitHub": "Visualizza su GitHub",
+                "footer.madeWith": "Fatto con",
+                "footer.forGardeners": "per giardinieri"
             }
         };
         
@@ -1385,7 +1438,7 @@
             
             addBed(name) {
                 const id = Date.now();
-                const beet = new GardenBed(id, name || `Bed ${this.beds.size + 1}`);
+                const bed = new GardenBed(id, name || `Bed ${this.beds.size + 1}`);
                 this.beds.set(id, bed);
                 return bed;
             }
@@ -2228,5 +2281,18 @@
             console.log('Beet Anything was installed as an app!');
         });
     </script>
+    
+    <!-- Footer -->
+    <footer>
+        <p>
+            <a href="https://github.com/schatzl/beet-anything" target="_blank" rel="noopener noreferrer">
+                <span class="github-icon">📦</span>
+                <span data-i18n="footer.viewOnGitHub">View on GitHub</span>
+            </a>
+        </p>
+        <p style="font-size: 0.85rem; margin-top: 1rem; color: var(--soil-medium);">
+            <span data-i18n="footer.madeWith">Made with</span> 🌱 <span data-i18n="footer.forGardeners">for gardeners</span>
+        </p>
+    </footer>
 </body>
 </html>
