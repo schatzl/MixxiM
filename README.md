@@ -1,5 +1,7 @@
 # :seedling: Beet Anything
-Tool to easily select matching vegetables for mixed bed cultivation
+A one-hour vibe coding project
+
+Web app to easily select matching vegetables for mixed bed cultivation
 
 ## Motivation
 
