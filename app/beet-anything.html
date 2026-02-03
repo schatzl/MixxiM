@@ -14,7 +14,15 @@
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJlZXQgQW55dGhpbmciLAogICJzaG9ydF9uYW1lIjogIkJlZXQgQW55dGhpbmciLAogICJkZXNjcmlwdGlvbiI6ICJJbnRlbGxpZ2VudGUgR2FydGVucGxhbnVuZyBtaXQgRnJ1Y2h0Zm9sZ2UgdW5kIE1pc2Noa3VsdHVyIiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZjRmMWVhIiwKICAidGhlbWVfY29sb3IiOiAiIzRhN2M1OSIsCiAgIm9yaWVudGF0aW9uIjogImFueSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTAwIDEwMCclM0UlM0NyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJyBmaWxsPSclMjM0YTdjNTknLyUzRSUzQ3RleHQgeD0nNTAlMjUnIHk9JzUwJTI1JyBmb250LXNpemU9JzUwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBkb21pbmFudC1iYXNlbGluZT0nbWlkZGxlJyUzRSVGMCU5RiU4QyVCMSUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzRhN2M1OScvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nNTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGRvbWluYW50LWJhc2VsaW5lPSdtaWRkbGUnJTNFJUYwJTlGJThDJUIxJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfQogIF0KfQ==">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234a7c59'/%3E%3Ctext x='50%25' y='50%25' font-size='50' text-anchor='middle' dominant-baseline='middle'%3E🌱%3C/text%3E%3C/svg%3E">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@600;700&display=swap');
+        /* Inter Font von rsms.me */
+        @import url('https://rsms.me/inter/inter.css');
+        
+        /* Inter Variable Font Support */
+        @supports (font-variation-settings: normal) {
+            body {
+                font-family: 'Inter var', sans-serif;
+            }
+        }
         
         :root {
             --boden-dunkel: #3a2f28;
@@ -35,7 +43,10 @@
         }
         
         body {
-            font-family: 'Merriweather', serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-feature-settings: 'liga' 1, 'calt' 1; /* Inter ligatures & contextual alternates */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             background: var(--creme);
             color: var(--boden-dunkel);
             line-height: 1.6;
@@ -73,11 +84,11 @@
         }
         
         h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 3.5rem;
             color: var(--blatt-gruen);
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
             margin-bottom: 0.5rem;
             animation: slideDown 0.8s ease-out;
         }
@@ -129,7 +140,7 @@
         }
         
         .panel h2 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             color: var(--blatt-gruen);
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
@@ -167,7 +178,7 @@
         }
         
         .jahr-anzeige {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 1.5rem;
             font-weight: 700;
             flex: 1;
@@ -185,7 +196,7 @@
         }
         
         select, input, button {
-            font-family: 'Merriweather', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
         }
         
@@ -339,7 +350,7 @@
         }
         
         .beet-name {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 1.3rem;
             color: var(--blatt-gruen);
             font-weight: 700;
@@ -476,7 +487,7 @@
         }
         
         .modal-kopf h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             color: var(--blatt-gruen);
             font-size: 1.8rem;
         }
@@ -538,7 +549,7 @@
         }
         
         .vorschlag-box h4 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             color: var(--wurzel-braun);
             margin-bottom: 1rem;
         }
@@ -609,6 +620,7 @@
             background: #f8f9fa;
         }
         
+        /* Mobile Optimierungen */
         @media (max-width: 968px) {
             .haupt-grid {
                 grid-template-columns: 1fr;
@@ -622,6 +634,238 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* iPhone und kleine Smartphones */
+        @media (max-width: 480px) {
+            body {
+                font-size: 0.95rem;
+            }
+            
+            .container {
+                padding: 1rem;
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 0;
+            }
+            
+            .subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .panel {
+                padding: 1rem;
+                border-radius: 8px;
+            }
+            
+            .panel h2 {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* Header Buttons */
+            .daten-steuerung {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+            
+            .daten-steuerung .btn {
+                width: 100%;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            /* Jahr-Auswahl */
+            .jahr-auswahl {
+                padding: 0.75rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .jahr-anzeige {
+                font-size: 1.3rem;
+            }
+            
+            /* Wunschliste */
+            .wunschliste-eingabe {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .wunschliste-eingabe select,
+            .wunschliste-eingabe button {
+                width: 100%;
+            }
+            
+            .wunschliste-tag {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            /* Buttons */
+            .btn {
+                font-size: 0.85rem;
+                padding: 0.65rem 1.2rem;
+            }
+            
+            .btn-vorschlag {
+                font-size: 1rem;
+                padding: 0.85rem;
+            }
+            
+            /* Beete */
+            .beet {
+                padding: 1rem;
+            }
+            
+            .beet-name {
+                font-size: 1.2rem;
+            }
+            
+            .pflanze-zuweisung {
+                padding: 0.6rem;
+                margin-bottom: 0.6rem;
+            }
+            
+            .pflanze-name {
+                font-size: 0.95rem;
+            }
+            
+            .pflanze-meta {
+                font-size: 0.8rem;
+                gap: 0.5rem;
+            }
+            
+            .naehrstoff-badge {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.4rem;
+            }
+            
+            .begleiter-tag {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            /* Vorschläge */
+            .vorschlag-box {
+                padding: 1rem;
+            }
+            
+            .vorschlag-box h4 {
+                font-size: 1.2rem;
+            }
+            
+            .vorschlag-element {
+                padding: 0.75rem;
+                margin-bottom: 0.6rem;
+            }
+            
+            /* Modal */
+            .modal-inhalt {
+                padding: 1.5rem;
+                width: 95%;
+                max-width: 95%;
+            }
+            
+            .modal-kopf h3 {
+                font-size: 1.5rem;
+            }
+            
+            .formular-gruppe {
+                margin-bottom: 1.2rem;
+            }
+            
+            /* Info-Text */
+            .info-text {
+                font-size: 0.85rem;
+                padding: 0.85rem;
+            }
+            
+            /* Tabelle für Matrix */
+            .kompatibilitaet-tabelle {
+                font-size: 0.75rem;
+            }
+            
+            .kompatibilitaet-tabelle th,
+            .kompatibilitaet-tabelle td {
+                padding: 0.3rem;
+            }
+            
+            /* Install Button auf Mobile */
+            #floatingInstallButton {
+                bottom: 10px !important;
+                right: 10px !important;
+                left: 10px !important;
+                width: auto !important;
+                font-size: 0.85rem !important;
+                padding: 0.7rem 1rem !important;
+            }
+            
+            #headerInstallButton {
+                display: inline-block !important;
+            }
+        }
+        
+        /* Sehr kleine Geräte (iPhone SE, etc.) */
+        @media (max-width: 375px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 0.75rem;
+            }
+            
+            .panel {
+                padding: 0.85rem;
+            }
+            
+            .jahr-anzeige {
+                font-size: 1.2rem;
+            }
+            
+            .beet-name {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Landscape Modus für Smartphones */
+        @media (max-width: 968px) and (orientation: landscape) {
+            .haupt-grid {
+                grid-template-columns: 1fr 1.5fr;
+            }
+            
+            .jahr-auswahl {
+                padding: 0.5rem;
+            }
+        }
+        
+        /* Prevent horizontal scroll on all devices */
+        body, html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+        
+        * {
+            max-width: 100%;
+        }
+        
+        /* Fix für Buttons die über Viewport hinausragen */
+        .btn-vorschlag,
+        .btn-sekundaer,
+        .btn-primaer {
+            max-width: 100%;
+            word-wrap: break-word;
+            white-space: normal;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -633,6 +877,7 @@
                 <button class="btn btn-sekundaer btn-klein" onclick="app.datenExportieren()">💾 Daten exportieren</button>
                 <button class="btn btn-sekundaer btn-klein" onclick="app.datenImportieren()">📂 Daten importieren</button>
                 <button class="btn btn-primaer btn-klein" onclick="app.matrixAnzeigen()">📊 Matrix anzeigen</button>
+                <button id="headerInstallButton" class="btn btn-primaer btn-klein" onclick="app.alsAppInstallieren()" style="display: none;">📱 Als App installieren</button>
             </div>
         </header>
         
@@ -1445,6 +1690,82 @@
                 eingabe.click();
             },
             
+            alsAppInstallieren() {
+                // Prüfe ob bereits als PWA läuft
+                if (window.matchMedia('(display-mode: standalone)').matches) {
+                    alert('Die App ist bereits installiert! Sie läuft gerade als PWA.');
+                    return;
+                }
+                
+                // Versuche PWA-Installation (wenn verfügbar)
+                if (window.deferredPrompt) {
+                    window.deferredPrompt.prompt();
+                    window.deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('App wurde installiert');
+                        }
+                        window.deferredPrompt = null;
+                        document.getElementById('headerInstallButton').style.display = 'none';
+                    });
+                } else {
+                    // Fallback: Zeige manuelle Installationsanleitung
+                    this.zeigeInstallationsAnleitung();
+                }
+            },
+            
+            zeigeInstallationsAnleitung() {
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                const isAndroid = /Android/.test(navigator.userAgent);
+                
+                let anleitung = '';
+                
+                if (isIOS) {
+                    anleitung = `
+📱 App-Installation auf iPhone/iPad:
+
+1. Tippen Sie auf das Teilen-Symbol (□↑) unten in Safari
+2. Scrollen Sie nach unten
+3. Wählen Sie "Zum Home-Bildschirm"
+4. Tippen Sie auf "Hinzufügen"
+
+Die App erscheint dann auf Ihrem Home-Bildschirm!
+
+Hinweis: Funktioniert nur in Safari (nicht Chrome/Firefox auf iOS)
+                    `;
+                } else if (isAndroid) {
+                    anleitung = `
+📱 App-Installation auf Android:
+
+1. Öffnen Sie das Chrome-Menü (⋮) oben rechts
+2. Wählen Sie "App installieren" oder "Zum Startbildschirm hinzufügen"
+3. Bestätigen Sie mit "Installieren"
+
+Die App erscheint dann auf Ihrem Home-Bildschirm!
+                    `;
+                } else {
+                    anleitung = `
+💻 App-Installation im Browser:
+
+Desktop (Chrome/Edge):
+1. Klicken Sie auf das ⊕ Symbol in der Adressleiste
+2. Oder: Menü (⋮) → "App installieren"
+3. Bestätigen Sie mit "Installieren"
+
+Mobile:
+- iPhone/Safari: Teilen (□↑) → "Zum Home-Bildschirm"
+- Android/Chrome: Menü (⋮) → "App installieren"
+
+Vorteile:
+✓ Offline nutzbar
+✓ Schnellerer Start
+✓ Eigenes App-Icon
+✓ Vollbild-Modus
+                    `;
+                }
+                
+                alert(anleitung);
+            },
+            
             speichern() {
                 this.garten.inLocalStorageSpeichern();
                 // Speichere auch App-State (Jahr und Wunschliste)
@@ -1576,20 +1897,44 @@
         
         // PWA Installation
         let deferredPrompt;
+        window.deferredPrompt = null;
+        
         const installButton = document.createElement('button');
+        installButton.id = 'floatingInstallButton';
         installButton.className = 'btn btn-primaer';
         installButton.innerHTML = '📱 Als App installieren';
         installButton.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);';
         document.body.appendChild(installButton);
         
+        const headerInstallButton = document.getElementById('headerInstallButton');
+        
+        // Prüfe ob bereits als PWA installiert
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('App läuft bereits als PWA');
+        } else {
+            // Zeige Header-Button immer an (für manuelle Installation)
+            if (headerInstallButton) {
+                headerInstallButton.style.display = 'inline-block';
+            }
+        }
+        
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
+            window.deferredPrompt = e;
+            
+            // Zeige beide Buttons
             installButton.style.display = 'block';
+            if (headerInstallButton) {
+                headerInstallButton.style.display = 'inline-block';
+            }
         });
         
         installButton.addEventListener('click', async () => {
-            if (!deferredPrompt) return;
+            if (!deferredPrompt) {
+                app.zeigeInstallationsAnleitung();
+                return;
+            }
             
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
@@ -1599,12 +1944,19 @@
             }
             
             deferredPrompt = null;
+            window.deferredPrompt = null;
             installButton.style.display = 'none';
+            if (headerInstallButton) {
+                headerInstallButton.style.display = 'none';
+            }
         });
         
-        // Nach Installation Button ausblenden
+        // Nach Installation Buttons ausblenden
         window.addEventListener('appinstalled', () => {
             installButton.style.display = 'none';
+            if (headerInstallButton) {
+                headerInstallButton.style.display = 'none';
+            }
             console.log('Beet Anything wurde als App installiert!');
         });
     </script>
