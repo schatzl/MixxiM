@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beet Anything - Fruchtfolge & Mischkultur</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Intelligente Gartenplanung mit Fruchtfolge und Mischkultur">
+    <meta name="theme-color" content="#4a7c59">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Beet Anything">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJlZXQgQW55dGhpbmciLAogICJzaG9ydF9uYW1lIjogIkJlZXQgQW55dGhpbmciLAogICJkZXNjcmlwdGlvbiI6ICJJbnRlbGxpZ2VudGUgR2FydGVucGxhbnVuZyBtaXQgRnJ1Y2h0Zm9sZ2UgdW5kIE1pc2Noa3VsdHVyIiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZjRmMWVhIiwKICAidGhlbWVfY29sb3IiOiAiIzRhN2M1OSIsCiAgIm9yaWVudGF0aW9uIjogImFueSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTAwIDEwMCclM0UlM0NyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJyBmaWxsPSclMjM0YTdjNTknLyUzRSUzQ3RleHQgeD0nNTAlMjUnIHk9JzUwJTI1JyBmb250LXNpemU9JzUwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBkb21pbmFudC1iYXNlbGluZT0nbWlkZGxlJyUzRSVGMCU5RiU4QyVCMSUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzRhN2M1OScvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nNTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGRvbWluYW50LWJhc2VsaW5lPSdtaWRkbGUnJTNFJUYwJTlGJThDJUIxJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfQogIF0KfQ==">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234a7c59'/%3E%3Ctext x='50%25' y='50%25' font-size='50' text-anchor='middle' dominant-baseline='middle'%3E🌱%3C/text%3E%3C/svg%3E">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@600;700&display=swap');
+        
+        :root {
+            --boden-dunkel: #3a2f28;
+            --boden-mittel: #5d4e3f;
+            --blatt-gruen: #4a7c59;
+            --salbei: #8ba888;
+            --creme: #f4f1ea;
+            --terrakotta: #c1694f;
+            --sonnen-gelb: #e8b84d;
+            --wurzel-braun: #6b4423;
+            --wasser-blau: #7ba8a8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Merriweather', serif;
+            background: var(--creme);
+            color: var(--boden-dunkel);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 168, 136, 0.03), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(193, 105, 79, 0.02), transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--blatt-gruen);
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--blatt-gruen);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--boden-mittel);
+            font-weight: 300;
+            font-style: italic;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+        
+        .daten-steuerung {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .haupt-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(58, 47, 40, 0.08);
+            border: 1px solid rgba(74, 124, 89, 0.1);
+        }
+        
+        .panel h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--blatt-gruen);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--salbei);
+            padding-bottom: 0.5rem;
+        }
+        
+        .jahr-auswahl {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--salbei) 0%, var(--blatt-gruen) 100%);
+            border-radius: 8px;
+            color: white;
+        }
+        
+        .jahr-auswahl button {
+            background: white;
+            color: var(--blatt-gruen);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .jahr-auswahl button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .jahr-anzeige {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .wunschliste-bereich {
+            margin-bottom: 2rem;
+        }
+        
+        .wunschliste-eingabe {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        select, input, button {
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+        }
+        
+        select, input[type="text"], input[type="number"] {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--salbei);
+            border-radius: 6px;
+            background: var(--creme);
+            color: var(--boden-dunkel);
+            transition: all 0.3s ease;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--blatt-gruen);
+            background: white;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primaer {
+            background: var(--blatt-gruen);
+            color: white;
+        }
+        
+        .btn-primaer:hover {
+            background: var(--boden-dunkel);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+        }
+        
+        .btn-sekundaer {
+            background: var(--terrakotta);
+            color: white;
+        }
+        
+        .btn-sekundaer:hover {
+            background: var(--wurzel-braun);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(193, 105, 79, 0.3);
+        }
+        
+        .btn-klein {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+        
+        .btn-vorschlag {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sonnen-gelb) 0%, var(--terrakotta) 100%);
+            color: var(--boden-dunkel);
+            font-size: 1.1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-vorschlag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 184, 77, 0.4);
+        }
+        
+        .wunschliste-elemente {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .wunschliste-tag {
+            background: var(--salbei);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            animation: popIn 0.3s ease-out;
+        }
+        
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .wunschliste-tag button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .wunschliste-tag button:hover {
+            transform: scale(1.2);
+        }
+        
+        .garten-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .beet {
+            background: linear-gradient(135deg, #f8f5ee 0%, #ebe6da 100%);
+            border: 3px solid var(--boden-mittel);
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .beet:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(58, 47, 40, 0.15);
+        }
+        
+        .beet-kopf {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--salbei);
+        }
+        
+        .beet-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--blatt-gruen);
+            font-weight: 700;
+        }
+        
+        .beet-aktionen {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .beet-aktionen button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.25rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .beet-aktionen button:hover {
+            transform: scale(1.2);
+        }
+        
+        .beet-inhalt {
+            min-height: 100px;
+        }
+        
+        .pflanze-zuweisung {
+            background: white;
+            border-left: 4px solid var(--blatt-gruen);
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .pflanze-zuweisung:hover {
+            background: var(--creme);
+            border-left-width: 6px;
+        }
+        
+        .pflanze-name {
+            font-weight: 700;
+            color: var(--blatt-gruen);
+            margin-bottom: 0.25rem;
+        }
+        
+        .pflanze-meta {
+            font-size: 0.85rem;
+            color: var(--boden-mittel);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .naehrstoff-badge {
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .naehrstoff-hoch {
+            background: var(--terrakotta);
+            color: white;
+        }
+        
+        .naehrstoff-mittel {
+            background: var(--sonnen-gelb);
+            color: var(--boden-dunkel);
+        }
+        
+        .naehrstoff-niedrig {
+            background: var(--salbei);
+            color: white;
+        }
+        
+        .leeres-beet {
+            color: var(--boden-mittel);
+            font-style: italic;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(58, 47, 40, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-inhalt {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-kopf {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--salbei);
+        }
+        
+        .modal-kopf h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--blatt-gruen);
+            font-size: 1.8rem;
+        }
+        
+        .schliessen-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--boden-mittel);
+            line-height: 1;
+        }
+        
+        .schliessen-btn:hover {
+            color: var(--terrakotta);
+        }
+        
+        .formular-gruppe {
+            margin-bottom: 1.5rem;
+        }
+        
+        .formular-gruppe label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--boden-dunkel);
+        }
+        
+        .begleiter-liste {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .begleiter-tag {
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .begleiter-gut {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .begleiter-schlecht {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .vorschlag-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffe7b8 100%);
+            border: 2px solid var(--sonnen-gelb);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .vorschlag-box h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--wurzel-braun);
+            margin-bottom: 1rem;
+        }
+        
+        .vorschlag-element {
+            background: white;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--sonnen-gelb);
+        }
+        
+        .vorschlag-element strong {
+            color: var(--blatt-gruen);
+        }
+        
+        .info-text {
+            background: var(--creme);
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--boden-mittel);
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--wasser-blau);
+        }
+        
+        .kompatibilitaet-matrix {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+        
+        .kompatibilitaet-tabelle {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        
+        .kompatibilitaet-tabelle th,
+        .kompatibilitaet-tabelle td {
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid var(--salbei);
+        }
+        
+        .kompatibilitaet-tabelle th {
+            background: var(--blatt-gruen);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .kompatibilitaet-tabelle tr:hover {
+            background: var(--creme);
+        }
+        
+        .komp-gut {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .komp-schlecht {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .komp-neutral {
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 968px) {
+            .haupt-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .garten-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌱 Beet Anything</h1>
+            <p class="subtitle">Fruchtfolge & Mischkultur leicht gemacht</p>
+            <div class="daten-steuerung">
+                <button class="btn btn-sekundaer btn-klein" onclick="app.datenExportieren()">💾 Daten exportieren</button>
+                <button class="btn btn-sekundaer btn-klein" onclick="app.datenImportieren()">📂 Daten importieren</button>
+                <button class="btn btn-primaer btn-klein" onclick="app.matrixAnzeigen()">📊 Matrix anzeigen</button>
+            </div>
+        </header>
+        
+        <div class="haupt-grid">
+            <!-- Linkes Panel: Steuerung -->
+            <div>
+                <div class="panel">
+                    <h2>Planungssteuerung</h2>
+                    
+                    <div class="jahr-auswahl">
+                        <button onclick="app.jahrAendern(-1)">←</button>
+                        <div class="jahr-anzeige" id="jahrAnzeige">2024</div>
+                        <button onclick="app.jahrAendern(1)">→</button>
+                    </div>
+                    
+                    <div class="wunschliste-bereich">
+                        <h3 style="margin-bottom: 1rem; color: var(--boden-dunkel);">Ihre Wunschliste</h3>
+                        <div class="wunschliste-eingabe">
+                            <select id="gemueseAuswahl">
+                                <option value="">Gemüse auswählen...</option>
+                            </select>
+                            <button class="btn btn-primaer" onclick="app.zurWunschlisteHinzufuegen()">Hinzufügen</button>
+                        </div>
+                        <div class="wunschliste-elemente" id="wunschlisteElemente"></div>
+                        
+                        <button class="btn btn-vorschlag" onclick="app.vorschlaegeGenerieren()">
+                            ✨ Gartenplan vorschlagen
+                        </button>
+                        
+                        <div id="vorschlaegeBox"></div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <button class="btn btn-sekundaer" style="width: 100%;" onclick="app.beetHinzufuegen()">
+                            + Gartenbeet hinzufügen
+                        </button>
+                    </div>
+                    
+                    <div class="info-text" style="margin-top: 2rem;">
+                        <strong>💡 So funktioniert's:</strong><br>
+                        Fügen Sie Gemüse zu Ihrer Wunschliste hinzu und klicken Sie dann auf "Gartenplan vorschlagen", um optimale Beetzuweisungen basierend auf Fruchtfolge und Mischkulturregeln zu erhalten.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rechtes Panel: Gartenbeete -->
+            <div class="panel">
+                <h2>Gartenbeete - <span id="jahrAnzeigeBeete">2024</span></h2>
+                <div class="garten-grid" id="gartenGrid"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal für Beetzuweisung -->
+    <div class="modal" id="beetModal">
+        <div class="modal-inhalt">
+            <div class="modal-kopf">
+                <h3>Pflanzen zuweisen</h3>
+                <button class="schliessen-btn" onclick="app.modalSchliessen()">×</button>
+            </div>
+            <div id="modalKoerper"></div>
+        </div>
+    </div>
+    
+    <!-- Modal für Kompatibilitätsmatrix -->
+    <div class="modal" id="matrixModal">
+        <div class="modal-inhalt" style="max-width: 900px;">
+            <div class="modal-kopf">
+                <h3>Mischkultur-Matrix</h3>
+                <button class="schliessen-btn" onclick="app.matrixModalSchliessen()">×</button>
+            </div>
+            <div id="matrixKoerper"></div>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // KERN-KLASSENHIERARCHIE
+        // ============================================
+        
+        /**
+         * Basisklasse für Gemüseinformationen
+         */
+        class Gemuese {
+            constructor(id, name, naehrstoffbedarf, familie) {
+                this.id = id;
+                this.name = name;
+                this.naehrstoffbedarf = naehrstoffbedarf; // 'hoch', 'mittel', 'niedrig'
+                this.familie = familie;
+                this.guteBegleiter = [];
+                this.schlechteBegleiter = [];
+            }
+            
+            gutenBegleiterHinzufuegen(gemueseId) {
+                if (!this.guteBegleiter.includes(gemueseId)) {
+                    this.guteBegleiter.push(gemueseId);
+                }
+            }
+            
+            schlechtenBegleiterHinzufuegen(gemueseId) {
+                if (!this.schlechteBegleiter.includes(gemueseId)) {
+                    this.schlechteBegleiter.push(gemueseId);
+                }
+            }
+            
+            istKompatibel(gemueseId) {
+                if (this.schlechteBegleiter.includes(gemueseId)) return -1;
+                if (this.guteBegleiter.includes(gemueseId)) return 1;
+                return 0;
+            }
+            
+            toJSON() {
+                return {
+                    id: this.id,
+                    name: this.name,
+                    naehrstoffbedarf: this.naehrstoffbedarf,
+                    familie: this.familie,
+                    guteBegleiter: this.guteBegleiter,
+                    schlechteBegleiter: this.schlechteBegleiter
+                };
+            }
+            
+            static fromJSON(data) {
+                const gem = new Gemuese(data.id, data.name, data.naehrstoffbedarf, data.familie);
+                gem.guteBegleiter = data.guteBegleiter || [];
+                gem.schlechteBegleiter = data.schlechteBegleiter || [];
+                return gem;
+            }
+        }
+        
+        /**
+         * Repräsentiert eine Pflanzung in einem bestimmten Beet und Jahr
+         */
+        class Pflanzung {
+            constructor(beetId, jahr, gemueseId) {
+                this.beetId = beetId;
+                this.jahr = jahr;
+                this.gemueseId = gemueseId;
+            }
+            
+            toJSON() {
+                return {
+                    beetId: this.beetId,
+                    jahr: this.jahr,
+                    gemueseId: this.gemueseId
+                };
+            }
+            
+            static fromJSON(data) {
+                return new Pflanzung(data.beetId, data.jahr, data.gemueseId);
+            }
+        }
+        
+        /**
+         * Repräsentiert ein Gartenbeet
+         */
+        class Gartenbeet {
+            constructor(id, name) {
+                this.id = id;
+                this.name = name;
+            }
+            
+            toJSON() {
+                return {
+                    id: this.id,
+                    name: this.name
+                };
+            }
+            
+            static fromJSON(data) {
+                return new Gartenbeet(data.id, data.name);
+            }
+        }
+        
+        /**
+         * Verwaltet den gesamten Garten mit allen Daten
+         */
+        class GartenManager {
+            constructor() {
+                this.gemueseSorten = new Map();
+                this.beete = new Map();
+                this.pflanzungen = [];
+                this.gemueseDatenbankInitialisieren();
+            }
+            
+            gemueseDatenbankInitialisieren() {
+                // Gemüse initialisieren
+                const gemueseListe = [
+                    new Gemuese('tomate', 'Tomate', 'hoch', 'Nachtschattengewächse'),
+                    new Gemuese('kartoffel', 'Kartoffel', 'hoch', 'Nachtschattengewächse'),
+                    new Gemuese('karotte', 'Karotte', 'niedrig', 'Doldenblütler'),
+                    new Gemuese('salat', 'Salat', 'niedrig', 'Korbblütler'),
+                    new Gemuese('kohl', 'Kohl', 'hoch', 'Kreuzblütler'),
+                    new Gemuese('bohnen', 'Bohnen', 'niedrig', 'Hülsenfrüchtler'),
+                    new Gemuese('erbsen', 'Erbsen', 'niedrig', 'Hülsenfrüchtler'),
+                    new Gemuese('zwiebel', 'Zwiebel', 'mittel', 'Amaryllisgewächse'),
+                    new Gemuese('knoblauch', 'Knoblauch', 'mittel', 'Amaryllisgewächse'),
+                    new Gemuese('gurke', 'Gurke', 'mittel', 'Kürbisgewächse'),
+                    new Gemuese('zucchini', 'Zucchini', 'mittel', 'Kürbisgewächse'),
+                    new Gemuese('mais', 'Mais', 'hoch', 'Süßgräser'),
+                    new Gemuese('radieschen', 'Radieschen', 'niedrig', 'Kreuzblütler'),
+                    new Gemuese('spinat', 'Spinat', 'mittel', 'Fuchsschwanzgewächse'),
+                    new Gemuese('basilikum', 'Basilikum', 'niedrig', 'Lippenblütler'),
+                    new Gemuese('paprika', 'Paprika', 'mittel', 'Nachtschattengewächse'),
+                    new Gemuese('sellerie', 'Sellerie', 'hoch', 'Doldenblütler'),
+                    new Gemuese('rucola', 'Rucola', 'niedrig', 'Kreuzblütler'),
+                    new Gemuese('kohlrabi', 'Kohlrabi', 'mittel', 'Kreuzblütler'),
+                    new Gemuese('lauch', 'Lauch', 'mittel', 'Amaryllisgewächse'),
+                ];
+                
+                gemueseListe.forEach(g => this.gemueseSorten.set(g.id, g));
+                
+                // Mischkultur-Beziehungen einrichten
+                this.begleiterFestlegen('tomate', ['basilikum', 'karotte', 'salat', 'sellerie'], ['kartoffel', 'kohl', 'erbsen']);
+                this.begleiterFestlegen('kartoffel', ['bohnen', 'mais', 'kohl'], ['tomate', 'gurke', 'paprika']);
+                this.begleiterFestlegen('karotte', ['tomate', 'salat', 'zwiebel', 'lauch'], ['sellerie']);
+                this.begleiterFestlegen('salat', ['karotte', 'radieschen', 'kohlrabi'], ['sellerie']);
+                this.begleiterFestlegen('kohl', ['bohnen', 'kartoffel', 'sellerie'], ['tomate', 'zwiebel', 'knoblauch']);
+                this.begleiterFestlegen('bohnen', ['mais', 'kohl', 'kartoffel', 'gurke'], ['zwiebel', 'knoblauch', 'lauch']);
+                this.begleiterFestlegen('erbsen', ['karotte', 'radieschen', 'kohlrabi'], ['zwiebel', 'knoblauch', 'lauch', 'tomate']);
+                this.begleiterFestlegen('zwiebel', ['karotte', 'salat', 'tomate'], ['bohnen', 'erbsen', 'kohl']);
+                this.begleiterFestlegen('knoblauch', ['tomate', 'gurke'], ['bohnen', 'erbsen', 'kohl']);
+                this.begleiterFestlegen('gurke', ['bohnen', 'mais', 'erbsen', 'knoblauch'], ['kartoffel', 'radieschen']);
+                this.begleiterFestlegen('zucchini', ['bohnen', 'mais', 'zwiebel'], ['kartoffel']);
+                this.begleiterFestlegen('mais', ['bohnen', 'gurke', 'erbsen', 'zucchini'], ['tomate', 'sellerie']);
+                this.begleiterFestlegen('radieschen', ['salat', 'erbsen', 'karotte'], ['gurke']);
+                this.begleiterFestlegen('spinat', ['erbsen', 'kohlrabi', 'radieschen'], []);
+                this.begleiterFestlegen('basilikum', ['tomate', 'paprika', 'gurke'], []);
+                this.begleiterFestlegen('paprika', ['basilikum', 'zwiebel', 'karotte'], ['bohnen', 'kartoffel']);
+                this.begleiterFestlegen('sellerie', ['kohl', 'lauch', 'tomate'], ['karotte', 'salat', 'mais']);
+                this.begleiterFestlegen('rucola', ['bohnen', 'erbsen', 'radieschen'], []);
+                this.begleiterFestlegen('kohlrabi', ['salat', 'erbsen', 'spinat'], []);
+                this.begleiterFestlegen('lauch', ['sellerie', 'karotte', 'tomate'], ['bohnen', 'erbsen']);
+            }
+            
+            begleiterFestlegen(gemId, gut, schlecht) {
+                const gem = this.gemueseSorten.get(gemId);
+                if (!gem) return;
+                
+                gut.forEach(g => {
+                    if (this.gemueseSorten.has(g)) {
+                        gem.gutenBegleiterHinzufuegen(g);
+                    }
+                });
+                
+                schlecht.forEach(s => {
+                    if (this.gemueseSorten.has(s)) {
+                        gem.schlechtenBegleiterHinzufuegen(s);
+                    }
+                });
+            }
+            
+            beetHinzufuegen(name) {
+                const id = Date.now();
+                const beet = new Gartenbeet(id, name || `Beet ${this.beete.size + 1}`);
+                this.beete.set(id, beet);
+                return beet;
+            }
+            
+            beetEntfernen(beetId) {
+                this.beete.delete(beetId);
+                this.pflanzungen = this.pflanzungen.filter(p => p.beetId !== beetId);
+            }
+            
+            pflanzungHinzufuegen(beetId, jahr, gemueseId) {
+                // Entferne existierende Pflanzung für diese Beet/Jahr/Gemüse-Kombination
+                this.pflanzungen = this.pflanzungen.filter(
+                    p => !(p.beetId === beetId && p.jahr === jahr && p.gemueseId === gemueseId)
+                );
+                this.pflanzungen.push(new Pflanzung(beetId, jahr, gemueseId));
+            }
+            
+            pflanzungEntfernen(beetId, jahr, gemueseId) {
+                this.pflanzungen = this.pflanzungen.filter(
+                    p => !(p.beetId === beetId && p.jahr === jahr && p.gemueseId === gemueseId)
+                );
+            }
+            
+            pflanzungenFuerBeet(beetId, jahr) {
+                return this.pflanzungen
+                    .filter(p => p.beetId === beetId && p.jahr === jahr)
+                    .map(p => this.gemueseSorten.get(p.gemueseId))
+                    .filter(g => g);
+            }
+            
+            pflanzungIdsFuerBeet(beetId, jahr) {
+                return this.pflanzungen
+                    .filter(p => p.beetId === beetId && p.jahr === jahr)
+                    .map(p => p.gemueseId);
+            }
+            
+            // Export/Import-Funktionalität
+            datenExportieren() {
+                return JSON.stringify({
+                    gemueseSorten: Array.from(this.gemueseSorten.values()).map(g => g.toJSON()),
+                    beete: Array.from(this.beete.values()).map(b => b.toJSON()),
+                    pflanzungen: this.pflanzungen.map(p => p.toJSON())
+                }, null, 2);
+            }
+            
+            datenImportieren(jsonString) {
+                try {
+                    const daten = JSON.parse(jsonString);
+                    
+                    // Gemüse importieren
+                    this.gemueseSorten.clear();
+                    daten.gemueseSorten.forEach(g => {
+                        const gem = Gemuese.fromJSON(g);
+                        this.gemueseSorten.set(gem.id, gem);
+                    });
+                    
+                    // Beete importieren
+                    this.beete.clear();
+                    daten.beete.forEach(b => {
+                        const beet = Gartenbeet.fromJSON(b);
+                        this.beete.set(beet.id, beet);
+                    });
+                    
+                    // Pflanzungen importieren
+                    this.pflanzungen = daten.pflanzungen.map(p => Pflanzung.fromJSON(p));
+                    
+                    return true;
+                } catch (e) {
+                    console.error('Import fehlgeschlagen:', e);
+                    return false;
+                }
+            }
+            
+            // In localStorage speichern
+            inLocalStorageSpeichern() {
+                localStorage.setItem('gartenplanerDaten', this.datenExportieren());
+            }
+            
+            // Aus localStorage laden
+            ausLocalStorageLaden() {
+                const daten = localStorage.getItem('gartenplanerDaten');
+                if (daten) {
+                    return this.datenImportieren(daten);
+                }
+                return false;
+            }
+        }
+        
+        // ============================================
+        // VORSCHLAGSALGORITHMUS
+        // ============================================
+        
+        class VorschlagsEngine {
+            constructor(gartenManager) {
+                this.garten = gartenManager;
+            }
+            
+            /**
+             * Generiert optimale Beetzuweisungen basierend auf Wunschliste
+             */
+            vorschlaegeGenerieren(wunschliste, aktuellesJahr) {
+                const vorschlaege = [];
+                const beete = Array.from(this.garten.beete.values());
+                const verwendeteGemuese = new Set();
+                
+                // Bewerte jedes Beet für jedes Gemüse
+                const beetBewertungen = [];
+                
+                for (const beet of beete) {
+                    for (const gemId of wunschliste) {
+                        if (verwendeteGemuese.has(gemId)) continue;
+                        
+                        const bewertung = this.pflanzungsOptionBewerten(beet.id, gemId, aktuellesJahr);
+                        beetBewertungen.push({
+                            beetId: beet.id,
+                            beetName: beet.name,
+                            gemId: gemId,
+                            bewertung: bewertung.gesamt,
+                            gruende: bewertung.gruende
+                        });
+                    }
+                }
+                
+                // Nach Bewertung sortieren (höchste zuerst)
+                beetBewertungen.sort((a, b) => b.bewertung - a.bewertung);
+                
+                // Gemüse den Beeten zuweisen
+                const zugewieseneBeete = new Set();
+                
+                for (const option of beetBewertungen) {
+                    if (verwendeteGemuese.has(option.gemId) || zugewieseneBeete.has(option.beetId)) {
+                        continue;
+                    }
+                    
+                    vorschlaege.push({
+                        beetId: option.beetId,
+                        beetName: option.beetName,
+                        gemId: option.gemId,
+                        gemueseName: this.garten.gemueseSorten.get(option.gemId).name,
+                        bewertung: option.bewertung,
+                        gruende: option.gruende
+                    });
+                    
+                    verwendeteGemuese.add(option.gemId);
+                    zugewieseneBeete.add(option.beetId);
+                }
+                
+                return vorschlaege;
+            }
+            
+            /**
+             * Bewertet eine Pflanzungsoption basierend auf mehreren Kriterien
+             */
+            pflanzungsOptionBewerten(beetId, gemId, jahr) {
+                const gem = this.garten.gemueseSorten.get(gemId);
+                if (!gem) return { gesamt: 0, gruende: [] };
+                
+                let bewertung = 0;
+                const gruende = [];
+                
+                // Vorjahrespflanzungen abrufen
+                const vorjahr = this.garten.pflanzungIdsFuerBeet(beetId, jahr - 1);
+                const aktuellesJahr = this.garten.pflanzungIdsFuerBeet(beetId, jahr);
+                
+                // Regel 1: Familienrotation (gleiche Familie vermeiden)
+                const vorjahresFamilien = vorjahr.map(id => this.garten.gemueseSorten.get(id)?.familie).filter(f => f);
+                if (!vorjahresFamilien.includes(gem.familie)) {
+                    bewertung += 30;
+                    gruende.push('Andere Pflanzenfamilie als im Vorjahr');
+                } else {
+                    bewertung -= 20;
+                    gruende.push('⚠️ Gleiche Pflanzenfamilie wie im Vorjahr');
+                }
+                
+                // Regel 2: Nährstoffrotation
+                const vorjahresNaehrstoff = vorjahr.map(id => this.garten.gemueseSorten.get(id)?.naehrstoffbedarf).filter(n => n);
+                if (vorjahresNaehrstoff.includes('hoch') && gem.naehrstoffbedarf === 'niedrig') {
+                    bewertung += 25;
+                    gruende.push('Regeneriert Bodennährstoffe nach Starkzehrer');
+                } else if (vorjahresNaehrstoff.includes('hoch') && gem.naehrstoffbedarf === 'hoch') {
+                    bewertung -= 15;
+                    gruende.push('⚠️ Hoher Nährstoffbedarf nach Starkzehrer');
+                } else if (gem.naehrstoffbedarf === 'niedrig') {
+                    bewertung += 10;
+                    gruende.push('Niedriger Nährstoffbedarf schont den Boden');
+                }
+                
+                // Regel 3: Mischkultur mit aktuellen Pflanzen
+                for (const aktGemId of aktuellesJahr) {
+                    const kompatibilitaet = gem.istKompatibel(aktGemId);
+                    if (kompatibilitaet === 1) {
+                        bewertung += 15;
+                        gruende.push(`Guter Begleiter von ${this.garten.gemueseSorten.get(aktGemId).name}`);
+                    } else if (kompatibilitaet === -1) {
+                        bewertung -= 30;
+                        gruende.push(`⚠️ Schlechter Begleiter von ${this.garten.gemueseSorten.get(aktGemId).name}`);
+                    }
+                }
+                
+                // Regel 4: Leere Beete bevorzugen für Flexibilität
+                if (aktuellesJahr.length === 0) {
+                    bewertung += 5;
+                }
+                
+                // Regel 5: Zweijahres-Rotationsprüfung (gleiches Gemüse vor 2 Jahren vermeiden)
+                const vorZweiJahren = this.garten.pflanzungIdsFuerBeet(beetId, jahr - 2);
+                if (vorZweiJahren.includes(gemId)) {
+                    bewertung -= 10;
+                    gruende.push('⚠️ Gleiches Gemüse wurde hier vor 2 Jahren angebaut');
+                }
+                
+                return { gesamt: bewertung, gruende };
+            }
+        }
+        
+        // ============================================
+        // ANWENDUNGSCONTROLLER
+        // ============================================
+        
+        const app = {
+            garten: new GartenManager(),
+            vorschlagsEngine: null,
+            aktuellesJahr: 2024,
+            wunschliste: [],
+            
+            init() {
+                // Versuche gespeicherte Daten zu laden
+                const geladen = this.garten.ausLocalStorageLaden();
+                
+                // Lade App-State (Jahr und Wunschliste)
+                const state = localStorage.getItem('beetAnythingState');
+                if (state) {
+                    try {
+                        const parsedState = JSON.parse(state);
+                        this.aktuellesJahr = parsedState.aktuellesJahr || 2024;
+                        this.wunschliste = parsedState.wunschliste || [];
+                        // UI aktualisieren
+                        document.getElementById('jahrAnzeige').textContent = this.aktuellesJahr;
+                        document.getElementById('jahrAnzeigeBeete').textContent = this.aktuellesJahr;
+                    } catch (e) {
+                        console.log('State konnte nicht geladen werden:', e);
+                    }
+                }
+                
+                // Wenn keine gespeicherten Daten, mit Standard-Beeten initialisieren
+                if (!geladen) {
+                    for (let i = 0; i < 4; i++) {
+                        this.garten.beetHinzufuegen(`Beet ${i + 1}`);
+                    }
+                    this.speichern(); // Initiale Daten speichern
+                }
+                
+                this.vorschlagsEngine = new VorschlagsEngine(this.garten);
+                
+                // Gemüse-Auswahlfeld füllen
+                const auswahl = document.getElementById('gemueseAuswahl');
+                const sortierteGemuese = Array.from(this.garten.gemueseSorten.values())
+                    .sort((a, b) => a.name.localeCompare(b.name));
+                
+                sortierteGemuese.forEach(gem => {
+                    const option = document.createElement('option');
+                    option.value = gem.id;
+                    option.textContent = gem.name;
+                    auswahl.appendChild(option);
+                });
+                
+                this.rendern();
+            },
+            
+            jahrAendern(delta) {
+                this.aktuellesJahr += delta;
+                document.getElementById('jahrAnzeige').textContent = this.aktuellesJahr;
+                document.getElementById('jahrAnzeigeBeete').textContent = this.aktuellesJahr;
+                this.speichern(); // Jahr-Änderung speichern
+                this.rendern();
+            },
+            
+            zurWunschlisteHinzufuegen() {
+                const auswahl = document.getElementById('gemueseAuswahl');
+                const gemId = auswahl.value;
+                if (gemId && !this.wunschliste.includes(gemId)) {
+                    this.wunschliste.push(gemId);
+                    auswahl.value = '';
+                    this.speichern(); // Wunschliste speichern
+                    this.wunschlisteRendern();
+                }
+            },
+            
+            vonWunschlisteEntfernen(gemId) {
+                this.wunschliste = this.wunschliste.filter(g => g !== gemId);
+                this.speichern(); // Wunschliste speichern
+                this.wunschlisteRendern();
+            },
+            
+            wunschlisteRendern() {
+                const container = document.getElementById('wunschlisteElemente');
+                if (this.wunschliste.length === 0) {
+                    container.innerHTML = '<p style="color: var(--boden-mittel); font-style: italic;">Noch kein Gemüse ausgewählt</p>';
+                    return;
+                }
+                
+                container.innerHTML = this.wunschliste.map(gemId => {
+                    const gem = this.garten.gemueseSorten.get(gemId);
+                    if (!gem) return '';
+                    return `
+                        <div class="wunschliste-tag">
+                            ${gem.name}
+                            <button onclick="app.vonWunschlisteEntfernen('${gemId}')">×</button>
+                        </div>
+                    `;
+                }).join('');
+            },
+            
+            beetHinzufuegen() {
+                this.garten.beetHinzufuegen();
+                this.speichern();
+                this.rendern();
+            },
+            
+            beetEntfernen(beetId) {
+                if (confirm('Dieses Beet und alle seine Pflanzungen entfernen?')) {
+                    this.garten.beetEntfernen(beetId);
+                    this.speichern();
+                    this.rendern();
+                }
+            },
+            
+            beetModalOeffnen(beetId) {
+                const beet = this.garten.beete.get(beetId);
+                if (!beet) return;
+                
+                const modal = document.getElementById('beetModal');
+                const modalKoerper = document.getElementById('modalKoerper');
+                
+                modalKoerper.innerHTML = `
+                    <div class="formular-gruppe">
+                        <label>Beetname</label>
+                        <input type="text" id="beetNameEingabe" value="${beet.name}" style="width: 100%;">
+                    </div>
+                    <div class="formular-gruppe">
+                        <label>Pflanzen zuweisen für ${this.aktuellesJahr}</label>
+                        <select id="pflanzenAuswahl" style="width: 100%;">
+                            <option value="">Pflanze auswählen...</option>
+                            ${Array.from(this.garten.gemueseSorten.values())
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map(gem => `<option value="${gem.id}">${gem.name}</option>`)
+                                .join('')}
+                        </select>
+                        <button class="btn btn-primaer" style="margin-top: 0.5rem;" onclick="app.pflanzeZuBeetHinzufuegen(${beetId})">Pflanze hinzufügen</button>
+                    </div>
+                    <div id="beetPflanzenListe">
+                        ${this.beetPflanzenListeRendern(beetId)}
+                    </div>
+                    <button class="btn btn-primaer" style="width: 100%; margin-top: 1rem;" onclick="app.beetSpeichern(${beetId})">Speichern</button>
+                `;
+                
+                modal.classList.add('active');
+            },
+            
+            beetPflanzenListeRendern(beetId) {
+                const gemIds = this.garten.pflanzungIdsFuerBeet(beetId, this.aktuellesJahr);
+                
+                if (gemIds.length === 0) {
+                    return '<p style="color: var(--boden-mittel); font-style: italic; margin-top: 1rem;">Keine Pflanzen für dieses Jahr zugewiesen</p>';
+                }
+                
+                return `
+                    <div style="margin-top: 1rem;">
+                        <strong>Aktuelle Pflanzen (${this.aktuellesJahr}):</strong>
+                        ${gemIds.map(gemId => {
+                            const gem = this.garten.gemueseSorten.get(gemId);
+                            if (!gem) return '';
+                            return `
+                                <div style="background: var(--creme); padding: 0.75rem; margin: 0.5rem 0; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>${gem.name} <span style="font-size: 0.8rem; color: var(--boden-mittel);">(${gem.familie})</span></span>
+                                    <button onclick="app.pflanzeVonBeetEntfernen(${beetId}, '${gemId}')" style="background: var(--terrakotta); color: white; border: none; padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer;">Entfernen</button>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            },
+            
+            pflanzeZuBeetHinzufuegen(beetId) {
+                const auswahl = document.getElementById('pflanzenAuswahl');
+                const gemId = auswahl.value;
+                if (!gemId) return;
+                
+                this.garten.pflanzungHinzufuegen(beetId, this.aktuellesJahr, gemId);
+                auswahl.value = '';
+                
+                const modalKoerper = document.getElementById('modalKoerper');
+                modalKoerper.querySelector('#beetPflanzenListe').innerHTML = this.beetPflanzenListeRendern(beetId);
+                
+                this.speichern();
+            },
+            
+            pflanzeVonBeetEntfernen(beetId, gemId) {
+                this.garten.pflanzungEntfernen(beetId, this.aktuellesJahr, gemId);
+                
+                const modalKoerper = document.getElementById('modalKoerper');
+                modalKoerper.querySelector('#beetPflanzenListe').innerHTML = this.beetPflanzenListeRendern(beetId);
+                
+                this.speichern();
+            },
+            
+            beetSpeichern(beetId) {
+                const beet = this.garten.beete.get(beetId);
+                const nameEingabe = document.getElementById('beetNameEingabe');
+                beet.name = nameEingabe.value;
+                this.modalSchliessen();
+                this.speichern();
+                this.rendern();
+            },
+            
+            modalSchliessen() {
+                document.getElementById('beetModal').classList.remove('active');
+            },
+            
+            vorschlaegeGenerieren() {
+                if (this.wunschliste.length === 0) {
+                    alert('Bitte fügen Sie zuerst Gemüse zu Ihrer Wunschliste hinzu!');
+                    return;
+                }
+                
+                const vorschlaege = this.vorschlagsEngine.vorschlaegeGenerieren(this.wunschliste, this.aktuellesJahr);
+                this.vorschlaegeRendern(vorschlaege);
+            },
+            
+            vorschlaegeRendern(vorschlaege) {
+                const container = document.getElementById('vorschlaegeBox');
+                
+                if (vorschlaege.length === 0) {
+                    container.innerHTML = `
+                        <div class="vorschlag-box">
+                            <h4>Keine Vorschläge verfügbar</h4>
+                            <p>Alle Gemüsesorten konnten nicht platziert werden. Versuchen Sie, mehr Beete hinzuzufügen oder Ihre Wunschliste anzupassen.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = `
+                    <div class="vorschlag-box">
+                        <h4>🌟 Vorgeschlagener Gartenplan</h4>
+                        ${vorschlaege.map(v => `
+                            <div class="vorschlag-element">
+                                <strong>${v.beetName}:</strong> ${v.gemueseName}<br>
+                                <small style="color: var(--boden-mittel); display: block; margin: 0.5rem 0;">
+                                    ${v.gruende.slice(0, 2).join(' • ')}
+                                </small>
+                                <button class="btn btn-primaer" style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.85rem;" 
+                                        onclick="app.vorschlagAnwenden(${v.beetId}, '${v.gemId}')">
+                                    Auf Beet anwenden
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            },
+            
+            vorschlagAnwenden(beetId, gemId) {
+                this.garten.pflanzungHinzufuegen(beetId, this.aktuellesJahr, gemId);
+                this.speichern();
+                this.rendern();
+            },
+            
+            matrixAnzeigen() {
+                const modal = document.getElementById('matrixModal');
+                const koerper = document.getElementById('matrixKoerper');
+                
+                const gemueseSorten = Array.from(this.garten.gemueseSorten.values())
+                    .sort((a, b) => a.name.localeCompare(b.name));
+                
+                let html = `
+                    <div class="kompatibilitaet-matrix">
+                        <table class="kompatibilitaet-tabelle">
+                            <thead>
+                                <tr>
+                                    <th>Pflanze</th>
+                                    ${gemueseSorten.map(g => `<th>${g.name}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                gemueseSorten.forEach(zeilenGem => {
+                    html += `<tr><th>${zeilenGem.name}</th>`;
+                    gemueseSorten.forEach(spaltenGem => {
+                        if (zeilenGem.id === spaltenGem.id) {
+                            html += '<td class="komp-neutral">-</td>';
+                        } else {
+                            const komp = zeilenGem.istKompatibel(spaltenGem.id);
+                            if (komp === 1) {
+                                html += '<td class="komp-gut">✓</td>';
+                            } else if (komp === -1) {
+                                html += '<td class="komp-schlecht">✗</td>';
+                            } else {
+                                html += '<td class="komp-neutral">○</td>';
+                            }
+                        }
+                    });
+                    html += '</tr>';
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem;">
+                        <strong>Legende:</strong> ✓ = Gute Begleiter | ✗ = Schlechte Begleiter | ○ = Neutral
+                    </div>
+                `;
+                
+                koerper.innerHTML = html;
+                modal.classList.add('active');
+            },
+            
+            matrixModalSchliessen() {
+                document.getElementById('matrixModal').classList.remove('active');
+            },
+            
+            datenExportieren() {
+                const daten = this.garten.datenExportieren();
+                const blob = new Blob([daten], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `gartenplan-${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            },
+            
+            datenImportieren() {
+                const eingabe = document.createElement('input');
+                eingabe.type = 'file';
+                eingabe.accept = '.json';
+                eingabe.onchange = (e) => {
+                    const datei = e.target.files[0];
+                    if (!datei) return;
+                    
+                    const leser = new FileReader();
+                    leser.onload = (ereignis) => {
+                        const erfolg = this.garten.datenImportieren(ereignis.target.result);
+                        if (erfolg) {
+                            alert('Daten erfolgreich importiert!');
+                            this.speichern();
+                            this.rendern();
+                        } else {
+                            alert('Import fehlgeschlagen. Bitte überprüfen Sie das Dateiformat.');
+                        }
+                    };
+                    leser.readAsText(datei);
+                };
+                eingabe.click();
+            },
+            
+            speichern() {
+                this.garten.inLocalStorageSpeichern();
+                // Speichere auch App-State (Jahr und Wunschliste)
+                localStorage.setItem('beetAnythingState', JSON.stringify({
+                    aktuellesJahr: this.aktuellesJahr,
+                    wunschliste: this.wunschliste
+                }));
+            },
+            
+            rendern() {
+                const grid = document.getElementById('gartenGrid');
+                const beete = Array.from(this.garten.beete.values());
+                
+                if (beete.length === 0) {
+                    grid.innerHTML = '<p class="leeres-beet">Noch keine Beete. Fügen Sie eines hinzu, um zu beginnen!</p>';
+                    return;
+                }
+                
+                grid.innerHTML = beete.map(beet => {
+                    const aktuellePflanzungen = this.garten.pflanzungenFuerBeet(beet.id, this.aktuellesJahr);
+                    const vorjahresPflanzungen = this.garten.pflanzungenFuerBeet(beet.id, this.aktuellesJahr - 1);
+                    
+                    let inhalt = '';
+                    if (aktuellePflanzungen.length === 0) {
+                        inhalt = `<div class="leeres-beet">Klicken zum Zuweisen von Pflanzen</div>`;
+                    } else {
+                        inhalt = aktuellePflanzungen.map(gem => {
+                            const aktuelleIds = aktuellePflanzungen.map(g => g.id);
+                            const guteBegleiter = aktuelleIds.filter(id => id !== gem.id && gem.istKompatibel(id) === 1);
+                            const schlechteBegleiter = aktuelleIds.filter(id => id !== gem.id && gem.istKompatibel(id) === -1);
+                            
+                            return `
+                                <div class="pflanze-zuweisung">
+                                    <div class="pflanze-name">${gem.name}</div>
+                                    <div class="pflanze-meta">
+                                        <span class="naehrstoff-badge naehrstoff-${gem.naehrstoffbedarf}">
+                                            ${gem.naehrstoffbedarf}er Bedarf
+                                        </span>
+                                        <span>${gem.familie}</span>
+                                    </div>
+                                    ${guteBegleiter.length > 0 ? `
+                                        <div class="begleiter-liste">
+                                            ${guteBegleiter.map(id => {
+                                                const b = this.garten.gemueseSorten.get(id);
+                                                return b ? `<span class="begleiter-tag begleiter-gut">✓ ${b.name}</span>` : '';
+                                            }).join('')}
+                                        </div>
+                                    ` : ''}
+                                    ${schlechteBegleiter.length > 0 ? `
+                                        <div class="begleiter-liste">
+                                            ${schlechteBegleiter.map(id => {
+                                                const b = this.garten.gemueseSorten.get(id);
+                                                return b ? `<span class="begleiter-tag begleiter-schlecht">✗ ${b.name}</span>` : '';
+                                            }).join('')}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                    
+                    let vorjahresInfo = '';
+                    if (vorjahresPflanzungen.length > 0) {
+                        vorjahresInfo = `
+                            <div style="font-size: 0.8rem; color: var(--boden-mittel); margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--salbei);">
+                                Vorjahr (${this.aktuellesJahr - 1}): ${vorjahresPflanzungen.map(g => g.name).join(', ')}
+                            </div>
+                        `;
+                    }
+                    
+                    return `
+                        <div class="beet" onclick="app.beetModalOeffnen(${beet.id})">
+                            <div class="beet-kopf">
+                                <div class="beet-name">${beet.name}</div>
+                                <div class="beet-aktionen">
+                                    <button onclick="event.stopPropagation(); app.beetEntfernen(${beet.id})" title="Beet entfernen">🗑️</button>
+                                </div>
+                            </div>
+                            <div class="beet-inhalt">
+                                ${inhalt}
+                                ${vorjahresInfo}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                this.wunschlisteRendern();
+            }
+        };
+        
+        // Anwendung initialisieren
+        app.init();
+        
+        // ============================================
+        // PWA SERVICE WORKER & INSTALLATION
+        // ============================================
+        
+        // Service Worker registrieren
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Inline Service Worker
+                const swCode = `
+                    const CACHE_NAME = 'beet-anything-v1';
+                    const urlsToCache = ['./', 'index.html'];
+                    
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => response || fetch(event.request))
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(reg => console.log('Service Worker registriert'))
+                    .catch(err => console.log('Service Worker Fehler:', err));
+            });
+        }
+        
+        // PWA Installation
+        let deferredPrompt;
+        const installButton = document.createElement('button');
+        installButton.className = 'btn btn-primaer';
+        installButton.innerHTML = '📱 Als App installieren';
+        installButton.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);';
+        document.body.appendChild(installButton);
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+        
+        installButton.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('App wurde installiert');
+            }
+            
+            deferredPrompt = null;
+            installButton.style.display = 'none';
+        });
+        
+        // Nach Installation Button ausblenden
+        window.addEventListener('appinstalled', () => {
+            installButton.style.display = 'none';
+            console.log('Beet Anything wurde als App installiert!');
+        });
+    </script>
+</body>
+</html>
