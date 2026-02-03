@@ -10,8 +10,8 @@ A modern, self-contained Progressive Web App for planning your vegetable garden 
 **Languages**: English, German, Italian  
 **Status**: Beta  
 **License**: Free for private use
+**Preview**: [Staging site](https://target23.de/beet-anything.html)
 
-**Preview**: [Test page](https://target23.de/beet-anything.html)
 ---
 
 ## ✨ Features
