@@ -1,11 +1,11 @@
-# Beet Anything - Product Specification v1.1 i18n
+# Beet Anything - Product Specification v1.2 Pest Protection
 
 ## Product Overview
 
 **Product Name:** Beet Anything  
-**Version:** 1.1 i18n (Internationalized Progressive Web App)  
+**Version:** 1.2 Pest Protection (Progressive Web App with Natural Pest Control)  
 **Type:** Web-based garden planning application with app installation  
-**Purpose:** Intelligent planning of vegetable gardens considering crop rotation and companion planting  
+**Purpose:** Intelligent planning of vegetable gardens considering crop rotation, companion planting, and natural pest protection  
 **Platforms:** Web, iOS (Safari), Android (Chrome), Desktop (all browsers)  
 **Languages:** English, German, Italian (extensible)
 
@@ -25,14 +25,20 @@
 - Unlimited number of beds possible
 
 ### 3. Vegetable Database
-Currently 20 vegetable varieties with the following attributes:
+Currently 30 vegetable varieties with the following attributes:
 
 #### Included Vegetables:
+
+**Original 20:**
 - Tomato, Potato, Carrot, Lettuce, Cabbage
 - Beans, Peas, Onion, Garlic
 - Cucumber, Zucchini, Corn, Radish
 - Spinach, Basil, Pepper, Celery
 - Arugula, Kohlrabi, Leek
+
+**New in v1.2:**
+- Broccoli, Chives, Parsley, Pumpkin, Mint
+- Strawberry, Turnip, Rhubarb, Eggplant, Fennel
 
 #### Attributes per Vegetable:
 - **ID**: Unique identifier (lowercase, e.g., "tomato")
@@ -41,6 +47,9 @@ Currently 20 vegetable varieties with the following attributes:
 - **Plant Family**: Botanical family (e.g., Solanaceae)
 - **Good Companions**: Array of compatible plant IDs
 - **Bad Companions**: Array of incompatible plant IDs
+- **Susceptible To**: Array of pests this plant attracts (NEW v1.2)
+- **Protects Against**: Array of pests this plant repels (NEW v1.2)
+- **Attracts Beneficials**: Boolean - attracts helpful insects (NEW v1.2)
 
 ### 4. Wishlist System
 - Selection of desired vegetables for the current year
@@ -66,7 +75,12 @@ Currently 20 vegetable varieties with the following attributes:
 - +15: Per good companion in the same bed (synergies)
 - -30: Per bad companion in the same bed (competition/allelopathy)
 
-**D. Additional Factors**
+**D. Pest Protection (±20 points)** *NEW in v1.2!*
+- +20: Plant protects others from pests (natural pest control)
+- -15: Plants share pest vulnerabilities (increased risk)
+- +10: Attracts beneficial insects (ladybugs, lacewings, parasitic wasps)
+
+**E. Additional Factors**
 - +5: Empty bed (more flexibility for planning)
 - -10: Same plant 2 years ago (extended rotation)
 
@@ -217,10 +231,17 @@ Vegetable
 ├── family: string
 ├── goodCompanions: string[]
 ├── badCompanions: string[]
+├── susceptibleTo: string[]              (NEW v1.2)
+├── protectsAgainst: string[]            (NEW v1.2)
+├── attractsBeneficials: boolean         (NEW v1.2)
 └── Methods:
     ├── addGoodCompanion(id)
     ├── addBadCompanion(id)
     ├── isCompatibleWith(id): -1 | 0 | 1
+    ├── protectsPlant(other): boolean         (NEW v1.2)
+    ├── sharesVulnerabilitiesWith(other)      (NEW v1.2)
+    ├── getPestIcons(): object                (NEW v1.2: returns {slugs, flying, larvae, beetles})
+    ├── getPestsByCategory(): object          (NEW v1.2: categorized pest lists)
     ├── getName(lang): string
     ├── toJSON()
     └── fromJSON(data)
@@ -229,6 +250,7 @@ GardenBed
 ├── id: number (timestamp)
 ├── name: string
 └── Methods:
+    ├── getName(lang) → string (NEW v1.2: translates default names)
     ├── toJSON()
     └── fromJSON(data)
 
@@ -360,6 +382,57 @@ app
 --water-blue: #7ba8a8     /* Info areas */
 ```
 
+### Visual Tags & Tooltips (NEW v1.2)
+
+**Companion Tags:**
+- ✓ Green background: Good companions
+- ✗ Red background: Bad companions  
+- 🛡️ Blue-green gradient: Protects from pests
+- 🪳 Yellow background: Shares pest vulnerabilities
+- 🐞 Ladybug emoji: Attracts beneficial insects
+
+**Individual Pest Icons (NEW):**
+Each plant shows its specific vulnerabilities:
+- 🐌 Slugs/Snails
+- 🦟 Flying pests (aphids, flies, moths, thrips)
+- 🐛 Larvae/Caterpillars (cabbage-white, hornworms, wireworms)
+- 🪲 Beetles (potato-beetle, flea-beetle, japanese-beetle)
+
+Example display:
+```
+🥕 Karotte (Niedrig)
+   Apiaceae
+   🦟 🐛    ← Pest icons with tooltips
+```
+
+**Interactive Tooltips:**
+All tags have hover tooltips showing detailed information:
+
+```
+✓ Zwiebel → "Traditionell gute Begleitpflanze • Schützt vor: carrot-fly, aphids, slugs"
+✗ Sellerie → "Unverträglich: Konkurriert um Nährstoffe oder hemmt Wachstum"
+🛡️ Karotte → "Schützt vor: carrot-fly, aphids"
+🪳 Brokkoli → "slugs, cabbage-white, aphids, cabbage-root-fly"
+🐞 → "Lockt Nützlinge an: Marienkäfer, Florfliegen, Schlupfwespen, Bestäuber"
+🐌 → "Schnecken: slugs"
+🦟 → "Fliegende Schädlinge: aphids, carrot-fly"
+🐛 → "Larven/Raupen: cabbage-white, wireworms"
+🪲 → "Käfer: flea-beetle, potato-beetle"
+```
+
+**Symbol Legend:**
+- Collapsible details element above garden beds
+- All 5 symbols explained
+- Info line: "Detailed information available by hovering over symbols"
+- Fully translated (EN/DE/IT)
+
+**Auto-Translated Bed Names (NEW):**
+Default bed names automatically translate:
+- English: "Bed 1, Bed 2, Bed 3"
+- German: "Beet 1, Beet 2, Beet 3"
+- Italian: "Aiuola 1, Aiuola 2, Aiuola 3"
+- User-defined names remain unchanged in all languages
+
 ### Typography
 
 **Font:** Inter (from rsms.me)
@@ -418,6 +491,43 @@ body, html {
 - Dropdown + Button: Stacked instead of side-by-side
 - Modals: 95% width on mobile
 - Tables: Horizontal scrollbar if needed
+
+---
+
+## Pest Categorization (NEW v1.2)
+
+**Individual pest icons categorize 20+ pests into 4 visual groups:**
+
+| Category | Icon | Pests Included |
+|----------|------|----------------|
+| **Slugs/Snails** | 🐌 | slugs |
+| **Flying Pests** | 🦟 | aphids, whitefly, thrips, onion-fly, carrot-fly, cabbage-root-fly, leek-moth |
+| **Larvae/Caterpillars** | 🐛 | cabbage-white, hornworms, pea-moth, corn-borer, earworm, wireworms, root-maggot |
+| **Beetles** | 🪲 | potato-beetle, bean-beetle, cucumber-beetle, japanese-beetle, flea-beetle, squash-bug |
+
+**Uncategorized pests** (shown in tooltips but no icon):
+- spider-mites, leaf-miners
+
+**Implementation:**
+- `getPestIcons()` returns boolean flags for each category
+- `getPestsByCategory()` returns actual pest lists for tooltips
+- Each plant shows 0-4 icons based on its vulnerabilities
+- Tooltips show category name + specific pests
+
+**Examples:**
+```
+Lettuce (slugs, aphids, leaf-miners):
+  → Shows: 🐌 🦟
+  
+Tomato (aphids, whitefly, hornworms):
+  → Shows: 🦟 🐛
+  
+Potato (aphids, potato-beetle, wireworms):
+  → Shows: 🦟 🪲 🐛
+  
+Onion (onion-fly, thrips):
+  → Shows: 🦟
+```
 
 ---
 
@@ -814,27 +924,40 @@ body {
 
 ## Versioning
 
-### Version 1.1 i18n (Current)
+### Version 1.2 Pest Protection (Current)
 - ✅ Complete core functionality
-- ✅ 20 vegetable varieties
+- ✅ **30 vegetable varieties** (up from 20)
 - ✅ Trilingual (EN/DE/IT)
+- ✅ **Pest protection system** (NEW!)
+- ✅ **Natural pest control** through companion planting
+- ✅ **Pest profiles** for all vegetables
+- ✅ **Protection relationships** in UI
+- ✅ **Vulnerability warnings**
+- ✅ **Beneficial insect indicators**
 - ✅ Auto-save/auto-load
-- ✅ Export/import
-- ✅ Suggestion algorithm
+- ✅ Export/import (with pest data)
+- ✅ Enhanced suggestion algorithm
 - ✅ PWA installation
 - ✅ Offline functionality
 - ✅ Mobile optimization (iPhone/Android)
 - ✅ Inter font (rsms.me)
 - ✅ Language persistence
+- ✅ GitHub link in footer
+
+### Version 1.1 i18n (February 2025)
+- ✅ Italian translation added
+- ✅ Language persistence
+- ✅ 20 vegetables trilingual
+- ✅ ~60 UI strings per language
 
 ### Planned Versions
 
-**Version 1.2** (Q2 2025)
-- Extended vegetable database (30+ varieties)
+**Version 1.3** (Q2 2025)
 - Planting calendar (sowing/harvest times)
 - Print function for garden plan
 - Notes field per bed
 - Spanish translation (ES)
+- French translation (FR)
 
 **Version 2.0** (Q4 2025)
 - Graphical bed visualization
@@ -957,7 +1080,8 @@ beet-anything/
 
 **Created**: 2025  
 **Product Name**: Beet Anything  
-**Version**: 1.1 i18n  
+**Version**: 1.2 Pest Protection  
 **Status**: Production Ready  
 **Filename**: beet-anything-i18n.html  
-**Last Updated**: February 2025
+**Last Updated**: February 2025  
+**GitHub**: https://github.com/schatzl/beet-anything

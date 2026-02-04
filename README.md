@@ -1,17 +1,13 @@
 # 🌱 Beet Anything
 
-**Intelligent Garden Planning with Crop Rotation and Companion Planting**
+**Intelligent Garden Planning with Crop Rotation, Companion Planting & Pest Protection**
 
-A one-hour vibe coding project.
+A modern, self-contained Progressive Web App for planning your vegetable garden across multiple years, considering crop rotation rules, companion planting relationships, and natural pest protection strategies.
 
-A modern, self-contained Progressive Web App for planning your vegetable garden across multiple years, considering crop rotation rules and companion planting relationships.
-
-**Version**: 1.1 i18n  
+**Version**: 1.2 Pest Protection  
 **Languages**: English, German, Italian  
-**Status**: Beta  
+**Status**: Production Ready  
 **License**: Free for private use
-
-**Preview**: [Staging site](https://target23.de/beet-anything.html)
 
 ---
 
@@ -36,10 +32,41 @@ A modern, self-contained Progressive Web App for planning your vegetable garden 
 - Warns about same family planting in consecutive years
 
 ### 🤝 Companion Planting
-- Built-in database of 20 vegetables with proven relationships
+- Built-in database of 30 vegetables with proven relationships
 - Shows good companions (mutually beneficial)
 - Warns about bad companions (incompatible)
 - Visual compatibility matrix for all combinations
+
+### 🛡️ Pest Protection System (NEW!)
+- **Natural pest control** through companion planting
+- **30 vegetables** with complete pest profiles
+- **Protection relationships**: Shows which plants protect others from pests
+- **Vulnerability warnings**: Alerts when plants share pest susceptibilities
+- **Beneficial insects**: Identifies plants that attract helpful bugs
+- **Smart scoring**: Algorithm prioritizes pest-protective combinations
+- **Interactive tooltips**: Hover over any tag to see detailed information
+  - Why plants are good/bad companions
+  - Which specific pests are shared or repelled
+  - Which beneficial insects are attracted
+- **Individual pest indicators**: Each plant shows its vulnerabilities
+  - 🐌 Slugs/Snails
+  - 🦟 Flying pests (aphids, flies, moths)
+  - 🐛 Larvae/Caterpillars (cabbage-white, hornworms)
+  - 🪲 Beetles (flea-beetle, potato-beetle)
+- **Comprehensive legend**: All symbols explained with hover instructions
+- **20+ common pests** tracked: slugs, aphids, cabbage-white, carrot-fly, etc.
+- **Critical slug protection**: 14 vulnerable plants, 5 protective plants
+
+### 🌍 Full Internationalization
+- **3 languages**: English, German, Italian
+- **Complete UI translation**: All buttons, labels, messages
+- **Vegetable names**: Trilingual (30 vegetables × 3 languages)
+- **Auto-translated bed names**: Default names adapt to language
+  - EN: "Bed 1, Bed 2, Bed 3"
+  - DE: "Beet 1, Beet 2, Beet 3"
+  - IT: "Aiuola 1, Aiuola 2, Aiuola 3"
+- **Language persistence**: Remembers your choice
+- **Instant switching**: Change language anytime
 
 ### 🎯 Suggestion System
 - One-click garden plan generation
@@ -48,6 +75,9 @@ A modern, self-contained Progressive Web App for planning your vegetable garden 
   - Companion planting compatibility
   - Nutrition rotation
   - Previous plantings (2-year history)
+  - **Pest protection synergies** (NEW!)
+  - **Shared pest vulnerabilities** (NEW!)
+  - **Beneficial insect attraction** (NEW!)
 - Detailed explanations for each suggestion
 - Apply suggestions individually or all at once
 
@@ -182,37 +212,48 @@ python3 -m http.server 8000
 
 ## 🌿 Included Vegetables
 
-### 20 Varieties with Full Data
+### 30 Varieties with Full Data
 
-| Vegetable | EN | DE | IT | Nutrition | Family |
-|-----------|----|----|-----|-----------|--------|
-| Tomato | Tomato | Tomate | Pomodoro | High | Solanaceae |
-| Potato | Potato | Kartoffel | Patata | High | Solanaceae |
-| Carrot | Carrot | Karotte | Carota | Low | Apiaceae |
-| Lettuce | Lettuce | Salat | Lattuga | Low | Asteraceae |
-| Cabbage | Cabbage | Kohl | Cavolo | High | Brassicaceae |
-| Beans | Beans | Bohnen | Fagioli | Low | Fabaceae |
-| Peas | Peas | Erbsen | Piselli | Low | Fabaceae |
-| Onion | Onion | Zwiebel | Cipolla | Medium | Amaryllidaceae |
-| Garlic | Garlic | Knoblauch | Aglio | Medium | Amaryllidaceae |
-| Cucumber | Cucumber | Gurke | Cetriolo | Medium | Cucurbitaceae |
-| Zucchini | Zucchini | Zucchini | Zucchina | Medium | Cucurbitaceae |
-| Corn | Corn | Mais | Mais | High | Poaceae |
-| Radish | Radish | Radieschen | Ravanello | Low | Brassicaceae |
-| Spinach | Spinach | Spinat | Spinaci | Medium | Amaranthaceae |
-| Basil | Basil | Basilikum | Basilico | Low | Lamiaceae |
-| Pepper | Pepper | Paprika | Peperone | Medium | Solanaceae |
-| Celery | Celery | Sellerie | Sedano | High | Apiaceae |
-| Arugula | Arugula | Rucola | Rucola | Low | Brassicaceae |
-| Kohlrabi | Kohlrabi | Kohlrabi | Cavolo Rapa | Medium | Brassicaceae |
-| Leek | Leek | Lauch | Porro | Medium | Amaryllidaceae |
+**Original 20:**
+- Tomato, Potato, Carrot, Lettuce, Cabbage
+- Beans, Peas, Onion, Garlic
+- Cucumber, Zucchini, Corn, Radish
+- Spinach, Basil, Pepper, Celery
+- Arugula, Kohlrabi, Leek
 
-**Each vegetable includes:**
-- Names in 3 languages
-- Nutrition demand level
-- Plant family
-- List of good companions
-- List of bad companions
+**New 10 (v1.2):**
+- Broccoli, Chives, Parsley, Pumpkin, Mint
+- Strawberry, Turnip, Rhubarb, Eggplant, Fennel
+
+### Data per Vegetable:
+- ✅ Names in 3 languages (EN/DE/IT)
+- ✅ Nutrition demand (high/medium/low)
+- ✅ Plant family
+- ✅ Good companion plants
+- ✅ Bad companion plants
+- ✅ **Pest susceptibilities** (NEW!)
+- ✅ **Pests it protects against** (NEW!)
+- ✅ **Attracts beneficial insects** (NEW!)
+
+### Example Pest Profiles:
+
+| Vegetable | Susceptible To | Protects Against | Beneficials |
+|-----------|----------------|------------------|-------------|
+| **Onion** | Onion-fly, Thrips | Carrot-fly, Aphids, Slugs | ❌ |
+| **Garlic** | Onion-fly | Aphids, Slugs, Japanese-beetle | ❌ |
+| **Chives** | - | Aphids, Carrot-fly, Slugs, Japanese-beetle | ✅ |
+| **Basil** | Aphids, Japanese-beetle, Slugs | Aphids, Whitefly, Hornworms | ✅ |
+| **Mint** | Aphids, Spider-mites | Aphids, Cabbage-white, Flea-beetle, Slugs | ✅ |
+| **Fennel** | Aphids | Aphids, Slugs | ✅ |
+| **Lettuce** | Slugs, Aphids, Leaf-miners | - | ❌ |
+| **Cabbage** | Cabbage-white, Aphids, Cabbage-root-fly, Slugs | - | ❌ |
+| **Strawberry** | Slugs, Aphids, Spider-mites | - | ❌ |
+| **Carrot** | Carrot-fly, Aphids, Wireworms | - | ❌ |
+
+**Key Insights:**
+- 🐌 **Slugs**: 14 plants vulnerable, 5 plants protective (Onion family + Mint + Fennel)
+- 🪲 **Aphids**: Most common pest, many protective plants available
+- 🐞 **Beneficial attractors**: Chives, Basil, Mint, Fennel, Beans, Peas, Parsley
 
 ---
 
@@ -241,6 +282,13 @@ The suggestion algorithm evaluates each vegetable-bed combination and assigns a 
 
 *Why*: Maximizes beneficial plant interactions
 
+#### Pest Protection (+20/-15 points) *NEW!*
+- **+20**: Protects other plants from pests ✅ 🛡️
+- **-15**: Shares pest vulnerabilities with others ⚠️ 🦟
+- **+10**: Attracts beneficial insects ✅ 🐞
+
+*Why*: Natural pest control through companion planting
+
 #### Other Factors
 - **+5**: Empty bed (more flexibility)
 - **-10**: Same plant grown 2 years ago (extended rotation)
@@ -250,6 +298,7 @@ The suggestion algorithm evaluates each vegetable-bed combination and assigns a 
 Vegetables are assigned to beds with highest scores, ensuring:
 - Optimal crop rotation
 - Compatible plant combinations
+- **Natural pest protection** (NEW!)
 - Soil health preservation
 - Maximum harvest potential
 
@@ -287,6 +336,89 @@ Vegetables are assigned to beds with highest scores, ensuring:
 3. **Avoid Conflicts**
    - Never ignore bad companion warnings
    - Even if space is limited, find alternative arrangements
+
+### Pest Protection Strategies (NEW!)
+
+1. **Use Protective Plants**
+   - Plant onions near carrots → protects from carrot-fly
+   - Plant garlic near strawberries → repels aphids and slugs
+   - Plant chives near roses → deters aphids
+
+2. **Attract Beneficial Insects**
+   - Look for 🐞 emoji in plant metadata
+   - Plants like basil, mint, fennel attract:
+     - Ladybugs (eat aphids)
+     - Lacewings (eat aphids and thrips)
+     - Parasitic wasps (control caterpillars)
+
+3. **Avoid Clustering Vulnerabilities**
+   - Don't plant cabbage + broccoli + kohlrabi together
+   - All attract same pests (cabbage-white butterfly)
+   - Algorithm warns with ⚠️ 🦟 tags
+
+4. **Watch for Protection Tags**
+   - 🛡️ Green tag = This plant protects others
+   - ⚠️ 🦟 Yellow tag = Plants share pest problems
+   - 🐞 Emoji = Attracts beneficial insects
+
+### Example Combinations
+
+**✅ EXCELLENT: Carrot + Onion + Chives**
+- Onion protects carrot from carrot-fly and slugs
+- Chives attracts beneficials
+- All have different nutrition needs
+- Different families
+- **Tooltip on 🛡️ Onion**: "Protects from: carrot-fly, aphids, slugs"
+
+**✅ GREAT: Tomato + Basil**
+- Basil protects tomato from aphids and whitefly
+- Basil attracts pollinators
+- Traditional good companions
+- Algorithm gives +45 bonus points!
+- **Tooltip on ✓ Basil**: "Traditional good companion • Protects from: aphids, whitefly, hornworms"
+
+**✅ PERFECT: Lettuce + Chives**
+- Chives protects lettuce from slugs and aphids
+- Both vulnerable to slugs → Chives provides critical protection
+- **Tooltip on 🛡️ Chives**: "Protects from: aphids, carrot-fly, slugs, japanese-beetle"
+
+**❌ AVOID: Cabbage + Broccoli + Kohlrabi**
+- All Brassicaceae family
+- Share pests (cabbage-white, aphids, slugs)
+- Heavy feeders compete for nutrients
+- Algorithm warns heavily (-50 points)
+- **Tooltip on 🪳 Broccoli**: "slugs, cabbage-white, aphids, cabbage-root-fly"
+
+### Visual Indicators
+
+**Pest Icons (Individual Plants):**
+Each plant displays icons for its pest vulnerabilities:
+
+```
+🥕 Karotte
+  Apiaceae
+  🦟 🐛    ← Shows: Flying pests + Larvae
+  
+🥬 Salat
+  Asteraceae
+  🐌 🦟 🐛  ← Shows: Slugs + Flying pests + Larvae
+  
+🧅 Zwiebel
+  Amaryllidaceae
+  🦟       ← Shows: Only flying pests
+```
+
+**Hover for details:**
+- 🐌 → "Slugs/Snails: slugs"
+- 🦟 → "Flying pests (aphids, flies, moths): aphids, carrot-fly"
+- 🐛 → "Larvae/Caterpillars: cabbage-white, wireworms"
+- 🪲 → "Beetles: flea-beetle, potato-beetle"
+
+**Benefits:**
+- See vulnerabilities at a glance
+- Works for single plants (not just in combinations)
+- Categorized by pest type
+- Detailed tooltips with specific pest names
 
 ### Data Management
 
@@ -598,6 +730,23 @@ Found a bug? Have a feature idea? Want to contribute?
 
 ## 📜 Changelog
 
+### v1.2 Pest Protection (February 2025)
+- ✨ **Pest Protection System** - Natural pest control through companion planting
+- ✨ Added 10 new vegetables (now 30 total)
+- ✨ Pest profiles for all 30 vegetables
+- ✨ Algorithm considers pest protection (+20/-15 points)
+- ✨ UI shows protection relationships (🛡️ tags)
+- ✨ UI warns about shared pests (🪳 tags)
+- ✨ **Individual pest icons** per plant (🐌🦟🐛🪲)
+- ✨ Beneficial insect indicators (🐞 emoji)
+- ✨ **Interactive tooltips** for all tags
+- ✨ **Symbol legend** with hover instructions
+- ✨ **Auto-translated bed names** (Bed/Beet/Aiuola)
+- ✨ Comprehensive slug protection (14 vulnerable, 5 protective plants)
+- ✨ 11 new translation keys (tooltips + pest categories)
+- 📝 Complete pest data research and integration
+- 🎨 New CSS styles for pest icons and tooltips
+
 ### v1.1 i18n (February 2025)
 - ✨ Added Italian translation
 - ✨ Language persistence (remembers choice)
@@ -658,11 +807,12 @@ Found a bug? Have a feature idea? Want to contribute?
 
 **Made with 🌱 for gardeners who care about healthy soil and happy plants**
 
-**Version**: 1.1 i18n  
+**Version**: 1.2 Pest Protection  
 **Last Updated**: February 2025  
-**Status**: Beta
-**File**: beet-anything-i18n.html
+**Status**: Production Ready  
+**File**: beet-anything-i18n.html  
+**GitHub**: https://github.com/schatzl/beet-anything
 
 ---
 
-*Happy Planning! 🌿🥕🍅*
+*Happy Planning! 🌿🥕🍅🐞*

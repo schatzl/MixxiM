@@ -1,10 +1,10 @@
-# BEET ANYTHING - Developer Resume v1.1 i18n
+# BEET ANYTHING - Developer Resume v1.2 Pest Protection
 
 ## 🎯 Quick Start
 
 **Product Name**: Beet Anything  
-**Version**: 1.1 i18n (Internationalized Progressive Web App)  
-**File**: `beet-anything-i18n.html` (~105 KB)  
+**Version**: 1.2 Pest Protection (PWA with Natural Pest Control)  
+**File**: `beet-anything-i18n.html` (~115 KB)  
 **Type**: Single-Page Application (Self-contained)  
 **Languages**: English, German, Italian  
 **Status**: Production Ready  
@@ -17,9 +17,10 @@
 ### Core Features (all ✅)
 ✅ Multi-year planning with unlimited history  
 ✅ Dynamic bed management (unlimited)  
-✅ 20 trilingual vegetables with companion planting data  
+✅ **30 trilingual vegetables** with companion planting + pest data  
 ✅ Intelligent suggestion algorithm (scoring-based)  
-✅ Compatibility matrix (20×20 combinations)  
+✅ Compatibility matrix (30×30 combinations)  
+✅ **Pest protection system** (NEW v1.2!)  
 ✅ **Auto-save after every change** (no manual saving needed!)  
 ✅ **Auto-load on start** (all data automatically restored)  
 ✅ Export/import (JSON for backups)  
@@ -29,12 +30,268 @@
 ✅ Responsive design (Desktop, Tablet, Mobile)  
 ✅ **Internationalization** (EN/DE/IT with language persistence)
 
-### New Features in v1.1 i18n
-🆕 **Trilingual support** (English, German, Italian)  
-🆕 **Language persistence** (remembers language choice)  
-🆕 **All vegetable names translated** (20 vegetables × 3 languages)  
-🆕 **Complete UI translation** (~60 strings per language)  
-🆕 **Language switch in header** (instant switching)  
+### New Features in v1.2 Pest Protection
+🆕 **30 vegetables** (up from 20)  
+🆕 **Pest profiles** for all vegetables  
+🆕 **Protection relationships** (shows which plants protect others)  
+🆕 **Vulnerability warnings** (alerts for shared pests)  
+🆕 **Beneficial insects** (identifies plants that attract helpers)  
+🆕 **Smart pest scoring** (+20/-15 points in algorithm)  
+🆕 **Visual pest tags** (🛡️, 🪳, 🐞)  
+🆕 **Interactive tooltips** (hover any tag for details)  
+🆕 **Individual pest icons** (🐌🦟🐛🪲 per plant)  
+🆕 **Slug protection** (14 vulnerable plants, 5 protective plants)  
+🆕 **Symbol legend** with hover instructions  
+🆕 **Auto-translated bed names** (Bed/Beet/Aiuola)  
+🆕 **11 new translation keys** (tooltips + pest categories)  
+
+---
+
+## 🛡️ Pest Protection System (NEW v1.2!)
+
+### Vegetable Class Extended
+
+```javascript
+class Vegetable {
+    constructor(id, nameEN, nameDE, nameIT, nutrition, family, pestData = {}) {
+        // Existing attributes...
+        this.nameEN = nameEN;
+        this.nameDE = nameDE;
+        this.nameIT = nameIT;
+        this.nutrition = nutrition;
+        this.family = family;
+        
+        // NEW: Pest & beneficial data
+        this.susceptibleTo = pestData.susceptibleTo || [];
+        this.protectsAgainst = pestData.protectsAgainst || [];
+        this.attractsBeneficials = pestData.attractsBeneficials || false;
+    }
+    
+    // NEW Methods:
+    protectsPlant(otherVegetable) {
+        return this.protectsAgainst.some(pest => 
+            otherVegetable.susceptibleTo.includes(pest)
+        );
+    }
+    
+    sharesVulnerabilitiesWith(otherVegetable) {
+        return this.susceptibleTo.filter(pest =>
+            otherVegetable.susceptibleTo.includes(pest)
+        );
+    }
+}
+```
+
+### Example Pest Data
+
+```javascript
+new Vegetable('onion', 'Onion', 'Zwiebel', 'Cipolla', 'medium', 'Amaryllidaceae', {
+    susceptibleTo: ['onion-fly', 'thrips'],
+    protectsAgainst: ['carrot-fly', 'aphids', 'slugs'],
+    attractsBeneficials: false
+}),
+
+new Vegetable('basil', 'Basil', 'Basilikum', 'Basilico', 'low', 'Lamiaceae', {
+    susceptibleTo: ['aphids', 'japanese-beetle', 'slugs'],
+    protectsAgainst: ['aphids', 'whitefly', 'hornworms'],
+    attractsBeneficials: true
+})
+```
+
+### Common Pests in Database
+
+- **aphids** (Blattläuse) - 20+ plants affected
+- **slugs** (Schnecken) - 14 plants vulnerable, 5 plants protective
+- **flea-beetle** (Erdflöhe) - 6 plants
+- **carrot-fly** (Möhrenfliege) - 4 plants
+- **cabbage-white** (Kohlweißling) - 5 plants
+- **whitefly** (Weiße Fliege) - 2 plants
+- Plus 15+ more specific pests
+
+### Protection Examples
+
+| Plant | Protects Against | Protected Plants |
+|-------|------------------|------------------|
+| **Onion** | carrot-fly, aphids, slugs | Carrot, Lettuce, Strawberry |
+| **Garlic** | aphids, slugs, japanese-beetle | Tomato, Strawberry |
+| **Chives** | aphids, carrot-fly, slugs, japanese-beetle | Carrot, Tomato, Strawberry |
+| **Basil** | aphids, whitefly, hornworms | Tomato, Pepper |
+| **Mint** | aphids, cabbage-white, flea-beetle | Cabbage, Tomato |
+| **Celery** | cabbage-white | Cabbage, Broccoli |
+
+---
+
+### Tooltip System
+
+**All companion tags have intelligent tooltips:**
+
+```javascript
+// Good Companions - shows WHY
+✓ Zwiebel
+Tooltip: "Traditionell gute Begleitpflanze • Schützt vor: carrot-fly, aphids, slugs"
+
+// Bad Companions - explains incompatibility
+✗ Sellerie
+Tooltip: "Unverträglich: Konkurriert um Nährstoffe oder hemmt Wachstum"
+
+// Protection - lists specific pests
+🛡️ Karotte
+Tooltip: "Schützt vor: carrot-fly, aphids"
+
+// Shared Pests - shows vulnerabilities
+🪳 Brokkoli
+Tooltip: "slugs, cabbage-white, aphids, cabbage-root-fly"
+
+// Beneficials - identifies insects
+🐞
+Tooltip: "Lockt Nützlinge an: Marienkäfer, Florfliegen, Schlupfwespen, Bestäuber"
+```
+
+**Legend with hover instructions:**
+- All 5 symbol types explained
+- Separate info line: "Detailinformationen sind durch Berühren der jeweiligen Symbole verfügbar"
+- Fully translated (EN/DE/IT)
+
+### Individual Pest Icons (NEW!)
+
+**Each plant shows its vulnerabilities with categorized icons:**
+
+```javascript
+// 4 pest categories
+🐌 Slugs/Snails       → slugs
+🦟 Flying pests       → aphids, whitefly, thrips, flies, moths
+🐛 Larvae/Caterpillars → cabbage-white, hornworms, wireworms
+🪲 Beetles            → potato-beetle, flea-beetle, japanese-beetle
+
+// Example: Lettuce
+🥬 Salat (Niedrig)
+   Asteraceae
+   🐌 🦟 🐛    ← Shows all 3 vulnerabilities
+
+// Example: Tomato
+🍅 Tomate (Hoch)
+   Solanaceae
+   🦟 🐛      ← Shows flying + larvae only
+```
+
+**Implementation:**
+```javascript
+// NEW methods in Vegetable class
+getPestIcons() {
+    const icons = {slugs: false, flying: false, larvae: false, beetles: false};
+    
+    const slugPests = ['slugs'];
+    const flyingPests = ['aphids', 'whitefly', 'thrips', 'onion-fly', 'carrot-fly', ...];
+    const larvaePests = ['cabbage-white', 'hornworms', 'wireworms', ...];
+    const beetlePests = ['potato-beetle', 'flea-beetle', 'japanese-beetle', ...];
+    
+    for (const pest of this.susceptibleTo) {
+        if (slugPests.includes(pest)) icons.slugs = true;
+        if (flyingPests.includes(pest)) icons.flying = true;
+        if (larvaePests.includes(pest)) icons.larvae = true;
+        if (beetlePests.includes(pest)) icons.beetles = true;
+    }
+    
+    return icons;
+}
+
+getPestsByCategory() {
+    // Returns: {slugs: ['slugs'], flying: ['aphids', 'whitefly'], ...}
+}
+
+// Usage in UI
+const pestIcons = veg.getPestIcons();
+const pestsByCategory = veg.getPestsByCategory();
+
+if (pestIcons.slugs) {
+    const tooltip = this.t('tooltip.slugs') + ': ' + pestsByCategory.slugs.join(', ');
+    html += `<span class="pest-icon" title="${tooltip}">🐌</span>`;
+}
+```
+
+**CSS for pest icons:**
+```css
+.pest-icons {
+    display: flex;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.pest-icon {
+    font-size: 1.1rem;
+    cursor: help;
+    opacity: 0.8;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pest-icon:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+```
+
+**Tooltips show specific pests:**
+- Hover 🐌: "Schnecken: slugs"
+- Hover 🦟: "Fliegende Schädlinge (Blattläuse, Fliegen, Motten): aphids, whitefly"
+- Hover 🐛: "Larven/Raupen: cabbage-white, hornworms"
+- Hover 🪲: "Käfer: flea-beetle, potato-beetle"
+
+### Auto-Translated Bed Names (NEW!)
+
+**Default bed names translate automatically:**
+
+```javascript
+class GardenBed {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    getName(lang) {
+        // Check if this is a default name pattern
+        const defaultPatterns = [
+            /^Bed (\d+)$/,      // English
+            /^Beet (\d+)$/,     // German
+            /^Aiuola (\d+)$/    // Italian
+        ];
+        
+        for (const pattern of defaultPatterns) {
+            const match = this.name.match(pattern);
+            if (match) {
+                const number = match[1];
+                const translations = {
+                    en: `Bed ${number}`,
+                    de: `Beet ${number}`,
+                    it: `Aiuola ${number}`
+                };
+                return translations[lang] || this.name;
+            }
+        }
+        
+        // Not a default name, return as-is (user-defined)
+        return this.name;
+    }
+}
+
+// Usage in render
+${bed.getName(this.currentLanguage)}  // Auto-translates!
+```
+
+**Examples:**
+- EN: "Bed 1, Bed 2, Bed 3"
+- DE: "Beet 1, Beet 2, Beet 3"
+- IT: "Aiuola 1, Aiuola 2, Aiuola 3"
+
+**User-defined names:**
+- "Nordseite" → stays "Nordseite" in all languages
+- "Sunny Corner" → stays "Sunny Corner" in all languages
+
+**How it works:**
+1. User creates bed → saved as "Bed 1" (English default)
+2. Switch to German → displays "Beet 1"
+3. Switch to Italian → displays "Aiuola 1"
+4. User renames to "Terrasse" → stays "Terrasse" in all languages
+5. Switch back to English → still shows "Terrasse" (user-defined)
 
 ---
 
@@ -249,7 +506,7 @@ window.matchMedia('(display-mode: standalone)').matches
 
 ## 🧮 Algorithm Core Logic
 
-**File Location**: `SuggestionEngine.scorePlantingOption()` (approx. line 1500)
+**File Location**: `SuggestionEngine.scorePlantingOption()` (approx. line 1764)
 
 ### Scoring Weights:
 
@@ -262,10 +519,27 @@ window.matchMedia('(display-mode: standalone)').matches
 | Nutrition rotation | +10 | Light feeder generally |
 | Good companion | +15 | Per compatible plant |
 | Bad companion | -30 | Per incompatible plant |
+| **Pest protection** | **+20** | **Protects other plants (NEW!)** |
+| **Shared pests** | **-15** | **Plants share vulnerabilities (NEW!)** |
+| **Beneficial insects** | **+10** | **Attracts helpers (NEW!)** |
 | Empty bed | +5 | No current plants |
 | 2-year rotation | -10 | Same plant 2 years ago |
 
 **Output**: Sorted list with bed-vegetable assignments + reasons
+
+### Example Scores:
+
+**Tomato + Basil in same bed:**
+- Good companion: +15
+- Basil protects tomato: +20
+- Basil attracts beneficials: +10
+- **Total bonus: +45 points!** 🌟
+
+**Cabbage + Broccoli (BAD!):**
+- Same family: -20
+- Share pests (cabbage-white, aphids): -15
+- Both heavy feeders: -15
+- **Total penalty: -50 points!** ⚠️
 
 ---
 
@@ -336,25 +610,41 @@ font-feature-settings: 'liga' 1, 'calt' 1;
 
 ## 🔧 Common Customizations
 
-### 1. Add New Vegetable
+### 1. Add New Vegetable (with Pest Data)
 
-**Location**: `GardenManager.initializeVegetableDatabase()` (approx. line 1320)
+**Location**: `GardenManager.initializeVegetableDatabase()` (approx. line 1406)
 
 ```javascript
-// Step 1: Create vegetable
+// Step 1: Create vegetable with pest data
 const veggies = [
     // ... existing ...
-    new Vegetable('arugula', 'Arugula', 'Rucola', 'Rucola', 'low', 'Brassicaceae'),
+    new Vegetable('beetroot', 'Beetroot', 'Rote Beete', 'Barbabietola', 'medium', 'Amaranthaceae', {
+        susceptibleTo: ['aphids', 'leaf-miners'],
+        protectsAgainst: [],
+        attractsBeneficials: false
+    }),
 ];
 
 // Step 2: Set companions
-this.setCompanions('arugula',
-    ['beans', 'peas'],     // Good companions
-    []                      // Bad companions
+this.setCompanions('beetroot',
+    ['onion', 'cabbage'],     // Good companions
+    ['spinach', 'leek']        // Bad companions
 );
 ```
 
-### 2. Add New Language
+### 2. Add New Pest Type
+
+Just add to the relevant vegetable's `susceptibleTo` or `protectsAgainst` arrays:
+
+```javascript
+new Vegetable('tomato', 'Tomato', 'Tomate', 'Pomodoro', 'high', 'Solanaceae', {
+    susceptibleTo: ['aphids', 'whitefly', 'hornworms', 'blight'],  // Added 'blight'
+    protectsAgainst: [],
+    attractsBeneficials: false
+}),
+```
+
+### 3. Add New Language
 
 **Location**: `translations` object (approx. line 1013)
 
@@ -367,13 +657,16 @@ const translations = {
         title: "Beet Anything",
         subtitle: "Rotation des cultures facile",
         "btn.export": "💾 Exporter",
-        // ... all ~60 keys
+        // ... all ~65 keys (including pest reasons)
+        "reason.pestProtection": "🛡️ Protège contre les parasites",
+        "reason.sharedPestRisk": "⚠️ Attire les mêmes parasites que",
+        "reason.attractsBeneficials": "🐞 Attire les insectes bénéfiques",
     }
 };
 
 // Update Vegetable class:
 class Vegetable {
-    constructor(id, nameEN, nameDE, nameIT, nameFR, nutrition, family) {
+    constructor(id, nameEN, nameDE, nameIT, nameFR, nutrition, family, pestData) {
         this.nameFR = nameFR;  // Add French
     }
     
@@ -506,15 +799,19 @@ addBed(), generateSuggestions()
 | Feature | Line | Description |
 |---------|------|-------------|
 | Translations | ~1013 | `translations` object (EN/DE/IT) |
-| Vegetable database | ~1320 | `initializeVegetableDatabase()` |
-| Companion rules | ~1345 | `setCompanions()` calls |
-| Scoring algorithm | ~1500 | `scorePlantingOption()` |
-| Auto-save logic | ~2040 | `app.save()` |
-| Auto-load logic | ~1598 | `app.init()` |
-| UI rendering | ~1900 | `app.render()` |
-| PWA install code | ~2130 | Service Worker + install buttons |
-| Export/import | ~1990 | `exportData()` / `importData()` |
-| Language switch | ~1637 | `setLanguage()` |
+| **Pest translations** | **~1108** | **Pest reason keys (NEW!)** |
+| Vegetable database | ~1406 | `initializeVegetableDatabase()` |
+| **Pest data** | **~1409** | **Vegetable + pestData (NEW!)** |
+| Companion rules | ~1470 | `setCompanions()` calls |
+| Scoring algorithm | ~1764 | `scorePlantingOption()` |
+| **Pest scoring** | **~1820** | **Pest protection logic (NEW!)** |
+| Auto-save logic | ~2300 | `app.save()` |
+| Auto-load logic | ~1836 | `app.init()` |
+| UI rendering | ~2308 | `app.render()` |
+| **Pest UI tags** | **~2340** | **Protection/warning tags (NEW!)** |
+| PWA install code | ~2400 | Service Worker + install buttons |
+| Export/import | ~2250 | `exportData()` / `importData()` |
+| Language switch | ~1875 | `setLanguage()` |
 
 ---
 
@@ -828,7 +1125,8 @@ git push origin main
 ---
 
 **Last Updated**: February 2025  
-**Version**: 1.1 i18n  
+**Version**: 1.2 Pest Protection  
 **Status**: Production Ready  
 **Developed for**: Private vegetable gardeners  
-**Maintenance**: Self-contained, no dependencies (except Inter Font)
+**Maintenance**: Self-contained, no dependencies (except Inter Font)  
+**GitHub**: https://github.com/schatzl/beet-anything

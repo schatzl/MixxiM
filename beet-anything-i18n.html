@@ -442,6 +442,25 @@
             flex-wrap: wrap;
         }
         
+        .pest-icons {
+            display: flex;
+            gap: 0.35rem;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0;
+        }
+        
+        .pest-icon {
+            font-size: 1.1rem;
+            cursor: help;
+            opacity: 0.8;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        
+        .pest-icon:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+        
         .nutrition-badge {
             padding: 0.15rem 0.5rem;
             border-radius: 12px;
@@ -575,6 +594,103 @@
         .companion-bad {
             background: #f8d7da;
             color: #721c24;
+        }
+        
+        .companion-protection {
+            background: linear-gradient(135deg, #7ba8a8 0%, #5d8a8a 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .companion-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffc107;
+        }
+        
+        /* Legend Box */
+        .legend-box {
+            background: linear-gradient(135deg, #f0f7f4 0%, #e8f4f0 100%);
+            border: 2px solid var(--sage);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .legend-box summary {
+            cursor: pointer;
+            user-select: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        
+        .legend-box summary:hover {
+            background: rgba(74, 124, 89, 0.1);
+        }
+        
+        .legend-box details[open] summary {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--sage);
+        }
+        
+        .legend-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+        }
+        
+        .legend-item .companion-tag {
+            flex-shrink: 0;
+            min-width: fit-content;
+        }
+        
+        .legend-item span:last-child {
+            color: var(--soil-medium);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .legend-item.legend-info {
+            background: transparent;
+            padding: 0.75rem 0.5rem 0.25rem 0.5rem;
+            border-top: 1px dashed var(--sage);
+            margin-top: 0.5rem;
+            justify-content: center;
+        }
+        
+        /* Tooltips */
+        [title] {
+            cursor: help;
+            position: relative;
+        }
+        
+        .companion-tag[title]:hover {
+            filter: brightness(0.95);
+        }
+        
+        @media (max-width: 480px) {
+            .legend-box {
+                font-size: 0.85rem;
+                padding: 0.75rem;
+            }
+            
+            .legend-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
         }
         
         .suggestion-box {
@@ -1023,6 +1139,41 @@
                     <span data-i18n="beds.title">Garden Beds</span> - 
                     <span id="yearDisplayBeds">2024</span>
                 </h2>
+                
+                <!-- Symbol Legend -->
+                <div class="legend-box">
+                    <details>
+                        <summary>
+                            <strong data-i18n="legend.title">Symbol Legend</strong> ℹ️
+                        </summary>
+                        <div class="legend-content">
+                            <div class="legend-item">
+                                <span class="companion-tag companion-good">✓ <span data-i18n="legend.plant">Plant</span></span>
+                                <span data-i18n="legend.goodCompanion">Good companion plant</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="companion-tag companion-bad">✗ <span data-i18n="legend.plant">Plant</span></span>
+                                <span data-i18n="legend.badCompanion">Incompatible plant</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="companion-tag companion-protection">🛡️ <span data-i18n="legend.plant">Plant</span></span>
+                                <span data-i18n="legend.pestProtection">Protects from pests</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="companion-tag companion-warning">🪳 <span data-i18n="legend.plant">Plant</span></span>
+                                <span data-i18n="legend.sharedPests">Shares pest vulnerabilities</span>
+                            </div>
+                            <div class="legend-item">
+                                <span style="font-size: 1.2rem;">🐞</span>
+                                <span data-i18n="legend.beneficials">Attracts beneficial insects</span>
+                            </div>
+                            <div class="legend-item legend-info">
+                                <span style="font-size: 0.9rem; color: var(--soil-medium); font-style: italic;" data-i18n="legend.hoverInfo">Detailed information available by hovering over symbols</span>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                
                 <div class="garden-grid" id="gardenGrid"></div>
             </div>
         </div>
@@ -1106,6 +1257,9 @@
                 "reason.goodCompanion": "Good companion with",
                 "reason.badCompanion": "⚠️ Poor companion with",
                 "reason.samePlant2Years": "⚠️ Same vegetable was grown here 2 years ago",
+                "reason.pestProtection": "🛡️ Protects against pests",
+                "reason.sharedPestRisk": "⚠️ Attracts same pests as",
+                "reason.attractsBeneficials": "🐞 Attracts beneficial insects",
                 "install.alreadyInstalled": "The app is already installed! It's currently running as a PWA.",
                 "install.iosTitle": "📱 App Installation on iPhone/iPad:",
                 "install.iosSteps": "1. Tap the Share icon (□↑) at the bottom in Safari\n2. Scroll down\n3. Select 'Add to Home Screen'\n4. Tap 'Add'\n\nThe app will then appear on your home screen!\n\nNote: Only works in Safari (not Chrome/Firefox on iOS)",
@@ -1118,7 +1272,23 @@
                 "import.error": "Import failed. Please check the file format.",
                 "footer.viewOnGitHub": "View on GitHub",
                 "footer.madeWith": "Made with",
-                "footer.forGardeners": "for gardeners"
+                "footer.forGardeners": "for gardeners",
+                "legend.title": "Symbol Legend",
+                "legend.plant": "Plant",
+                "legend.goodCompanion": "Good companion plant",
+                "legend.badCompanion": "Incompatible plant",
+                "legend.pestProtection": "Protects from pests",
+                "legend.sharedPests": "Shares pest vulnerabilities",
+                "legend.beneficials": "Attracts beneficial insects",
+                "legend.hoverInfo": "Detailed information available by hovering over symbols",
+                "tooltip.beneficials": "Attracts beneficial insects: Ladybugs, Lacewings, Parasitic Wasps, Pollinators",
+                "tooltip.traditionalCompanion": "Traditional good companion",
+                "tooltip.protectsFrom": "Protects from",
+                "tooltip.incompatible": "Incompatible: competes for nutrients or inhibits growth",
+                "tooltip.slugs": "Slugs/Snails",
+                "tooltip.flying": "Flying pests (aphids, flies, moths)",
+                "tooltip.larvae": "Larvae/Caterpillars",
+                "tooltip.beetles": "Beetles"
             },
             de: {
                 title: "Beet Anything",
@@ -1158,9 +1328,9 @@
                 "matrix.good": "Gute Begleiter",
                 "matrix.bad": "Schlechte Begleiter",
                 "matrix.neutral": "Neutral",
-                "nutrition.high": "hoher",
-                "nutrition.medium": "mittlerer",
-                "nutrition.low": "niedriger",
+                "nutrition.high": "Hoch",
+                "nutrition.medium": "Mittel",
+                "nutrition.low": "Niedrig",
                 "companion.with": "mit",
                 "reason.differentFamily": "Andere Pflanzenfamilie als im Vorjahr",
                 "reason.sameFamily": "⚠️ Gleiche Pflanzenfamilie wie im Vorjahr",
@@ -1170,6 +1340,9 @@
                 "reason.goodCompanion": "Guter Begleiter von",
                 "reason.badCompanion": "⚠️ Schlechter Begleiter von",
                 "reason.samePlant2Years": "⚠️ Gleiches Gemüse wurde hier vor 2 Jahren angebaut",
+                "reason.pestProtection": "🛡️ Schützt vor Schädlingen",
+                "reason.sharedPestRisk": "⚠️ Zieht gleiche Schädlinge an wie",
+                "reason.attractsBeneficials": "🐞 Lockt Nützlinge an",
                 "install.alreadyInstalled": "Die App ist bereits installiert! Sie läuft gerade als PWA.",
                 "install.iosTitle": "📱 App-Installation auf iPhone/iPad:",
                 "install.iosSteps": "1. Tippen Sie auf das Teilen-Symbol (□↑) unten in Safari\n2. Scrollen Sie nach unten\n3. Wählen Sie 'Zum Home-Bildschirm'\n4. Tippen Sie auf 'Hinzufügen'\n\nDie App erscheint dann auf Ihrem Home-Bildschirm!\n\nHinweis: Funktioniert nur in Safari (nicht Chrome/Firefox auf iOS)",
@@ -1182,7 +1355,23 @@
                 "import.error": "Import fehlgeschlagen. Bitte überprüfen Sie das Dateiformat.",
                 "footer.viewOnGitHub": "Auf GitHub ansehen",
                 "footer.madeWith": "Gemacht mit",
-                "footer.forGardeners": "für Gärtner"
+                "footer.forGardeners": "für Gärtner",
+                "legend.title": "Symbol-Legende",
+                "legend.plant": "Pflanze",
+                "legend.goodCompanion": "Guter Begleitpflanze",
+                "legend.badCompanion": "Unverträgliche Pflanze",
+                "legend.pestProtection": "Schützt vor Schädlingen",
+                "legend.sharedPests": "Teilt Schädlingsanfälligkeit",
+                "legend.beneficials": "Lockt Nützlinge an",
+                "legend.hoverInfo": "Detailinformationen sind durch Berühren der jeweiligen Symbole verfügbar",
+                "tooltip.beneficials": "Lockt Nützlinge an: Marienkäfer, Florfliegen, Schlupfwespen, Bestäuber",
+                "tooltip.traditionalCompanion": "Traditionell gute Begleitpflanze",
+                "tooltip.protectsFrom": "Schützt vor",
+                "tooltip.incompatible": "Unverträglich: Konkurriert um Nährstoffe oder hemmt Wachstum",
+                "tooltip.slugs": "Schnecken",
+                "tooltip.flying": "Fliegende Schädlinge (Blattläuse, Fliegen, Motten)",
+                "tooltip.larvae": "Larven/Raupen",
+                "tooltip.beetles": "Käfer"
             },
             it: {
                 title: "Beet Anything",
@@ -1234,6 +1423,9 @@
                 "reason.goodCompanion": "Buon compagno con",
                 "reason.badCompanion": "⚠️ Cattivo compagno con",
                 "reason.samePlant2Years": "⚠️ Stesso ortaggio coltivato qui 2 anni fa",
+                "reason.pestProtection": "🛡️ Protegge dai parassiti",
+                "reason.sharedPestRisk": "⚠️ Attrae stessi parassiti di",
+                "reason.attractsBeneficials": "🐞 Attrae insetti utili",
                 "install.alreadyInstalled": "L'app è già installata! Sta funzionando come PWA.",
                 "install.iosTitle": "📱 Installazione App su iPhone/iPad:",
                 "install.iosSteps": "1. Tocca l'icona Condividi (□↑) in basso in Safari\n2. Scorri verso il basso\n3. Seleziona 'Aggiungi a Home'\n4. Tocca 'Aggiungi'\n\nL'app apparirà sulla tua schermata home!\n\nNota: Funziona solo in Safari (non Chrome/Firefox su iOS)",
@@ -1246,7 +1438,23 @@
                 "import.error": "Importazione fallita. Controlla il formato del file.",
                 "footer.viewOnGitHub": "Visualizza su GitHub",
                 "footer.madeWith": "Fatto con",
-                "footer.forGardeners": "per giardinieri"
+                "footer.forGardeners": "per giardinieri",
+                "legend.title": "Leggenda dei Simboli",
+                "legend.plant": "Pianta",
+                "legend.goodCompanion": "Buona pianta compagna",
+                "legend.badCompanion": "Pianta incompatibile",
+                "legend.pestProtection": "Protegge dai parassiti",
+                "legend.sharedPests": "Condivide vulnerabilità ai parassiti",
+                "legend.beneficials": "Attrae insetti utili",
+                "legend.hoverInfo": "Informazioni dettagliate disponibili passando il mouse sui simboli",
+                "tooltip.beneficials": "Attrae insetti utili: Coccinelle, Crisope, Vespe parassite, Impollinatori",
+                "tooltip.traditionalCompanion": "Tradizionalmente buona pianta compagna",
+                "tooltip.protectsFrom": "Protegge da",
+                "tooltip.incompatible": "Incompatibile: compete per nutrienti o inibisce la crescita",
+                "tooltip.slugs": "Lumache",
+                "tooltip.flying": "Parassiti volanti (afidi, mosche, falene)",
+                "tooltip.larvae": "Larve/Bruchi",
+                "tooltip.beetles": "Coleotteri"
             }
         };
         
@@ -1258,7 +1466,7 @@
          * Base class for vegetable information
          */
         class Vegetable {
-            constructor(id, nameEN, nameDE, nameIT, nutrition, family) {
+            constructor(id, nameEN, nameDE, nameIT, nutrition, family, pestData = {}) {
                 this.id = id;
                 this.nameEN = nameEN;
                 this.nameDE = nameDE;
@@ -1267,6 +1475,11 @@
                 this.family = family;
                 this.goodCompanions = [];
                 this.badCompanions = [];
+                
+                // Pest & beneficial insect data
+                this.susceptibleTo = pestData.susceptibleTo || [];
+                this.protectsAgainst = pestData.protectsAgainst || [];
+                this.attractsBeneficials = pestData.attractsBeneficials || false;
             }
             
             addGoodCompanion(vegetableId) {
@@ -1287,6 +1500,71 @@
                 return 0;
             }
             
+            // NEW: Check if this plant protects another from specific pests
+            protectsPlant(otherVegetable) {
+                return this.protectsAgainst.some(pest => 
+                    otherVegetable.susceptibleTo.includes(pest)
+                );
+            }
+            
+            // NEW: Check if plants share pest vulnerabilities
+            sharesVulnerabilitiesWith(otherVegetable) {
+                return this.susceptibleTo.filter(pest =>
+                    otherVegetable.susceptibleTo.includes(pest)
+                );
+            }
+            
+            // NEW: Get pest icons for this plant
+            getPestIcons() {
+                const icons = {
+                    slugs: false,
+                    flying: false,
+                    larvae: false,
+                    beetles: false
+                };
+                
+                // Categorize pests
+                const slugPests = ['slugs'];
+                const flyingPests = ['aphids', 'whitefly', 'thrips', 'onion-fly', 'carrot-fly', 'cabbage-root-fly', 'leek-moth'];
+                const larvaePests = ['cabbage-white', 'hornworms', 'pea-moth', 'corn-borer', 'earworm', 'wireworms', 'root-maggot'];
+                const beetlePests = ['potato-beetle', 'bean-beetle', 'cucumber-beetle', 'japanese-beetle', 'flea-beetle', 'squash-bug'];
+                
+                for (const pest of this.susceptibleTo) {
+                    if (slugPests.includes(pest)) icons.slugs = true;
+                    if (flyingPests.includes(pest)) icons.flying = true;
+                    if (larvaePests.includes(pest)) icons.larvae = true;
+                    if (beetlePests.includes(pest)) icons.beetles = true;
+                }
+                
+                return icons;
+            }
+            
+            // NEW: Get detailed pest list by category
+            getPestsByCategory() {
+                const categories = {
+                    slugs: [],
+                    flying: [],
+                    larvae: [],
+                    beetles: [],
+                    other: []
+                };
+                
+                const slugPests = ['slugs'];
+                const flyingPests = ['aphids', 'whitefly', 'thrips', 'onion-fly', 'carrot-fly', 'cabbage-root-fly', 'leek-moth'];
+                const larvaePests = ['cabbage-white', 'hornworms', 'pea-moth', 'corn-borer', 'earworm', 'wireworms', 'root-maggot'];
+                const beetlePests = ['potato-beetle', 'bean-beetle', 'cucumber-beetle', 'japanese-beetle', 'flea-beetle', 'squash-bug'];
+                
+                for (const pest of this.susceptibleTo) {
+                    if (slugPests.includes(pest)) categories.slugs.push(pest);
+                    else if (flyingPests.includes(pest)) categories.flying.push(pest);
+                    else if (larvaePests.includes(pest)) categories.larvae.push(pest);
+                    else if (beetlePests.includes(pest)) categories.beetles.push(pest);
+                    else categories.other.push(pest);
+                }
+                
+                return categories;
+            }
+            
             getName(lang = 'en') {
                 if (lang === 'de') return this.nameDE;
                 if (lang === 'it') return this.nameIT;
@@ -1302,12 +1580,27 @@
                     nutrition: this.nutrition,
                     family: this.family,
                     goodCompanions: this.goodCompanions,
-                    badCompanions: this.badCompanions
+                    badCompanions: this.badCompanions,
+                    susceptibleTo: this.susceptibleTo,
+                    protectsAgainst: this.protectsAgainst,
+                    attractsBeneficials: this.attractsBeneficials
                 };
             }
             
             static fromJSON(data) {
-                const veg = new Vegetable(data.id, data.nameEN, data.nameDE, data.nameIT, data.nutrition, data.family);
+                const veg = new Vegetable(
+                    data.id, 
+                    data.nameEN, 
+                    data.nameDE, 
+                    data.nameIT, 
+                    data.nutrition, 
+                    data.family,
+                    {
+                        susceptibleTo: data.susceptibleTo || [],
+                        protectsAgainst: data.protectsAgainst || [],
+                        attractsBeneficials: data.attractsBeneficials || false
+                    }
+                );
                 veg.goodCompanions = data.goodCompanions || [];
                 veg.badCompanions = data.badCompanions || [];
                 return veg;
@@ -1346,6 +1639,33 @@
                 this.name = name;
             }
             
+            // NEW: Get translated name if it's a default name
+            getName(lang, bedCount) {
+                // Check if this is a default name pattern (e.g., "Bed 1", "Beet 1", "Aiuola 1")
+                const defaultPatterns = [
+                    /^Bed (\d+)$/,      // English
+                    /^Beet (\d+)$/,     // German
+                    /^Aiuola (\d+)$/    // Italian
+                ];
+                
+                for (const pattern of defaultPatterns) {
+                    const match = this.name.match(pattern);
+                    if (match) {
+                        const number = match[1];
+                        // Return translated default name
+                        const translations = {
+                            en: `Bed ${number}`,
+                            de: `Beet ${number}`,
+                            it: `Aiuola ${number}`
+                        };
+                        return translations[lang] || this.name;
+                    }
+                }
+                
+                // Not a default name, return as-is (user-defined)
+                return this.name;
+            }
+            
             toJSON() {
                 return {
                     id: this.id,
@@ -1370,28 +1690,158 @@
             }
             
             initializeVegetableDatabase() {
-                // Initialize vegetables with EN, DE and IT names
+                // Initialize vegetables with EN, DE, IT names and pest data
                 const veggies = [
-                    new Vegetable('tomato', 'Tomato', 'Tomate', 'Pomodoro', 'high', 'Solanaceae'),
-                    new Vegetable('potato', 'Potato', 'Kartoffel', 'Patata', 'high', 'Solanaceae'),
-                    new Vegetable('carrot', 'Carrot', 'Karotte', 'Carota', 'low', 'Apiaceae'),
-                    new Vegetable('lettuce', 'Lettuce', 'Salat', 'Lattuga', 'low', 'Asteraceae'),
-                    new Vegetable('cabbage', 'Cabbage', 'Kohl', 'Cavolo', 'high', 'Brassicaceae'),
-                    new Vegetable('beans', 'Beans', 'Bohnen', 'Fagioli', 'low', 'Fabaceae'),
-                    new Vegetable('peas', 'Peas', 'Erbsen', 'Piselli', 'low', 'Fabaceae'),
-                    new Vegetable('onion', 'Onion', 'Zwiebel', 'Cipolla', 'medium', 'Amaryllidaceae'),
-                    new Vegetable('garlic', 'Garlic', 'Knoblauch', 'Aglio', 'medium', 'Amaryllidaceae'),
-                    new Vegetable('cucumber', 'Cucumber', 'Gurke', 'Cetriolo', 'medium', 'Cucurbitaceae'),
-                    new Vegetable('zucchini', 'Zucchini', 'Zucchini', 'Zucchina', 'medium', 'Cucurbitaceae'),
-                    new Vegetable('corn', 'Corn', 'Mais', 'Mais', 'high', 'Poaceae'),
-                    new Vegetable('radish', 'Radish', 'Radieschen', 'Ravanello', 'low', 'Brassicaceae'),
-                    new Vegetable('spinach', 'Spinach', 'Spinat', 'Spinaci', 'medium', 'Amaranthaceae'),
-                    new Vegetable('basil', 'Basil', 'Basilikum', 'Basilico', 'low', 'Lamiaceae'),
-                    new Vegetable('pepper', 'Pepper', 'Paprika', 'Peperone', 'medium', 'Solanaceae'),
-                    new Vegetable('celery', 'Celery', 'Sellerie', 'Sedano', 'high', 'Apiaceae'),
-                    new Vegetable('arugula', 'Arugula', 'Rucola', 'Rucola', 'low', 'Brassicaceae'),
-                    new Vegetable('kohlrabi', 'Kohlrabi', 'Kohlrabi', 'Cavolo Rapa', 'medium', 'Brassicaceae'),
-                    new Vegetable('leek', 'Leek', 'Lauch', 'Porro', 'medium', 'Amaryllidaceae'),
+                    new Vegetable('tomato', 'Tomato', 'Tomate', 'Pomodoro', 'high', 'Solanaceae', {
+                        susceptibleTo: ['aphids', 'whitefly', 'hornworms'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('potato', 'Potato', 'Kartoffel', 'Patata', 'high', 'Solanaceae', {
+                        susceptibleTo: ['potato-beetle', 'aphids', 'wireworms'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('carrot', 'Carrot', 'Karotte', 'Carota', 'low', 'Apiaceae', {
+                        susceptibleTo: ['carrot-fly', 'aphids', 'wireworms'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('lettuce', 'Lettuce', 'Salat', 'Lattuga', 'low', 'Asteraceae', {
+                        susceptibleTo: ['slugs', 'aphids', 'leaf-miners'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('cabbage', 'Cabbage', 'Kohl', 'Cavolo', 'high', 'Brassicaceae', {
+                        susceptibleTo: ['cabbage-white', 'aphids', 'cabbage-root-fly', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('beans', 'Beans', 'Bohnen', 'Fagioli', 'low', 'Fabaceae', {
+                        susceptibleTo: ['aphids', 'bean-beetle', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: true
+                    }),
+                    new Vegetable('peas', 'Peas', 'Erbsen', 'Piselli', 'low', 'Fabaceae', {
+                        susceptibleTo: ['aphids', 'pea-moth', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: true
+                    }),
+                    new Vegetable('onion', 'Onion', 'Zwiebel', 'Cipolla', 'medium', 'Amaryllidaceae', {
+                        susceptibleTo: ['onion-fly', 'thrips'],
+                        protectsAgainst: ['carrot-fly', 'aphids', 'slugs'],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('garlic', 'Garlic', 'Knoblauch', 'Aglio', 'medium', 'Amaryllidaceae', {
+                        susceptibleTo: ['onion-fly'],
+                        protectsAgainst: ['aphids', 'slugs', 'japanese-beetle'],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('cucumber', 'Cucumber', 'Gurke', 'Cetriolo', 'medium', 'Cucurbitaceae', {
+                        susceptibleTo: ['aphids', 'cucumber-beetle', 'spider-mites', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('zucchini', 'Zucchini', 'Zucchini', 'Zucchina', 'medium', 'Cucurbitaceae', {
+                        susceptibleTo: ['slugs', 'aphids', 'squash-bug'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('corn', 'Corn', 'Mais', 'Mais', 'high', 'Poaceae', {
+                        susceptibleTo: ['corn-borer', 'aphids', 'earworm'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('radish', 'Radish', 'Radieschen', 'Ravanello', 'low', 'Brassicaceae', {
+                        susceptibleTo: ['flea-beetle', 'aphids', 'root-maggot'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('spinach', 'Spinach', 'Spinat', 'Spinaci', 'medium', 'Amaranthaceae', {
+                        susceptibleTo: ['aphids', 'leaf-miners', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('basil', 'Basil', 'Basilikum', 'Basilico', 'low', 'Lamiaceae', {
+                        susceptibleTo: ['aphids', 'japanese-beetle', 'slugs'],
+                        protectsAgainst: ['aphids', 'whitefly', 'hornworms'],
+                        attractsBeneficials: true
+                    }),
+                    new Vegetable('pepper', 'Pepper', 'Paprika', 'Peperone', 'medium', 'Solanaceae', {
+                        susceptibleTo: ['aphids', 'spider-mites', 'hornworms'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('celery', 'Celery', 'Sellerie', 'Sedano', 'high', 'Apiaceae', {
+                        susceptibleTo: ['aphids', 'carrot-fly', 'leaf-miners'],
+                        protectsAgainst: ['cabbage-white'],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('arugula', 'Arugula', 'Rucola', 'Rucola', 'low', 'Brassicaceae', {
+                        susceptibleTo: ['flea-beetle', 'slugs', 'aphids'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('kohlrabi', 'Kohlrabi', 'Kohlrabi', 'Cavolo Rapa', 'medium', 'Brassicaceae', {
+                        susceptibleTo: ['cabbage-white', 'aphids', 'flea-beetle', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('leek', 'Leek', 'Lauch', 'Porro', 'medium', 'Amaryllidaceae', {
+                        susceptibleTo: ['leek-moth', 'thrips', 'onion-fly'],
+                        protectsAgainst: ['carrot-fly'],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('broccoli', 'Broccoli', 'Brokkoli', 'Broccoli', 'high', 'Brassicaceae', {
+                        susceptibleTo: ['cabbage-white', 'aphids', 'cabbage-root-fly', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('chives', 'Chives', 'Schnittlauch', 'Erba Cipollina', 'low', 'Amaryllidaceae', {
+                        susceptibleTo: [],
+                        protectsAgainst: ['aphids', 'carrot-fly', 'japanese-beetle', 'slugs'],
+                        attractsBeneficials: true
+                    }),
+                    new Vegetable('parsley', 'Parsley', 'Petersilie', 'Prezzemolo', 'low', 'Apiaceae', {
+                        susceptibleTo: ['aphids', 'carrot-fly'],
+                        protectsAgainst: [],
+                        attractsBeneficials: true
+                    }),
+                    new Vegetable('pumpkin', 'Pumpkin', 'Kürbis', 'Zucca', 'high', 'Cucurbitaceae', {
+                        susceptibleTo: ['squash-bug', 'aphids', 'cucumber-beetle', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('mint', 'Mint', 'Minze', 'Menta', 'low', 'Lamiaceae', {
+                        susceptibleTo: ['aphids', 'spider-mites'],
+                        protectsAgainst: ['aphids', 'cabbage-white', 'flea-beetle', 'slugs'],
+                        attractsBeneficials: true
+                    }),
+                    new Vegetable('strawberry', 'Strawberry', 'Erdbeere', 'Fragola', 'medium', 'Rosaceae', {
+                        susceptibleTo: ['slugs', 'aphids', 'spider-mites'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('turnip', 'Turnip', 'Rettich', 'Ravanello Bianco', 'low', 'Brassicaceae', {
+                        susceptibleTo: ['flea-beetle', 'aphids', 'root-maggot'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('rhubarb', 'Rhubarb', 'Rhabarber', 'Rabarbaro', 'medium', 'Polygonaceae', {
+                        susceptibleTo: ['aphids', 'slugs'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('eggplant', 'Eggplant', 'Aubergine', 'Melanzana', 'high', 'Solanaceae', {
+                        susceptibleTo: ['aphids', 'flea-beetle', 'potato-beetle'],
+                        protectsAgainst: [],
+                        attractsBeneficials: false
+                    }),
+                    new Vegetable('fennel', 'Fennel', 'Fenchel', 'Finocchio', 'medium', 'Apiaceae', {
+                        susceptibleTo: ['aphids'],
+                        protectsAgainst: ['aphids', 'slugs'],
+                        attractsBeneficials: true
+                    }),
                 ];
                 
                 veggies.forEach(v => this.vegetables.set(v.id, v));
@@ -1417,6 +1867,18 @@
                 this.setCompanions('arugula', ['beans', 'peas', 'radish'], []);
                 this.setCompanions('kohlrabi', ['lettuce', 'peas', 'spinach'], []);
                 this.setCompanions('leek', ['celery', 'carrot', 'tomato'], ['beans', 'peas']);
+                
+                // New vegetables
+                this.setCompanions('broccoli', ['beans', 'celery', 'onion', 'potato'], ['tomato', 'strawberry', 'pepper']);
+                this.setCompanions('chives', ['carrot', 'tomato', 'strawberry'], ['beans', 'peas']);
+                this.setCompanions('parsley', ['tomato', 'carrot', 'corn'], ['lettuce']);
+                this.setCompanions('pumpkin', ['corn', 'beans', 'peas'], ['potato']);
+                this.setCompanions('mint', ['cabbage', 'tomato'], ['parsley']);
+                this.setCompanions('strawberry', ['beans', 'lettuce', 'spinach', 'chives'], ['cabbage', 'broccoli']);
+                this.setCompanions('turnip', ['peas', 'beans', 'mint'], []);
+                this.setCompanions('rhubarb', ['beans', 'cabbage', 'onion'], []);
+                this.setCompanions('eggplant', ['beans', 'pepper', 'spinach'], ['potato', 'fennel']);
+                this.setCompanions('fennel', ['celery'], ['tomato', 'beans', 'kohlrabi', 'eggplant']);
             }
             
             setCompanions(vegId, good, bad) {
@@ -1631,6 +2093,29 @@
                 if (twoYearsAgo.includes(vegId)) {
                     score -= 10;
                     reasons.push('reason.samePlant2Years');
+                }
+                
+                // Rule 6: Pest protection (NEW!)
+                const currentPlantings = this.garden.getPlantingsForBed(bedId, year);
+                for (const otherVeg of currentPlantings) {
+                    // Positive: This plant protects others from pests
+                    if (veg.protectsPlant(otherVeg)) {
+                        score += 20;
+                        reasons.push(`reason.pestProtection:${otherVeg.id}`);
+                    }
+                    
+                    // Negative: Plants share pest vulnerabilities
+                    const sharedPests = veg.sharesVulnerabilitiesWith(otherVeg);
+                    if (sharedPests.length > 0) {
+                        score -= 15;
+                        reasons.push(`reason.sharedPestRisk:${otherVeg.id}`);
+                    }
+                }
+                
+                // Rule 7: Attracts beneficial insects (NEW!)
+                if (veg.attractsBeneficials && currentPlantings.length > 0) {
+                    score += 10;
+                    reasons.push('reason.attractsBeneficials');
                 }
                 
                 return { total: score, reasons };
@@ -2119,6 +2604,16 @@
                             const goodCompanions = currentIds.filter(id => id !== veg.id && veg.isCompatibleWith(id) === 1);
                             const badCompanions = currentIds.filter(id => id !== veg.id && veg.isCompatibleWith(id) === -1);
                             
+                            // NEW: Find plants that this vegetable protects
+                            const protectedPlants = currentPlantings.filter(other => 
+                                other.id !== veg.id && veg.protectsPlant(other)
+                            );
+                            
+                            // NEW: Find plants with shared pests
+                            const sharedPestPlants = currentPlantings.filter(other =>
+                                other.id !== veg.id && veg.sharesVulnerabilitiesWith(other).length > 0
+                            );
+                            
                             return `
                                 <div class="plant-assignment">
                                     <div class="plant-name">${veg.getName(this.currentLanguage)}</div>
@@ -2127,12 +2622,47 @@
                                             ${this.t(`nutrition.${veg.nutrition}`)}
                                         </span>
                                         <span>${veg.family}</span>
+                                        ${veg.attractsBeneficials ? `<span style="margin-left: 0.25rem;" title="${this.t('tooltip.beneficials')}">🐞</span>` : ''}
                                     </div>
+                                    ${(() => {
+                                        // Show pest icons for this plant
+                                        const pestIcons = veg.getPestIcons();
+                                        const pestsByCategory = veg.getPestsByCategory();
+                                        let iconsHTML = '';
+                                        
+                                        if (pestIcons.slugs) {
+                                            const tooltip = this.t('tooltip.slugs') + ': ' + pestsByCategory.slugs.join(', ');
+                                            iconsHTML += `<span class="pest-icon" title="${tooltip}">🐌</span>`;
+                                        }
+                                        if (pestIcons.flying) {
+                                            const tooltip = this.t('tooltip.flying') + ': ' + pestsByCategory.flying.join(', ');
+                                            iconsHTML += `<span class="pest-icon" title="${tooltip}">🦟</span>`;
+                                        }
+                                        if (pestIcons.larvae) {
+                                            const tooltip = this.t('tooltip.larvae') + ': ' + pestsByCategory.larvae.join(', ');
+                                            iconsHTML += `<span class="pest-icon" title="${tooltip}">🐛</span>`;
+                                        }
+                                        if (pestIcons.beetles) {
+                                            const tooltip = this.t('tooltip.beetles') + ': ' + pestsByCategory.beetles.join(', ');
+                                            iconsHTML += `<span class="pest-icon" title="${tooltip}">🪲</span>`;
+                                        }
+                                        
+                                        return iconsHTML ? `<div class="pest-icons">${iconsHTML}</div>` : '';
+                                    })()}
                                     ${goodCompanions.length > 0 ? `
                                         <div class="companions-list">
                                             ${goodCompanions.map(id => {
                                                 const c = this.garden.vegetables.get(id);
-                                                return c ? `<span class="companion-tag companion-good">✓ ${c.getName(this.currentLanguage)}</span>` : '';
+                                                if (!c) return '';
+                                                // Build tooltip explaining why it's a good companion
+                                                const reasons = [];
+                                                if (c.isCompatibleWith(veg.id) === 1) reasons.push(this.t('tooltip.traditionalCompanion'));
+                                                if (c.protectsPlant(veg)) {
+                                                    const pests = c.protectsAgainst.filter(p => veg.susceptibleTo.includes(p));
+                                                    reasons.push(this.t('tooltip.protectsFrom') + ': ' + pests.join(', '));
+                                                }
+                                                const tooltip = reasons.join(' • ');
+                                                return `<span class="companion-tag companion-good" title="${tooltip}">✓ ${c.getName(this.currentLanguage)}</span>`;
                                             }).join('')}
                                         </div>
                                     ` : ''}
@@ -2140,7 +2670,27 @@
                                         <div class="companions-list">
                                             ${badCompanions.map(id => {
                                                 const c = this.garden.vegetables.get(id);
-                                                return c ? `<span class="companion-tag companion-bad">✗ ${c.getName(this.currentLanguage)}</span>` : '';
+                                                if (!c) return '';
+                                                const tooltip = this.t('tooltip.incompatible');
+                                                return `<span class="companion-tag companion-bad" title="${tooltip}">✗ ${c.getName(this.currentLanguage)}</span>`;
+                                            }).join('')}
+                                        </div>
+                                    ` : ''}
+                                    ${protectedPlants.length > 0 ? `
+                                        <div class="companions-list">
+                                            ${protectedPlants.map(other => {
+                                                const pests = veg.protectsAgainst.filter(p => other.susceptibleTo.includes(p));
+                                                const tooltip = this.t('tooltip.protectsFrom') + ': ' + pests.join(', ');
+                                                return `<span class="companion-tag companion-protection" title="${tooltip}">🛡️ ${other.getName(this.currentLanguage)}</span>`;
+                                            }).join('')}
+                                        </div>
+                                    ` : ''}
+                                    ${sharedPestPlants.length > 0 ? `
+                                        <div class="companions-list">
+                                            ${sharedPestPlants.map(other => {
+                                                const sharedPests = veg.sharesVulnerabilitiesWith(other);
+                                                const pestNames = sharedPests.join(', ');
+                                                return `<span class="companion-tag companion-warning" title="${pestNames}">🪳 ${other.getName(this.currentLanguage)}</span>`;
                                             }).join('')}
                                         </div>
                                     ` : ''}
@@ -2161,7 +2711,7 @@
                     return `
                         <div class="bed" onclick="app.openBedModal(${bed.id})">
                             <div class="bed-header">
-                                <div class="bed-name">${bed.name}</div>
+                                <div class="bed-name">${bed.getName(this.currentLanguage)}</div>
                                 <div class="bed-actions">
                                     <button onclick="event.stopPropagation(); app.removeBed(${bed.id})" title="Remove bed">🗑️</button>
                                 </div>
