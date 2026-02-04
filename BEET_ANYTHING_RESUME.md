@@ -40,12 +40,14 @@
 🆕 **Visual pest tags** (🛡️, 🪳, 🐞)  
 🆕 **Interactive tooltips** (hover any tag for details)  
 🆕 **Individual pest icons** (🐌🦟🐛🪲 per plant)  
+🆕 **Translated pest names** (24 pests in EN/DE/IT = 72 translations)  
+🆕 **Inline pest display** (icons with beneficial insects in same line)  
 🆕 **Slug protection** (14 vulnerable plants, 5 protective plants)  
 🆕 **Symbol legend** with hover instructions  
 🆕 **Auto-translated bed names** (Bed/Beet/Aiuola)  
 🆕 **Data versioning system** (automatic migration v1.0→v1.2)  
-🆕 **Clear All Data button** (fresh start option)  
-🆕 **15 new translation keys** (tooltips + pest categories + data management)  
+🆕 **Clear All Data button** (footer location, two-step confirmation, backup prompt)  
+🆕 **96+ new translation keys** (pests + tooltips + features)  
 
 ---
 
@@ -359,21 +361,44 @@ Data successfully imported (version 1.2)
 **Clear All Data feature:**
 ```javascript
 clearAllData() {
-    const confirmed = confirm(this.t('data.clearConfirm'));
-    if (confirmed) {
-        localStorage.removeItem('beetAnythingData');
-        localStorage.removeItem('beetAnythingState');
-        alert(this.t('data.cleared'));
-        window.location.reload();
+    // Step 1: Confirm deletion intent
+    const wantToDelete = confirm(this.t('data.clearConfirm'));
+    if (!wantToDelete) return; // Cancel → back to normal
+    
+    // Step 2: Offer backup
+    const wantBackup = confirm(this.t('data.offerBackup'));
+    
+    if (wantBackup) {
+        this.exportData();           // Create backup first
+        alert(this.t('data.backupSaved'));
+        setTimeout(() => {
+            this.performClearAllData();
+        }, 500);
+    } else {
+        this.performClearAllData();  // Delete without backup
     }
+}
+
+performClearAllData() {
+    localStorage.removeItem('beetAnythingData');
+    localStorage.removeItem('beetAnythingState');
+    alert(this.t('data.cleared'));
+    window.location.reload();
 }
 ```
 
 **UI Button:**
-- Header: 🗑️ Clear All Data
-- Confirmation required
+- Location: Footer (bottom left) - safe from accidental clicks
+- Style: Transparent background, subtle border
+- Two-step confirmation: (1) Delete? (2) Backup first?
 - Translated in EN/DE/IT
 - Complete reset with page reload
+
+**Safety Features:**
+- ✅ Footer position prevents accidental clicks
+- ✅ Two confirmations required
+- ✅ Backup always offered (recommended)
+- ✅ Clear cancel points at each step
 
 ---
 

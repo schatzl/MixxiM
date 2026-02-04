@@ -423,16 +423,17 @@ Each plant displays icons for its pest vulnerabilities:
 ```
 
 **Hover for details:**
-- 🐌 → "Slugs/Snails: slugs"
-- 🦟 → "Flying pests (aphids, flies, moths): aphids, carrot-fly"
-- 🐛 → "Larvae/Caterpillars: cabbage-white, wireworms"
-- 🪲 → "Beetles: flea-beetle, potato-beetle"
+- 🐌 → "Schnecken: Schnecken" (DE) / "Slugs/Snails: slugs" (EN) / "Lumache: lumache" (IT)
+- 🦟 → "Fliegende Schädlinge: Blattläuse, Möhrenfliege" (DE) / "Flying pests: aphids, carrot-fly" (EN)
+- 🐛 → "Larven/Raupen: Kohlweißling, Drahtwürmer" (DE) / "Larvae/Caterpillars: cabbage-white, wireworms" (EN)
+- 🪲 → "Käfer: Erdfloh, Kartoffelkäfer" (DE) / "Beetles: flea-beetle, potato-beetle" (EN)
 
 **Benefits:**
 - See vulnerabilities at a glance
 - Works for single plants (not just in combinations)
 - Categorized by pest type
 - Detailed tooltips with specific pest names
+- **Fully translated pest names** in EN/DE/IT (24 pests)
 
 ### Data Management
 
@@ -453,10 +454,17 @@ Each plant displays icons for its pest vulnerabilities:
    - Console shows migration progress
    - No manual intervention needed
 
-4. **Fresh Start**
-   - Use "🗑️ Clear All Data" button for complete reset
-   - Confirmation required before deletion
+4. **Fresh Start (Clear All Data)**
+   - Button located in footer (bottom left) - safe from accidental clicks
+   - Two-step confirmation process:
+     1. Confirm deletion intent
+     2. Offer to create backup first (recommended)
+   - Options:
+     - OK = Create backup, then delete
+     - Cancel = Delete without backup
+     - Cancel on step 1 = Return to normal, nothing deleted
    - All data removed, page reloads fresh
+   - Located safely in footer to prevent accidental deletion
 
 5. **Use Meaningful Bed Names**
    - "North Bed" better than "Bed 1"
@@ -763,17 +771,21 @@ Found a bug? Have a feature idea? Want to contribute?
 - ✨ UI shows protection relationships (🛡️ tags)
 - ✨ UI warns about shared pests (🪳 tags)
 - ✨ **Individual pest icons** per plant (🐌🦟🐛🪲)
+- ✨ **Translated pest names** - 24 pests in EN/DE/IT (72 translations)
 - ✨ Beneficial insect indicators (🐞 emoji)
-- ✨ **Interactive tooltips** for all tags
+- ✨ **Interactive tooltips** for all tags with translated pest names
 - ✨ **Symbol legend** with hover instructions
 - ✨ **Auto-translated bed names** (Bed/Beet/Aiuola)
 - ✨ **Data versioning system** - Automatic migration from v1.0
-- ✨ **Clear All Data** button - Fresh start option
+- ✨ **Clear All Data** button - Footer location, two-step confirmation, backup option
 - ✨ Comprehensive slug protection (14 vulnerable, 5 protective plants)
-- ✨ 15 new translation keys (tooltips + pest categories + data management)
+- ✨ Pest icons displayed inline with beneficial insects (space-saving layout)
+- ✨ 96+ new translation keys (24 pests × 3 languages + features)
 - 📝 Complete pest data research and integration
 - 🎨 New CSS styles for pest icons and tooltips
 - 🔧 Migration system for backwards compatibility
+- 🔒 Safe deletion workflow with backup prompt
+
 
 ### v1.1 i18n (February 2025)
 - ✨ Added Italian translation

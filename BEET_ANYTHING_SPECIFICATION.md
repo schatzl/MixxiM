@@ -203,9 +203,24 @@ this.currentLanguage = parsedState.language || 'en';
 #### Translation System:
 ```javascript
 const translations = {
-    en: { "btn.export": "💾 Export Data" },
-    de: { "btn.export": "💾 Daten exportieren" },
-    it: { "btn.export": "💾 Esporta dati" }
+    en: { 
+        "btn.export": "💾 Export Data",
+        "pest.slugs": "slugs",
+        "pest.aphids": "aphids",
+        // ... 22 more pests
+    },
+    de: { 
+        "btn.export": "💾 Daten exportieren",
+        "pest.slugs": "Schnecken",
+        "pest.aphids": "Blattläuse",
+        // ... 22 more pests
+    },
+    it: { 
+        "btn.export": "💾 Esporta dati",
+        "pest.slugs": "lumache",
+        "pest.aphids": "afidi",
+        // ... 22 more pests
+    }
 };
 
 // Usage in HTML:
@@ -213,7 +228,19 @@ const translations = {
 
 // Usage in JavaScript:
 app.t('btn.export') // Returns translated string
+app.t('pest.slugs') // Returns "Schnecken" (in German)
+
+// Translating pest arrays:
+const pests = ['slugs', 'aphids', 'carrot-fly'];
+const translated = pests.map(p => app.t(`pest.${p}`)).join(', ');
+// Returns: "Schnecken, Blattläuse, Möhrenfliege" (in German)
 ```
+
+**Translation Keys:**
+- ~60 UI strings (buttons, labels, messages)
+- 30 vegetables × 3 languages (90 strings)
+- 24 pests × 3 languages (72 strings)
+- **Total: ~220 translation keys**
 
 ---
 
@@ -595,13 +622,39 @@ Data successfully imported (version 1.2)
 
 ### Clear Data Feature
 
-**New button in header:** 🗑️ Clear All Data
+**New button in footer:** 🗑️ Clear All Data (bottom left)
+
+**Location:**
+- Footer position (bottom left)
+- Safe from accidental clicks
+- Transparent background with subtle border
+- Small font size (0.8rem)
+
+**Two-Step Confirmation:**
+1. **Step 1:** Confirm deletion intent
+   - "Sind Sie sicher, dass Sie alle Gartendaten vollständig löschen möchten?"
+   - OK → Continue to Step 2
+   - Cancel → Return to app (nothing happens)
+
+2. **Step 2:** Offer backup
+   - "Möchten Sie ein Backup speichern vor dem Löschen?"
+   - OK → Create backup, then delete
+   - Cancel → Delete without backup
 
 **Functionality:**
-- Confirmation dialog (translated)
-- Removes all localStorage data
+- Two confirmation dialogs (translated)
+- Backup option always offered
+- Removes all localStorage data:
+  - `beetAnythingData`
+  - `beetAnythingState`
 - Reloads page for fresh start
 - Available in all 3 languages
+
+**Safety Features:**
+- Footer location prevents accidental clicks
+- Two-step process with clear cancel points
+- Backup recommended and easy to create
+- Translated warnings in user's language
 
 ---
 
