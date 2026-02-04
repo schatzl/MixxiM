@@ -10,10 +10,10 @@ A modern, self-contained Progressive Web App for planning your vegetable garden 
 **Last Updated**: February 2025  
 **Status**: Production Ready  
 **Languages**: English, German, Italian  
-**File**: beet-anything-i18n.html  
+**File**: beet-anything.html  
 **GitHub**: https://github.com/schatzl/beet-anything  
 **License**: Free for any use - Personal, commercial, educational, or otherwise.  
-**Live demo**: [Beet Anything](https://target23.de/beet-anything-i18n.html)
+**Live demo**: [Beet Anything](https://target23.de/beet-anything.html)
 
 ---
 
@@ -92,7 +92,15 @@ A modern, self-contained Progressive Web App for planning your vegetable garden 
 - **Auto-load**: All data restored on app startup
 - **Export**: Download complete garden data as JSON
 - **Import**: Restore data from backup files
+- **Version migration**: Automatically upgrades old data formats (v1.0 → v1.2)
+- **Clear all data**: Fresh start option with confirmation
 - **Privacy**: 100% local storage, no server uploads
+
+**Data Versioning:**
+- Current version: **1.2**
+- Automatic migration from v1.0 (legacy) to v1.2
+- Old saves get pest data added automatically
+- Console logging shows migration progress
 
 ### 📱 Progressive Web App
 - **Install as app** on iPhone, Android, or Desktop
@@ -157,13 +165,13 @@ See [APP_INSTALLATION_GUIDE.md](APP_INSTALLATION_GUIDE.md) for detailed instruct
 
 ```bash
 # Download the file
-wget beet-anything-i18n.html
+wget beet-anything.html
 
 # Open in browser
 # Double-click the file
 # OR serve with Python:
 python3 -m http.server 8000
-# Visit http://localhost:8000/beet-anything-i18n.html
+# Visit http://localhost:8000/beet-anything.html
 ```
 
 ---
@@ -439,7 +447,18 @@ Each plant displays icons for its pest vulnerabilities:
    - Switching devices
    - Uninstalling app
 
-3. **Use Meaningful Bed Names**
+3. **Version Migration**
+   - App automatically upgrades old data formats
+   - v1.0 (legacy) → v1.2 adds pest protection data
+   - Console shows migration progress
+   - No manual intervention needed
+
+4. **Fresh Start**
+   - Use "🗑️ Clear All Data" button for complete reset
+   - Confirmation required before deletion
+   - All data removed, page reloads fresh
+
+5. **Use Meaningful Bed Names**
    - "North Bed" better than "Bed 1"
    - "Tomato Patch" helps remember layout
    - "Raised Bed A" for structured gardens
@@ -470,7 +489,7 @@ Each plant displays icons for its pest vulnerabilities:
 ### File Structure
 
 ```
-beet-anything-i18n.html          (~105 KB)
+beet-anything.html          (~115 KB)
 ├── HTML Structure
 ├── CSS Styling (inline)
 ├── JavaScript Logic (inline)
@@ -484,7 +503,7 @@ beet-anything-i18n.html          (~105 KB)
 ### Performance
 
 - **Load Time**: < 1s on WiFi, < 2s on 4G
-- **File Size**: ~105 KB uncompressed, ~25 KB gzipped
+- **File Size**: ~115 KB uncompressed, ~30 KB gzipped
 - **Memory**: ~5-50 KB in LocalStorage (typical usage)
 - **Offline**: Full functionality after first visit
 
@@ -562,7 +581,7 @@ See [BEET_ANYTHING_RESUME.md](BEET_ANYTHING_RESUME.md) for more customization op
 **GitHub Pages** (Free):
 ```bash
 1. Create GitHub repo
-2. Upload beet-anything-i18n.html as index.html
+2. Upload beet-anything.html as index.html
 3. Enable GitHub Pages
 4. Visit https://username.github.io/repo-name
 ```
@@ -748,10 +767,13 @@ Found a bug? Have a feature idea? Want to contribute?
 - ✨ **Interactive tooltips** for all tags
 - ✨ **Symbol legend** with hover instructions
 - ✨ **Auto-translated bed names** (Bed/Beet/Aiuola)
+- ✨ **Data versioning system** - Automatic migration from v1.0
+- ✨ **Clear All Data** button - Fresh start option
 - ✨ Comprehensive slug protection (14 vulnerable, 5 protective plants)
-- ✨ 11 new translation keys (tooltips + pest categories)
+- ✨ 15 new translation keys (tooltips + pest categories + data management)
 - 📝 Complete pest data research and integration
 - 🎨 New CSS styles for pest icons and tooltips
+- 🔧 Migration system for backwards compatibility
 
 ### v1.1 i18n (February 2025)
 - ✨ Added Italian translation

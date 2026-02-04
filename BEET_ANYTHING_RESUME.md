@@ -4,7 +4,7 @@
 
 **Product Name**: Beet Anything  
 **Version**: 1.2 Pest Protection (PWA with Natural Pest Control)  
-**File**: `beet-anything-i18n.html` (~115 KB)  
+**File**: `beet-anything.html` (~115 KB)  
 **Type**: Single-Page Application (Self-contained)  
 **Languages**: English, German, Italian  
 **Status**: Production Ready  
@@ -43,7 +43,9 @@
 🆕 **Slug protection** (14 vulnerable plants, 5 protective plants)  
 🆕 **Symbol legend** with hover instructions  
 🆕 **Auto-translated bed names** (Bed/Beet/Aiuola)  
-🆕 **11 new translation keys** (tooltips + pest categories)  
+🆕 **Data versioning system** (automatic migration v1.0→v1.2)  
+🆕 **Clear All Data button** (fresh start option)  
+🆕 **15 new translation keys** (tooltips + pest categories + data management)  
 
 ---
 
@@ -292,6 +294,86 @@ ${bed.getName(this.currentLanguage)}  // Auto-translates!
 3. Switch to Italian → displays "Aiuola 1"
 4. User renames to "Terrasse" → stays "Terrasse" in all languages
 5. Switch back to English → still shows "Terrasse" (user-defined)
+
+### Data Versioning & Migration (NEW!)
+
+**Problem solved:** Old data from v1.0 works seamlessly with v1.2
+
+**Version system:**
+```javascript
+{
+  "version": "1.2",  // NEW: Every export includes version
+  "vegetables": [...],
+  "beds": [...],
+  "plantings": [...]
+}
+```
+
+**Automatic migration:**
+```javascript
+migrateData(data) {
+    const currentVersion = '1.2';
+    const dataVersion = data.version || '1.0';
+    
+    console.log(`Migrating data from v${dataVersion} to v${currentVersion}`);
+    
+    // v1.0 → v1.1: Add pest data
+    if (!data.version || data.version === '1.0') {
+        console.log('Migrating from v1.0: Adding pest data to vegetables');
+        
+        data.vegetables = data.vegetables.map(veg => {
+            // Add empty pest arrays if missing
+            if (!veg.susceptibleTo) veg.susceptibleTo = [];
+            if (!veg.protectsAgainst) veg.protectsAgainst = [];
+            if (veg.attractsBeneficials === undefined) 
+                veg.attractsBeneficials = false;
+            return veg;
+        });
+        
+        data.version = '1.1';
+    }
+    
+    // v1.1 → v1.2: Future migrations
+    if (data.version === '1.1') {
+        console.log('Migrating from v1.1 to v1.2');
+        // Add new features here when needed
+        data.version = '1.2';
+    }
+    
+    return data;
+}
+```
+
+**Console output:**
+```
+✅ Loaded data version: 1.2
+```
+
+or during migration:
+```
+Migrating data from v1.0 to v1.2
+Migrating from v1.0: Adding pest data to vegetables
+Data successfully imported (version 1.2)
+```
+
+**Clear All Data feature:**
+```javascript
+clearAllData() {
+    const confirmed = confirm(this.t('data.clearConfirm'));
+    if (confirmed) {
+        localStorage.removeItem('beetAnythingData');
+        localStorage.removeItem('beetAnythingState');
+        alert(this.t('data.cleared'));
+        window.location.reload();
+    }
+}
+```
+
+**UI Button:**
+- Header: 🗑️ Clear All Data
+- Confirmation required
+- Translated in EN/DE/IT
+- Complete reset with page reload
 
 ---
 
@@ -1021,7 +1103,7 @@ Before each new version:
 
 ### Get Started in 5 Minutes
 
-1. **Open file**: `beet-anything-i18n.html` in editor
+1. **Open file**: `beet-anything.html` in editor
 2. **Search concept**: Ctrl+F "Vegetable" → Find class
 3. **Understand**: OOP hierarchy → GardenManager → SuggestionEngine
 4. **Customize**: Add vegetable (see above)
@@ -1090,9 +1172,9 @@ Before each new version:
 ### Option 2: GitHub Pages
 ```bash
 git init
-git add beet-anything-i18n.html
+git add beet-anything.html
 # Rename to index.html!
-mv beet-anything-i18n.html index.html
+mv beet-anything.html index.html
 git commit -m "Initial commit"
 git push origin main
 # → Enable GitHub Pages

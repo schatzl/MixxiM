@@ -305,7 +305,7 @@ To install Beet Anything as a PWA, it must be hosted on a web server with HTTPS.
 ```bash
 1. Create GitHub account
 2. Create new repository
-3. Upload beet-anything-i18n.html
+3. Upload beet-anything.html
 4. Rename to index.html
 5. Enable GitHub Pages in settings
 6. Visit: https://username.github.io/repo-name
@@ -356,7 +356,7 @@ To install Beet Anything as a PWA, it must be hosted on a web server with HTTPS.
 **Upload:**
 ```bash
 # Via FTP/SFTP
-Upload beet-anything-i18n.html to web root
+Upload beet-anything.html to web root
 Rename to index.html
 Ensure HTTPS is configured
 ```
@@ -419,7 +419,7 @@ openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 36
 python3 -m http.server --bind localhost 8000 --protocol=https
 
 # Visit
-https://localhost:8000/beet-anything-i18n.html
+https://localhost:8000/beet-anything.html
 ```
 
 **Option 2: Node.js HTTP Server**
@@ -432,7 +432,7 @@ npm install -g http-server
 http-server -S -C cert.pem -K key.pem
 
 # Visit
-https://localhost:8080/beet-anything-i18n.html
+https://localhost:8080/beet-anything.html
 ```
 
 **Note:** Browsers will warn about self-signed certificate. This is OK for testing.

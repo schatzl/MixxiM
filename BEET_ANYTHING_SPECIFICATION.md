@@ -275,10 +275,12 @@ GardenManager
     ├── removePlanting(bedId, year, vegetableId)
     ├── getPlantingsForBed(bedId, year)
     ├── getPlantingIdsForBed(bedId, year)
-    ├── exportData(): JSON
+    ├── exportData(): JSON                     (includes version: '1.2')
     ├── importData(json): boolean
+    ├── migrateData(data): data                (NEW v1.2: migrates old formats)
     ├── saveToLocalStorage()
     └── loadFromLocalStorage(): boolean
+
 
 SuggestionEngine
 ├── garden: GardenManager
@@ -531,12 +533,85 @@ Onion (onion-fly, thrips):
 
 ---
 
+---
+
+## Data Migration System (NEW v1.2)
+
+**Automatic version migration ensures backwards compatibility:**
+
+### Migration Flow
+
+```
+Old Data (v1.0)           Migration             Current Data (v1.2)
+┌─────────────┐          ┌──────────┐          ┌─────────────┐
+│ No version  │  ──────> │ Detect   │  ──────> │ version:1.2 │
+│ No pest     │          │ Add pest │          │ Full pest   │
+│ data        │          │ arrays   │          │ profiles    │
+└─────────────┘          └──────────┘          └─────────────┘
+```
+
+### Migration Method
+
+```javascript
+migrateData(data) {
+    const currentVersion = '1.2';
+    const dataVersion = data.version || '1.0';
+    
+    // v1.0 → v1.1: Add pest data
+    if (!data.version || data.version === '1.0') {
+        data.vegetables = data.vegetables.map(veg => {
+            if (!veg.susceptibleTo) veg.susceptibleTo = [];
+            if (!veg.protectsAgainst) veg.protectsAgainst = [];
+            if (veg.attractsBeneficials === undefined) 
+                veg.attractsBeneficials = false;
+            return veg;
+        });
+        data.version = '1.1';
+    }
+    
+    // v1.1 → v1.2: Future migrations
+    if (data.version === '1.1') {
+        // Add new features here
+        data.version = '1.2';
+    }
+    
+    return data;
+}
+```
+
+### Console Output
+
+```
+✅ Loaded data version: 1.2
+```
+
+or during migration:
+
+```
+Migrating data from v1.0 to v1.2
+Migrating from v1.0: Adding pest data to vegetables
+Data successfully imported (version 1.2)
+```
+
+### Clear Data Feature
+
+**New button in header:** 🗑️ Clear All Data
+
+**Functionality:**
+- Confirmation dialog (translated)
+- Removes all localStorage data
+- Reloads page for fresh start
+- Available in all 3 languages
+
+---
+
 ## Data Structures
 
-### JSON Export Format
+### JSON Export Format (v1.2)
 
 ```json
 {
+  "version": "1.2",
   "vegetables": [
     {
       "id": "tomato",
@@ -546,7 +621,10 @@ Onion (onion-fly, thrips):
       "nutrition": "high",
       "family": "Solanaceae",
       "goodCompanions": ["basil", "carrot", "lettuce"],
-      "badCompanions": ["potato", "cabbage"]
+      "badCompanions": ["potato", "cabbage"],
+      "susceptibleTo": ["aphids", "whitefly", "hornworms"],
+      "protectsAgainst": [],
+      "attractsBeneficials": false
     }
   ],
   "beds": [
@@ -564,6 +642,11 @@ Onion (onion-fly, thrips):
   ]
 }
 ```
+
+**Version History:**
+- **v1.0** (legacy): No version field, no pest data
+- **v1.1**: Added pest data (susceptibleTo, protectsAgainst, attractsBeneficials)
+- **v1.2**: Current version (includes all features)
 
 ### LocalStorage State Format
 
@@ -769,7 +852,7 @@ Onion (onion-fly, thrips):
 
 ### Add New Vegetable
 
-**File:** `beet-anything-i18n.html`  
+**File:** `beet-anything.html`  
 **Location:** `GardenManager.initializeVegetableDatabase()` (approx. line 1320)
 
 ```javascript
@@ -788,7 +871,7 @@ this.setCompanions('beetroot',
 
 ### Add New Language
 
-**File:** `beet-anything-i18n.html`  
+**File:** `beet-anything.html`  
 **Location:** `translations` object (approx. line 1013)
 
 ```javascript
@@ -823,7 +906,7 @@ class Vegetable {
 
 ### Adjust Scoring Algorithm
 
-**File:** `beet-anything-i18n.html`  
+**File:** `beet-anything.html`  
 **Location:** `SuggestionEngine.scorePlantingOption()` (approx. line 1500)
 
 ```javascript
@@ -1048,7 +1131,7 @@ body {
 
 ```
 beet-anything/
-├── beet-anything-i18n.html              (Main app, ~105 KB)
+├── beet-anything.html              (Main app, ~105 KB)
 ├── BEET_ANYTHING_SPECIFICATION.md       (this document)
 ├── BEET_ANYTHING_RESUME.md              (Developer quick start)
 ├── APP_INSTALLATION_GUIDE.md            (PWA installation)
@@ -1082,6 +1165,6 @@ beet-anything/
 **Product Name**: Beet Anything  
 **Version**: 1.2 Pest Protection  
 **Status**: Production Ready  
-**Filename**: beet-anything-i18n.html  
+**Filename**: beet-anything.html  
 **Last Updated**: February 2025  
 **GitHub**: https://github.com/schatzl/beet-anything
